@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f2b230"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="UmbunduLingo">
+<meta name="theme-color" content="#6d5efc"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Umbu">
 <meta name="description" content="Aprende Umbundu do zero, com voz. Grátis.">
-<title>UmbunduLingo</title>
+<title>Umbu</title>
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Fredoka:wght@400;500;600&family=Nunito:wght@600;700;800;900&display=swap">
 <style>html,body{margin:0;padding:0}</style></head><body>
@@ -818,6 +818,47 @@ body { background-image: radial-gradient(70% 26% at 50% 0%, var(--hero-glow), tr
 .flag::after { display: none !important; content: none !important; }
 .flagsvg { display: block; width: 100%; height: 100%; }
 .hero-cover .hc-flag { position: absolute; left: 190px; top: 26px; width: 42px; height: 28px; border-radius: 6px; overflow: hidden; z-index: 3; box-shadow: 0 4px 14px rgba(20,8,70,.35); transform: rotate(-4deg); }
+/* ===== método novo ===== */
+.chip.heart, #lhWrap { display: none !important; }
+.stepdots { display: flex; gap: 6px; justify-content: center; margin-bottom: 4px; }
+.stepdots i { width: 28px; height: 6px; border-radius: 4px; background: var(--surface-2); }
+.stepdots i.done { background: var(--accent); opacity: .5; } .stepdots i.cur { background: var(--accent); }
+.cw-pic { font-size: 64px; line-height: 1.1; }
+.cw-use { background: var(--surface-2); border-radius: 18px; padding: 12px 14px; font-weight: 600; font-size: 15px; color: var(--muted); }
+.cw-do { background: var(--accent-soft); border-radius: 18px; padding: 12px 14px; font-size: 14.5px; }
+.cw-do b { color: var(--accent-t); }
+.recap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.recap-i { background: var(--surface-2); border-radius: 18px; padding: 12px; display: grid; gap: 2px; text-align: center; justify-items: center; }
+.recap-i i { font-style: normal; font-size: 30px; line-height: 1.1; }
+.recap-i b { font: 800 19px var(--font-title); overflow-wrap: anywhere; }
+.recap-i span { font-size: 13px; color: var(--muted); font-weight: 700; }
+.recap-i:active { transform: scale(.97); }
+.eyebrow.phase { display: inline-block; background: var(--accent-soft); padding: 3px 12px; border-radius: 99px; margin-bottom: 4px; }
+.tick { color: var(--good); font-size: .8em; }
+.mast { display: flex; gap: 3px; margin-top: 3px; }
+.mast i { width: 14px; height: 5px; border-radius: 3px; background: var(--line); }
+.mast i.on { background: var(--good); }
+.method { display: grid; gap: 10px; }
+.method div { display: grid; gap: 2px; background: var(--surface-2); border-radius: 16px; padding: 10px 14px; }
+.method b { font: 800 16px var(--font-title); color: var(--accent-t); }
+.method span { font-size: 14px; color: var(--muted); }
+.cta.alt { background: var(--surface-2); color: var(--fg); }
+.cta.alt small { color: var(--accent-t); opacity: 1; }
+.seg button { white-space: nowrap; }
+
+.hero-cover .hc-t h1 { font-size: 50px !important; line-height: 1 !important; letter-spacing: -0.03em !important; }
+.hero-cover .hc-t .tagline { color: rgba(255,255,255,.88); font: 700 15px var(--font-title); margin-top: 4px; }
+.hero-cover .hc-flag { left: 178px !important; top: 36px !important; }
+.logo { font-size: clamp(34px, 12vw, 48px) !important; letter-spacing: -0.03em !important; }
+
+.rp-link { display: block; margin: 8px auto 0; font-size: 13px; font-weight: 700; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.rp-kinds { display: grid; gap: 8px; margin: 10px 0; }
+.rp-kinds label { display: flex; gap: 10px; align-items: center; background: var(--surface-2); padding: 11px 14px; border-radius: 14px; font-weight: 700; }
+.rp-kinds input { width: 20px; height: 20px; accent-color: var(--accent); }
+textarea.field { width: 100%; resize: vertical; padding: 12px 14px; font: inherit; }
+.btnrow { display: flex; flex-wrap: wrap; gap: 8px; }
+.sheet-wrap { z-index: 150 !important; }
+#fb { max-height: 48vh; overflow-y: auto; }
 </style>
 
 <section id="gate" class="gate" hidden></section>
@@ -1096,7 +1137,7 @@ function avatarHtml(av, size, mood) {
 const HELPERS = [
   { id: 'ngola', pose: 'hip', name: 'Ngola', role: 'O teu guia', col: '#cfc8ff', tags: ['Focado', 'Confiante', 'Leal'],
     look: { skin: '#7a4a2c', hair: '#14100f', hs: 'curto', shirt: '#6d5efc', gl: 'nenhum', hw: 'fones', hwc: '#19d3c5' }, pants: '#1f2937', shoe: '#ffffff',
-    bio: 'O teu guia no UmbunduLingo. Direto, calmo e sempre contigo em cada lição.',
+    bio: 'O teu guia no Umbu. Direto, calmo e sempre contigo em cada lição.',
     ok: ['É isso! Tu consegues.', 'Boa! Mais uma no bolso.', 'Limpinho. Segue assim!', 'Perfeito. Próxima?'],
     bad: ['Sem stress. Vê o que aconteceu e vai de novo.', 'Quase! A próxima é tua.', 'Errar faz parte. Bora outra vez.'],
     done: ['Missão cumprida. Orgulho de ti!', 'Hoje evoluíste. Amanhã há mais.'], tip: ['Vamos a isto?', 'Uma palavra de cada vez.', 'Estou contigo.', 'Foco. Tu consegues.'] },
@@ -5316,9 +5357,9 @@ function chestSvg(open, big) {
     '<rect x="27" y="35" width="10" height="12" rx="3" fill="#fff3a8" stroke="' + b + '" stroke-width="2.5"/><circle cx="32" cy="41" r="2" fill="' + b + '"/></svg>';
 }
 /* Dicionário: pesquisa em Umbundu e em Português */
-let dq = { q: '', only: false, n: 60 };
+let dq = { q: '', only: false, conf: false, n: 60 };
 function dictResults() {
-  const q = norm(dq.q), pool = dq.only ? learnedItems() : allItems(), out = [];
+  const q = norm(dq.q), pool = dq.conf ? allItems().filter(i => i.teacher) : dq.only ? learnedItems() : allItems(), out = [];
   if (!q) { return pool.slice().sort((a, b) => a.u.localeCompare(b.u)); }
   const sc = i => { const u = norm(i.u), p = norm(i.p); if (u === q || p === q) return 0; if (u.startsWith(q)) return 1; if (p.startsWith(q)) return 2; if (u.includes(q)) return 3; if (p.includes(q)) return 4; return 9; };
   pool.forEach(i => { const s = sc(i); if (s < 9) out.push([s, i]); });
@@ -5327,14 +5368,14 @@ function dictResults() {
 }
 function dictList() {
   const r = dictResults(), shown = r.slice(0, dq.n);
-  return '<p class="note">' + r.length + (r.length === 1 ? ' palavra' : ' palavras') + (dq.only ? ' aprendidas' : '') + '</p>' +
+  return '<p class="note">' + r.length + (r.length === 1 ? ' palavra' : ' palavras') + (dq.conf ? ' confirmadas pelo professor' : dq.only ? ' aprendidas' : '') + '</p>' +
     (shown.length ? '<div class="word-list">' + shown.map(wordRow).join('') + '</div>' : '<div class="card"><p class="lead">Nada encontrado. Experimenta outra palavra, em Umbundu ou em Português.</p></div>') +
     (r.length > shown.length ? '<button class="btn small ghost" data-act="dict-more">Mostrar mais</button>' : '');
 }
 function renderDict() {
   $('#view').innerHTML = '<div class="page"><h1>Dicionário</h1><p class="lead">Procura em Umbundu ou em Português. Toca no altifalante para ouvir.</p>' +
     '<div class="searchbox">' + ic('search') + '<input class="field" id="dictQ" type="search" inputmode="search" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Procurar…" value="' + esc(dq.q) + '" aria-label="Procurar no dicionário"></div>' +
-    '<div class="seg" role="group" aria-label="Filtro"><button data-dall="1" aria-pressed="' + !dq.only + '">Todas</button><button data-dall="0" aria-pressed="' + dq.only + '">Aprendidas</button></div>' +
+    '<div class="seg" role="group" aria-label="Filtro"><button data-dall="1" aria-pressed="' + (!dq.only && !dq.conf) + '">Todas</button><button data-dall="0" aria-pressed="' + (dq.only && !dq.conf) + '">Aprendidas</button><button data-dall="2" aria-pressed="' + dq.conf + '">✔ Professor</button></div>' +
     '<div id="dictOut">' + dictList() + '</div></div>';
 }
 function renderThemeCard() {
@@ -5355,7 +5396,7 @@ function dailyChestCard() {
 const KEY = 'umbundulingo.v5';
 const MAXH = 10;
 const DEF = {
-  completed: {}, seen: {}, hist: {}, box: {}, xp: 0, gems: 0, hearts: 10, theme: { id: 'roxo', bg: '', mode: 'auto', v: 12 }, dailyChest: '', heartsAt: 0, streak: 0, best: 0, lastDay: '', freezes: 0, goal: 30, rev: {}, miss: {},
+  completed: {}, seen: {}, hist: {}, box: {}, xp: 0, gems: 0, hearts: 10, theme: { id: 'roxo', bg: '', mode: 'auto', v: 12 }, dailyChest: '', seenMethod: 0, reports: [], lastBackup: 0, heartsAt: 0, streak: 0, best: 0, lastDay: '', freezes: 0, goal: 30, rev: {}, miss: {},
   voice: { on: true, fx: true, helpers: true, rate: 0.85, uri: '' },
   day: { d: '', xp: 0, lessons: 0, heard: 0, claimed: {} },
   stats: { lessons: 0, heard: 0, perfect: 0, right: 0, answered: 0 },
@@ -5388,6 +5429,7 @@ function addXp(n) { today().xp += n; state.xp += n; }
 
 const HEART_MS = 10 * 60 * 1000;
 function regen() {
+  state.hearts = MAXH; state.heartsAt = 0; return;
   if (state.hearts >= MAXH) { state.hearts = MAXH; state.heartsAt = 0; return; }
   const now = Date.now();
   if (!state.heartsAt) { state.heartsAt = now; return; }
@@ -5398,13 +5440,7 @@ function regen() {
     save();
   }
 }
-function loseHeart() {
-  regen();
-  if (state.hearts >= MAXH) state.heartsAt = Date.now();
-  state.hearts = Math.max(0, state.hearts - 1);
-  if (!state.heartsAt) state.heartsAt = Date.now();
-  save();
-}
+function loseHeart() { /* sem vidas: errar faz parte de aprender */ }
 function dispStreak() {
   if (!state.lastDay) return 0;
   const d = dayDiff(state.lastDay, ymd(new Date()));
@@ -5424,9 +5460,16 @@ function touchStreak() {
 
 /* ===================== CONTEÚDO + REVISÃO ===================== */
 function origItem(id) { for (const u of UNITS) for (const i of u.items) if (i.id === id) return i; return null; }
+let CONF = new Set();
+function parseConf(t) {
+  const set = new Set();
+  String(t || '').split(/\r?\n/).forEach(l => { l = l.replace(/#.*/, '').trim(); if (!l) return; const w = norm(l.split('|')[0]); if (w) set.add(w); });
+  return set;
+}
+try { CONF = parseConf(localStorage.getItem('umbundulingo.conf')); } catch (e) {}
 function applyRev(it) {
-  const r = state.rev[it.id];
-  return r ? { id: it.id, u: r.u || it.u, p: r.p || it.p, ok: !!r.ok, src: it.src, alt: it.alt } : { id: it.id, u: it.u, p: it.p, ok: false, src: it.src, alt: it.alt };
+  const r = state.rev[it.id], teacher = CONF.has(norm(it.u));
+  return r ? { id: it.id, u: r.u || it.u, p: r.p || it.p, ok: !!r.ok || teacher, teacher: teacher, src: it.src, alt: it.alt } : { id: it.id, u: it.u, p: it.p, ok: teacher, teacher: teacher, src: it.src, alt: it.alt };
 }
 const allItems = () => _all || (_all = UNITS.flatMap(u => u.items.map(applyRev)));
 
@@ -5564,6 +5607,14 @@ function typeEx(item, dir) { return { type: 'type', item, dir: dir || (Math.rand
 function ptVariants(p) { const base = p.replace(/\([^)]*\)/g, ' ').trim(); return [p].concat(base.split(/\s*(?:\/|;)\s*/)).concat([base]).map(norm).filter(Boolean); }
 function matchEx(pool) { return { type: 'match', pairs: shuffle(pool).slice(0, 4) }; }
 
+function lettersEx(item) {
+  if (/\s/.test(item.u.trim())) return null;
+  const parts = item.u.toLowerCase().match(/ch|nj|ng|mb|nd|ny|nh|ts|\S/g) || [];
+  if (parts.length < 3 || parts.length > 12) return null;
+  const abc = ['a', 'e', 'i', 'o', 'u', 'k', 'l', 'm', 'n', 't', 'v', 's', 'c', 'h', 'x', 'y', 'p'];
+  const extra = shuffle(abc.filter(l => !parts.includes(l))).slice(0, 2);
+  return { type: 'tiles', letters: true, item, answer: parts, tiles: shuffle(parts.concat(extra)) };
+}
 function buildExercises(node) {
   const pool = node.items; let ex = []; POOL_HINT = pool;
   const L = canListen();
@@ -5573,9 +5624,19 @@ function buildExercises(node) {
     return ex;
   }
   if (node.kind === 'lesson' && node.intro.length) {
-    pool.forEach(i => ex.push(emojiOf(i) && Math.random() < 0.75 ? picEx(i) : mcEx(i, 'u2pt')));
-    ex = ex.concat(shuffle(pool).slice(0, 3).map((i, k) => isPhrase(i) ? phraseEx(i) : (k === 0 && L ? listenEx(i) : (k === 1 ? typeEx(i) : mcEx(i, 'pt2u')))));
-    ex.splice(Math.min(ex.length, pool.length + 1), 0, matchEx(pool));
+    const tag = (e, ph) => { if (e) e.phase = ph; return e; };
+    const two = e => { const ok = e.choices.find(c => c.ok), bad = e.choices.find(c => !c.ok); e.two = true; e.choices = shuffle([ok, bad]); return e; };
+    shuffle(pool.slice()).forEach((i, k) => {
+      const e = (k % 3 === 2 && L) ? listenEx(i) : (emojiOf(i) && Math.random() < 0.8 ? picEx(i) : mcEx(i, 'u2pt'));
+      ex.push(tag(two(e), e.type === 'listen' ? 'Ouvir' : 'Reconhecer'));
+    });
+    shuffle(pool.slice()).slice(0, 4).forEach(i => ex.push(tag(isPhrase(i) ? phraseEx(i) : (lettersEx(i) || mcEx(i, 'pt2u')), 'Recordar')));
+    ex.push(tag(matchEx(pool), 'Ligar'));
+    shuffle(pool.slice()).slice(0, 2).forEach(i => ex.push(tag(isPhrase(i) ? phraseEx(i) : (L && Math.random() < 0.5 ? typeEx(i, 'dict') : typeEx(i, 'pt2u')), 'Escrever')));
+    const inPool = x => pool.some(p => p.id === x.id);
+    let old = dueItems().filter(x => !inPool(x)).slice(0, 2);
+    if (old.length < 2) old = old.concat(shuffle(learnedItems().filter(x => !inPool(x) && !old.some(o => o.id === x.id))).slice(0, 2 - old.length));
+    old.forEach(i => ex.push(tag(mcEx(i, 'pt2u'), 'Revisão')));
   } else if (node.kind === 'lesson') {
     shuffle(pool).slice(0, 5).forEach(i => ex.push(mcEx(i, Math.random() < 0.5 ? 'pt2u' : 'u2pt')));
     shuffle(pool).slice(0, 3).forEach(i => ex.push(isPhrase(i) ? phraseEx(i) : typeEx(i)));
@@ -5614,24 +5675,33 @@ function closeLesson() { $('#lesson').hidden = true; document.body.classList.rem
 
 function startSession(node) {
   regen();
-  if (node.kind !== 'practice' && state.hearts <= 0) { openNoHearts(); return; }
   const ex = buildExercises(node);
   S = { node, queue: ex.slice(), total: ex.length, right: 0, firstTry: 0, wrong: 0, cur: null, mode: '', lastBad: false, secUp: null, goalHit: false };
   openLessonUI(); updateLHearts(); $('#fb').hidden = true; footReset(); $('#barFill').style.width = '0%';
-  introI = 0;
-  nextEx();
+  introI = 0; S.n0 = ex.length; S.introDone = false;
+  if (node.kind === 'lesson' && node.intro.length && !state.completed[node.id]) showIntro(); else { S.introDone = true; nextEx(); }
 }
 function showIntro() {
-  const items = S.node.intro, it = items[introI];
+  const items = S.node.intro, n = items.length;
   $('#fb').hidden = true; footReset(); $('#stage').scrollTop = 0;
+  if (introI >= n) {
+    $('#stage').innerHTML = '<span class="eyebrow">Revê antes de praticar</span><h2 class="q">As ' + n + ' palavras desta parte</h2><p class="note">Toca em cada uma para ouvir. Diz em voz alta.</p><div class="recap">' +
+      items.map(it => '<button class="recap-i" data-say="' + esc(it.u) + '">' + (emojiOf(it) ? '<i>' + emojiOf(it) + '</i>' : '') + '<b>' + esc(it.u) + '</b><span>' + esc(it.p) + '</span></button>').join('') + '</div>' +
+      '<div class="mrow">' + mascot(HELPERS[0], 84, 'cheer', 'wave') + '<div class="bubble"><b>Ngola</b>Boa! Agora vamos usar estas palavras. Se errares, a palavra volta daí a pouco.</div></div>';
+    setMain('Começar os exercícios', 'intro'); return;
+  }
+  const it = items[introI], L = usageNote(it).slice(0, 2).map(esc).join('<br>');
+  const pill = it.teacher ? '<span class="pill ok">✔ Confirmada pelo professor</span>' : it.ok ? '<span class="pill ok">Revisada por falante</span>' : '<span class="pill">Ainda por confirmar com um falante</span>';
   $('#stage').innerHTML =
-    '<span class="eyebrow">Palavras novas · ' + (introI + 1) + ' de ' + items.length + '</span>' +
-    '<div class="card-word"><div class="big">' + esc(it.u) + '</div><div class="mean">' + esc(it.p) + '</div>' +
+    '<div class="stepdots">' + items.map((_, k) => '<i class="' + (k < introI ? 'done' : k === introI ? 'cur' : '') + '"></i>').join('') + '</div>' +
+    '<span class="eyebrow">Conhecer · palavra ' + (introI + 1) + ' de ' + n + '</span>' +
+    '<div class="card-word">' + (emojiOf(it) ? '<div class="cw-pic">' + emojiOf(it) + '</div>' : '') + '<div class="big">' + esc(it.u) + '</div><div class="mean">' + esc(it.p) + '</div>' +
     '<div class="say-row"><button class="spk big" data-say="' + esc(it.u) + '" aria-label="Ouvir ' + esc(it.u) + '">' + ic('volume') + '</button>' +
     '<button class="spk slow" data-say="' + esc(it.u) + '" data-slow="1">' + ic('volume') + 'Devagar</button></div>' +
-    '<div class="read">Lê-se aprox.: <span>' + esc(respell(it.u)) + '</span></div>' + (it.alt && it.alt.length ? '<div class="read">Também se diz: <span>' + esc(it.alt.join(', ')) + '</span></div>' : '') +
-    (it.ok ? '<span class="pill ok">Revisado por falante nativo</span>' : (it.src ? '<span class="pill ok">Fonte: ' + srcLabel(it) + '</span><p class="note">Ainda sem revisão de falante nativo. A voz é sintética e aproxima o som.</p>' : '<span class="pill">Só no Guia de Umbundu</span><p class="note">Ainda não confirmada por outra fonte nem por falante nativo. A voz é sintética e aproxima o som.</p>')) + '</div>';
-  setMain(introI < items.length - 1 ? 'Continuar' : 'Começar exercícios', 'intro');
+    '<div class="read">Lê-se aprox.: <span>' + esc(respell(it.u)) + '</span></div>' + (it.alt && it.alt.length ? '<div class="read">Também se diz: <span>' + esc(it.alt.join(', ')) + '</span></div>' : '') + pill + '</div>' +
+    (L ? '<div class="cw-use">' + L + '</div>' : '') +
+    '<button class="rp-link" data-act="rp-open">⚑ Reportar problema nesta palavra</button><div class="cw-do"><b>Faz agora:</b> ouve, repete em voz alta 2 vezes e liga a palavra à imagem ou ao significado.</div>';
+  setMain(introI < n - 1 ? 'Próxima palavra' : 'Rever as ' + n, 'intro');
   setTimeout(() => speak(it.u), 150);
 }
 function nextEx() {
@@ -5654,7 +5724,7 @@ function picEx(item) {
   shuffle(seenPool(item).concat(allItems())).forEach(x => { const ex = emojiOf(x); if (ds.length < 3 && ex && !seen.has(ex)) { seen.add(ex); ds.push(ex); } });
   return { type: 'pic', item, choices: shuffle([{ text: e, ok: true }].concat(ds.map(t => ({ text: t, ok: false })))) };
 }
-const isNewWord = it => it && !state.seen[it.id];
+const isNewWord = it => it && !state.seen[it.id] && !(S && S.introDone);
 const spkBtn = (u, slow) => '<button class="spk' + (slow ? ' slow' : '') + '" data-say="' + esc(u) + '"' + (slow ? ' data-slow="1"' : '') + ' aria-label="Ouvir">' + ic('volume') + (slow ? 'Devagar' : '') + '</button>';
 let _rgloss = null;
 function rglossOf(tok) {
@@ -5678,7 +5748,7 @@ function mascotRow(inner) {
 function hintFor(ex) {
   const it = ex.item; if (!it) return '';
   const L = usageNote(it).slice(0, 2);
-  const ans = ex.type === 'pic' ? '' : isChoice(ex.type) ? (ex.choices.find(c => c.ok) || {}).text : ex.type === 'tiles' ? ex.answer.join(' ') : ex.type === 'type' ? (ex.dir === 'u2pt' ? it.p : it.u) : '';
+  const ans = ex.type === 'pic' ? '' : isChoice(ex.type) ? (ex.choices.find(c => c.ok) || {}).text : ex.type === 'tiles' ? ex.answer.join(ex.letters ? '' : ' ') : ex.type === 'type' ? (ex.dir === 'u2pt' ? it.p : it.u) : '';
   if (ans) L.push('A resposta começa por «' + ans.slice(0, 2) + '…» e tem ' + ans.length + ' letras.');
   return L.map(esc).join('<br>');
 }
@@ -5691,6 +5761,7 @@ function renderEx(ex) {
   renderEx0(ex);
   const st = $('#stage');
   if (fresh) st.insertAdjacentHTML('afterbegin', teachCard(ex.item));
+  if (ex.phase) st.insertAdjacentHTML('afterbegin', '<span class="eyebrow phase">' + ex.phase + '</span>');
   if (ex.type !== 'match' && ex.item) st.insertAdjacentHTML('beforeend', '<button class="btn small ghost hintbtn" data-act="hint">Dica</button><div class="hintbox" hidden></div>');
 }
 function renderEx0(ex) {
@@ -5717,15 +5788,15 @@ function renderEx0(ex) {
     setMain('Verificar', 'check', null, true);
   } else if (ex.type === 'tiles') {
     S.t = { chosen: [] };
-    st.innerHTML = head(pick(Q_TILES)) + mascotRow('<span class="bt">«' + tokHtml(ex.item.p, 'p') + '»</span>') + '<div class="answer-line" id="ansLine"></div><div class="bank" id="bank"></div>';
+    st.innerHTML = head(ex.letters ? 'Forma a palavra em Umbundu:' : pick(Q_TILES)) + mascotRow('<span class="bt">«' + tokHtml(ex.item.p, 'p') + '»</span>' + (ex.letters ? (emojiOf(ex.item) ? '<span class="bemo">' + emojiOf(ex.item) + '</span>' : '') + spkBtn(ex.item.u) : '')) + '<div class="answer-line" id="ansLine"></div><div class="bank" id="bank"></div>';
     drawTiles(); setMain('Verificar', 'check', null, true);
   } else if (ex.type === 'type') {
     const toU = ex.dir !== 'u2pt';
-    st.innerHTML = head(toU ? pick(Q_TYPE) : pick(['Escreve em Português:', 'Traduz escrevendo em Português:'])) + mascotRow(toU ? '<span class="bt">«' + esc(ex.item.p) + '»</span>' : spkBtn(ex.item.u) + '<span class="bt big2">' + esc(ex.item.u) + '</span>') +
+    st.innerHTML = head(ex.dir === 'dict' ? 'Escuta e escreve em Umbundu:' : toU ? pick(Q_TYPE) : pick(['Escreve em Português:', 'Traduz escrevendo em Português:'])) + mascotRow(ex.dir === 'dict' ? spkBtn(ex.item.u) + spkBtn(ex.item.u, true) : toU ? '<span class="bt">«' + esc(ex.item.p) + '»</span>' : spkBtn(ex.item.u) + '<span class="bt big2">' + esc(ex.item.u) + '</span>') +
       '<input id="ansInput" class="field" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Escreve aqui" aria-label="Resposta">' +
       '<p class="note">Os acentos não contam.</p>';
     setMain('Verificar', 'check', null, true);
-    setTimeout(() => { const i = $('#ansInput'); if (i) i.focus(); }, 50);
+    setTimeout(() => { const i = $('#ansInput'); if (i) i.focus(); }, 50); if (ex.dir === 'dict') setTimeout(() => speak(ex.item.u), 350);
   } else if (ex.type === 'match') {
     const right = shuffle(ex.pairs);
     S.m = { left: null, done: 0, n: ex.pairs.length, bad: false };
@@ -5753,8 +5824,8 @@ function check() {
     if (ex.type === 'cloze') { const bl = $('#blank'); if (bl) bl.textContent = right.text; }
     resolve(sel.ok, ex.type === 'cloze' ? ex.item.u : right.text);
   } else if (ex.type === 'tiles') {
-    const got = S.t.chosen.map(id => ex.tiles[id]).join(' ');
-    resolve(got === ex.answer.join(' '), ex.item.u);
+    const sep = ex.letters ? '' : ' ', got = S.t.chosen.map(id => ex.tiles[id]).join(sep);
+    resolve(got === ex.answer.join(sep), ex.item.u);
   } else if (ex.type === 'type') {
     const inp = $('#ansInput'); inp.disabled = true;
     const v = norm(inp.value);
@@ -5773,7 +5844,7 @@ function resolve(ok, correctText) {
     if (id) state.miss[id] = (state.miss[id] || 0) + 1;
     if (S.node.kind !== 'practice') loseHeart();
     save(); updateLHearts(); updateHeader();
-    S.queue.push(Object.assign({}, ex, { retry: true, answered: false }));
+    S.total++; S.queue.splice(Math.min(3, S.queue.length), 0, Object.assign({}, ex, { retry: true, answered: false }));
   }
   S.lastBad = !ok;
   S.lastOk = ok; if (id) { state.seen[id] = 1; if (!ex.retry) srsUpdate(id, ok); save(); }
@@ -5781,7 +5852,7 @@ function resolve(ok, correctText) {
   const line = ok ? pick(hp.ok) : pick(hp.bad), exh = explain(ex, ok);
   f.innerHTML = '<div class="fbrow">' + mascot(hp, 74, ok ? 'cheer' : 'sad') + '<div class="fbt"><b>' + esc(line) + '</b>' + (ok ? '' : '<small>Resposta certa: ' + esc(correctText) + '</small>') + '</div></div>' +
     (exh ? '<div class="expl"><span class="eyebrow">Explicação</span>' + exh + '</div>' : '') +
-    '<button class="btn small ghost aibtn" data-act="ask-ai">' + ic('bolt') + (AI.url ? 'Explicar com IA' : 'Explicar resposta') + '</button><div class="ai-out" aria-live="polite"></div>';
+    '<button class="btn small ghost aibtn" data-act="ask-ai">' + ic('bolt') + (AI.url ? 'Explicar com IA' : 'Explicar resposta') + '</button><div class="ai-out" aria-live="polite"></div>' + (ex.item ? '<button class="rp-link" data-act="rp-open">⚑ Reportar problema nesta palavra</button>' : '');
   document.querySelector('.foot').className = 'foot ' + (ok ? 'ok' : 'bad');
   setMain('Continuar', 'next', ok ? 'good' : 'bad');
   setBar();
@@ -5791,7 +5862,7 @@ function onMain() {
   if (!S) return;
   if (S.mode === 'intro') {
     introI++;
-    if (introI < S.node.intro.length) showIntro(); else nextEx();
+    if (introI <= S.node.intro.length) showIntro(); else { S.introDone = true; nextEx(); }
   } else if (S.mode === 'check') check();
   else if (S.mode === 'next') {
     if (state.hearts <= 0 && S.lastBad && S.node.kind !== 'practice') { closeLesson(); render(); openNoHearts(); }
@@ -5824,7 +5895,7 @@ function matchClick(e) {
 }
 function finish() {
   const n = S.node, kind = n.kind; const streakBefore = dispStreak();
-  const acc = Math.round(100 * S.firstTry / S.total);
+  const acc = Math.round(100 * S.firstTry / (S.n0 || S.total));
   const firstTime = (kind === 'lesson' || kind === 'test') && !state.completed[n.id];
   const priorXp = today().xp;
   let xp, gems;
@@ -5837,9 +5908,10 @@ function finish() {
   if (kind === 'practice' && state.hearts < MAXH) { state.hearts++; heartGain = true; if (state.hearts >= MAXH) state.heartsAt = 0; }
   addXp(xp); state.gems += gems;
   if (kind !== 'practice') today().lessons++;
-  state.stats.lessons++; state.stats.right += S.firstTry; state.stats.answered += S.total;
+  state.stats.lessons++; state.stats.right += S.firstTry; state.stats.answered += (S.n0 || S.total);
   if (S.wrong === 0) state.stats.perfect++;
   touchStreak(); save(); updateHeader(); sfx('done');
+  if (state.stats.lessons >= 3 && Date.now() - (state.lastBackup || 0) > 7 * 864e5 && state.stats.lessons % 3 === 0) setTimeout(() => toast('Faz uma cópia do progresso no Perfil.'), 2500);
   if (dispStreak() > streakBefore) S.streakUp = [streakBefore, dispStreak()];
   const goalHit = priorXp < state.goal && today().xp >= state.goal;
   if (S.secUp != null && openSecs && S.secUp + 1 < SECTIONS.length) openSecs.add(S.secUp + 1);
@@ -5892,6 +5964,79 @@ function startPractice(mode) {
   }
   if (mode === 'listen' && !canListen()) { toast('Liga a voz para praticar a ouvir.'); return; }
   startSession({ id: 'practice', kind: 'practice', mode: mode || 'mix', label: 'Prática', items: items, intro: [], length: 10 });
+}
+/* ===== cópia de segurança ===== */
+const u8b64 = u => { let s = ''; for (let i = 0; i < u.length; i += 8192) s += String.fromCharCode.apply(null, u.subarray(i, i + 8192)); return btoa(s); };
+const b64u8 = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
+async function packState() {
+  const json = JSON.stringify(state), raw = new TextEncoder().encode(json);
+  if (window.CompressionStream) {
+    try { const cs = new Blob([raw]).stream().pipeThrough(new CompressionStream('gzip')); return 'U1:' + u8b64(new Uint8Array(await new Response(cs).arrayBuffer())); } catch (e) {}
+  }
+  return 'U0:' + u8b64(raw);
+}
+async function unpackState(code) {
+  code = String(code || '').replace(/\s+/g, '');
+  const tag = code.slice(0, 3), body = code.slice(3);
+  let bytes;
+  if (tag === 'U1:') { const ds = new Blob([b64u8(body)]).stream().pipeThrough(new DecompressionStream('gzip')); bytes = new Uint8Array(await new Response(ds).arrayBuffer()); }
+  else if (tag === 'U0:') bytes = b64u8(body);
+  else bytes = new TextEncoder().encode(code);
+  const r = JSON.parse(new TextDecoder().decode(bytes));
+  if (!r || typeof r !== 'object' || typeof r.completed !== 'object') throw new Error('invalido');
+  return r;
+}
+function applyBackup(r) { state = mergeState(r); save(); applyTheme(); updateHeader(); render(); }
+async function backupCopy() {
+  const code = await packState(); state.lastBackup = Date.now(); save();
+  try { await navigator.clipboard.writeText(code); toast('Código copiado. Guarda-o numa mensagem para ti.'); }
+  catch (e) { openSheet('O teu código', '<p class="note">Copia tudo o que está abaixo e guarda numa mensagem.</p><textarea class="field" rows="6" readonly onclick="this.select()">' + esc(code) + '</textarea>', [{ label: 'Fechar', kind: 'ghost' }]); }
+}
+async function backupFile() {
+  const code = await packState(); state.lastBackup = Date.now(); save();
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([code], { type: 'text/plain' }));
+  a.download = 'umbu-progresso-' + ymd(new Date()) + '.txt'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  toast('Ficheiro guardado nas tuas transferências.');
+}
+function openRestore() {
+  openSheet('Restaurar progresso', '<p class="note">Cola o código que guardaste, ou escolhe o ficheiro. Isto substitui o progresso que tens agora neste telemóvel.</p><textarea class="field" id="rsCode" rows="5" placeholder="Cola aqui o código (começa por U1: ou U0:)"></textarea>' +
+    '<p style="margin-top:10px"><label class="btn small ghost" for="bkFile">Escolher ficheiro</label><input type="file" id="bkFile" accept=".txt,.json,text/plain" hidden></p>',
+    [{ label: 'Restaurar', fn: async () => { try { applyBackup(await unpackState($('#rsCode').value)); toast('Progresso restaurado.'); } catch (e) { toast('Código inválido. Confere se copiaste tudo.'); } } }, { label: 'Cancelar', kind: 'ghost' }]);
+}
+document.addEventListener('change', async e => {
+  if (e.target.id !== 'bkFile' || !e.target.files[0]) return;
+  try { const t = await e.target.files[0].text(); applyBackup(await unpackState(t)); closeSheet(); toast('Progresso restaurado.'); } catch (x) { toast('Ficheiro inválido.'); }
+});
+/* ===== reportar problemas ===== */
+const REP_KINDS = ['Significado errado', 'Escrita errada', 'Áudio ou pronúncia errados', 'Difícil de perceber', 'Outro'];
+function openReport(it) {
+  if (!it) { toast('Abre uma palavra primeiro.'); return; }
+  openSheet('Reportar problema', '<p class="lead"><b>' + esc(it.u) + '</b> · ' + esc(it.p) + '</p><div class="rp-kinds">' + REP_KINDS.map((k, i) => '<label><input type="radio" name="rpk" value="' + i + '"' + (i === 0 ? ' checked' : '') + '> ' + k + '</label>').join('') + '</div>' +
+    '<textarea class="field" id="rpNote" rows="3" placeholder="O que devia estar certo? (opcional)"></textarea>',
+    [{ label: 'Guardar reporte', fn: () => {
+      const k = document.querySelector('input[name="rpk"]:checked'), n = $('#rpNote').value.trim().slice(0, 300);
+      state.reports.push({ id: it.id, u: it.u, p: it.p, k: REP_KINDS[k ? +k.value : 4], n: n, t: Date.now() }); save(); toast('Obrigado! Ficou guardado.'); if (tab === 'profile') renderProfile();
+    } }, { label: 'Cancelar', kind: 'ghost' }]);
+}
+function reportBody() {
+  const L = ['Umbu v1.2 · relatório de ' + (state.profile.name || 'estudante'), 'Data: ' + ymd(new Date()), 'Lições feitas: ' + state.stats.lessons + ' · Palavras aprendidas: ' + learnedItems().length, ''];
+  if (state.reports.length) { L.push('PROBLEMAS REPORTADOS (' + state.reports.length + '):'); state.reports.forEach(r => L.push('- ' + r.u + ' = ' + r.p + ' → ' + r.k + (r.n ? ': ' + r.n : ''))); L.push(''); }
+  const ms = Object.keys(state.miss).map(id => [id, state.miss[id]]).sort((a, b) => b[1] - a[1]).slice(0, 15);
+  if (ms.length) { L.push('PALAVRAS ONDE MAIS ERREI:'); ms.forEach(m => { const it = allItems().find(i => i.id === m[0]); if (it) L.push('- ' + it.u + ' = ' + it.p + ' (' + m[1] + ' erros)'); }); }
+  return L.join('\n');
+}
+async function sendReport() {
+  const text = reportBody();
+  try { if (navigator.share) { await navigator.share({ title: 'Relatório Umbu', text: text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+  try { await navigator.clipboard.writeText(text); toast('Relatório copiado. Cola-o numa mensagem.'); } catch (e) { window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank'); }
+}
+function openMethod() {
+  openSheet('Como vais aprender', '<div class="method">' +
+    '<div><b>1 · Conhecer</b><span>Cada parte começa com 5 palavras: ouves, vês a imagem, repetes em voz alta.</span></div>' +
+    '<div><b>2 · Reconhecer</b><span>Escolhes entre 2 opções. Fácil, para a palavra ficar ligada ao significado.</span></div>' +
+    '<div><b>3 · Recordar e escrever</b><span>Formas a palavra letra a letra, ouves e escreves, sem ajuda.</span></div>' +
+    '<div><b>4 · Lembrar</b><span>Quando erras, a palavra volta daí a pouco. Depois volta ao fim de 10 minutos, 1 dia, 3 dias, 1 semana…</span></div>' +
+    '<p class="note">Não há vidas: errar faz parte. Palavras com ✔ foram confirmadas pelo professor.</p></div>', [{ label: 'Entendi', fn: () => { state.seenMethod = 1; save(); } }]);
 }
 function openNoHearts() {
   openSheet('Sem corações', '<div class="sheet-hero">' + hare('sad') + '<p>Não faz mal. Faz uma prática rápida e recuperas 1 coração. A prática nunca gasta corações.</p></div>', [
@@ -5958,11 +6103,13 @@ function updateHeader() {
   regen(); today();
   $('#hStreak').textContent = dispStreak(); $('#hGems').textContent = state.gems; $('#hHearts').textContent = state.hearts;
   const nodes = nodesList(), cur = nodes.findIndex(n => !state.completed[n.id]);
-  $('#hLevel').textContent = SECTIONS[cur < 0 ? SECTIONS.length - 1 : nodes[cur].sec].level;
+  $('#hLevel').textContent = 'Etapa ' + ((cur < 0 ? SECTIONS.length - 1 : nodes[cur].sec) + 1);
 }
 function srcLabel(i) { return i.src === 'M' ? 'Mundumbundu' : i.src === 'C' ? '2 fontes' : 'Só no Guia'; }
+const masteryOf = id => { const b = state.box[id]; return b ? b.b : -1; };
 function wordRow(i) {
-  return '<div class="word-row"><div class="wt"><span class="u">' + esc(i.u) + '</span><span class="r">' + esc(respell(i.u)) + ' · ' + srcLabel(i) + '</span></div><span class="p">' + esc(i.p) + '</span>' +
+  const m = masteryOf(i.id), dots = m >= 0 ? '<span class="mast" aria-label="Domínio ' + m + ' de 5">' + [1, 2, 3, 4, 5].map(k => '<i' + (k <= m ? ' class="on"' : '') + '></i>').join('') + '</span>' : '';
+  return '<div class="word-row"><div class="wt"><span class="u">' + esc(i.u) + (i.teacher ? ' <span class="tick" title="Confirmada pelo professor">✔</span>' : '') + '</span><span class="r">' + esc(respell(i.u)) + ' · ' + (i.teacher ? 'Professor' : srcLabel(i)) + '</span>' + dots + '</div><span class="p">' + esc(i.p) + '</span>' +
     '<button class="spk" data-say="' + esc(i.u) + '" aria-label="Ouvir ' + esc(i.u) + '">' + ic('volume') + '</button></div>';
 }
 
@@ -5984,8 +6131,8 @@ function renderHome() {
   const curSec = cur < 0 ? SECTIONS.length - 1 : nodes[cur].sec;
   if (!openSecs) openSecs = new Set([curSec]);
   const learned = learnedItems().length, d = today(), gp = Math.min(100, Math.round(100 * d.xp / state.goal));
-  let h = '<div class="hero"><div class="hero-cover">' + coverSvg('cv', '') + '<div class="hc-t"><h1>Umbundu<br>Lingo</h1></div><div class="hc-flag"><svg class="flagsvg" viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="20" fill="#cc092f"/><rect y="20" width="60" height="20" fill="#111"/><g fill="none" stroke="#f2b230" stroke-linecap="round"><path d="M21.5 22.5a8.6 8.6 0 0 1 17 0" stroke-width="3.2" stroke-dasharray="2.2 1.6"/><path d="M25 29q11-1 12.5-12.5" stroke-width="2.2"/></g><path d="M30 12.2l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4z" fill="#f2b230"/></svg></div><div class="hc-team">' + [[1, 'hip', 14], [2, 'cheer', 26], [3, 'cross', 18]].map(x => '<div class="pod">' + mascot(HELPERS[x[0]], 58, 'smug', x[1]) + '<i style="height:' + x[2] + 'px"></i></div>').join('') + '</div><div class="hc-m"><div class="pod">' + mascot(HELPERS[0], 104, 'cheer', 'wave') + '<i style="height:24px"></i></div></div></div>' +
-    (cur >= 0 && nodes[cur] ? '<button class="cta" data-node="' + nodes[cur].id + '"><span><small>Continuar</small><b>' + esc(nodes[cur].unit.title) + ' · ' + nodes[cur].label + '</b></span>' + ic('chevron') + '</button>' : '') + '<div class="goal"><div class="goal-row"><span>Meta de hoje</span><span>' + Math.min(d.xp, state.goal) + ' / ' + state.goal + ' XP</span></div><div class="meter" role="progressbar" aria-label="Meta diária"><i style="width:' + gp + '%"></i></div></div>' +
+  let h = '<div class="hero"><div class="hero-cover">' + coverSvg('cv', '') + '<div class="hc-t"><h1>Umbu</h1><p class="tagline">Aprende Umbundu</p></div><div class="hc-flag"><svg class="flagsvg" viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="20" fill="#cc092f"/><rect y="20" width="60" height="20" fill="#111"/><g fill="none" stroke="#f2b230" stroke-linecap="round"><path d="M21.5 22.5a8.6 8.6 0 0 1 17 0" stroke-width="3.2" stroke-dasharray="2.2 1.6"/><path d="M25 29q11-1 12.5-12.5" stroke-width="2.2"/></g><path d="M30 12.2l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4z" fill="#f2b230"/></svg></div><div class="hc-team">' + [[1, 'hip', 14], [2, 'cheer', 26], [3, 'cross', 18]].map(x => '<div class="pod">' + mascot(HELPERS[x[0]], 58, 'smug', x[1]) + '<i style="height:' + x[2] + 'px"></i></div>').join('') + '</div><div class="hc-m"><div class="pod">' + mascot(HELPERS[0], 104, 'cheer', 'wave') + '<i style="height:24px"></i></div></div></div>' +
+    (cur >= 0 && nodes[cur] ? '<button class="cta" data-node="' + nodes[cur].id + '"><span><small>Continuar</small><b>' + esc(nodes[cur].unit.title) + ' · ' + nodes[cur].label + '</b></span>' + ic('chevron') + '</button>' : '') + (dueItems().length ? '<button class="cta alt" data-act="practice-due"><span><small>Revisão do dia</small><b>Rever ' + Math.min(10, dueItems().length) + ' palavras</b></span>' + ic('chevron') + '</button>' : '') + '<div class="goal"><div class="goal-row"><span>Meta de hoje</span><span>' + Math.min(d.xp, state.goal) + ' / ' + state.goal + ' XP</span></div><div class="meter" role="progressbar" aria-label="Meta diária"><i style="width:' + gp + '%"></i></div></div>' +
     '<div class="hero-row"><span class="pill ok">' + learned + ' palavras aprendidas</span><button class="btn small ghost" data-act="voice">' + ic('volume') + 'Voz</button></div></div>';
   h += '<nav class="chips" aria-label="Secções">' + SECTIONS.map((s, si) => {
     const st = secStats(si, nodes), cls = st.done === st.total ? 'done' : (si === curSec ? 'cur' : '');
@@ -5997,7 +6144,7 @@ function renderHome() {
     h += '<section class="sec" id="sec-' + si + '" style="--s-deep:' + sec.deep + ';--s-light:' + sec.light + ';--s-ink:' + sec.ink + '">' +
       '<button class="sec-banner' + (locked ? ' locked' : '') + '" data-sec="' + si + '" aria-expanded="' + open + '">' +
       '<span class="crest-wrap' + (complete ? ' gold' : '') + '">' + crest(si + 3) + '</span>' +
-      '<span class="sb-text"><small>Secção ' + (si + 1) + ' · ' + sec.level + '</small><b>' + esc(sec.title) + '</b><span class="sb-sub">' + sec.units.length + (sec.units.length === 1 ? ' unidade' : ' unidades') + ' · ' + pct + '%</span><span class="sb-bar"><i style="width:' + pct + '%"></i></span></span>' +
+      '<span class="sb-text"><small>Etapa ' + (si + 1) + ' de ' + SECTIONS.length + '</small><b>' + esc(sec.title) + '</b><span class="sb-sub">' + sec.units.length + (sec.units.length === 1 ? ' unidade' : ' unidades') + ' · ' + pct + '%</span><span class="sb-bar"><i style="width:' + pct + '%"></i></span></span>' +
       '<span class="chev">' + (locked ? ic('lock') : ic('chevron')) + '</span></button>';
     if (open) {
       const DX = [0, 38, 54, 38, 0, -38, -54, -38]; let nk = 0;
@@ -6062,7 +6209,7 @@ function renderPractice() {
   if (learned.length < 3) h += '<p class="lead">Ainda não aprendeste palavras. A prática vai usar as da Secção 1. Completa a primeira lição para praticares o que aprendeste.</p>';
   const due = dueItems().length;
   h += '<div class="card"><h2>Revisão inteligente</h2><p class="lead">' + (due ? due + (due === 1 ? ' palavra está' : ' palavras estão') + ' prontas para rever agora.' : 'Nenhuma palavra para rever agora.') + ' Cada palavra volta no momento certo: 10 minutos, 1 dia, 3 dias, 1 semana… Assim ficas a saber mesmo.</p><button class="btn"' + (due ? '' : ' disabled') + ' data-act="practice-due">Rever agora</button></div>' +
-    '<div class="card"><h2>Prática rápida</h2><p class="lead">10 exercícios variados. Não gasta corações e recupera 1 coração.</p><button class="btn" data-act="practice-mix">Começar</button></div>' +
+    '<div class="card"><h2>Prática rápida</h2><p class="lead">10 exercícios variados para reforçar o que já aprendeste.</p><button class="btn" data-act="practice-mix">Começar</button></div>' +
     '<div class="card"><h2>Só ouvir</h2><p class="lead">8 exercícios de audição para treinar o ouvido.</p><button class="btn ghost" data-act="practice-listen">Ouvir e escolher</button></div>' +
     '<div class="card"><h2>Reforçar erros</h2><p class="lead">' + (misses ? misses + (misses === 1 ? ' palavra precisa' : ' palavras precisam') + ' de reforço.' : 'Ainda não tens erros para reforçar.') + '</p><button class="btn ghost"' + (misses ? '' : ' disabled') + ' data-act="practice-errors">Reforçar</button></div>';
   if (learned.length) h += '<span class="eyebrow">As tuas palavras</span><div class="word-list">' + learned.map(wordRow).join('') + '</div>';
@@ -6084,9 +6231,7 @@ function renderShop() {
   const hearts = state.hearts, miss = MAXH - hearts;
   let h = '<div class="page"><h1>Loja</h1><p class="lead">Tudo grátis para sempre. As gemas ganham-se a estudar e não se compram com dinheiro.</p>' +
     '<div class="card"><div class="quest-top"><h2>As tuas gemas</h2><span>' + ic('gem') + state.gems + '</span></div></div>' +
-    '<span class="eyebrow">Corações e ofensiva</span>' +
-    '<div class="card"><div class="quest-top"><span>' + ic('heart', 'fill') + ' Recuperar 1 coração</span><span class="price">' + ic('gem') + '20</span></div><button class="btn small" data-act="refill1"' + (miss > 0 && state.gems >= 20 ? '' : ' disabled') + '>' + (miss > 0 ? 'Comprar' : 'Já tens ' + MAXH + ' de ' + MAXH) + '</button></div>' +
-    '<div class="card"><div class="quest-top"><span>' + ic('heart', 'fill') + ' Encher todos os corações</span><span class="price">' + ic('gem') + '60</span></div><button class="btn small" data-act="refillAll"' + (miss > 1 && state.gems >= 60 ? '' : ' disabled') + '>Comprar</button></div>' +
+    '<span class="eyebrow">Ofensiva</span>' +
     '<div class="card"><div class="quest-top"><span>' + ic('shield') + ' Congelar ofensiva (protege 1 dia)</span><span class="price">' + ic('gem') + '50</span></div><button class="btn small" data-act="buy-freeze"' + (state.gems >= 50 ? '' : ' disabled') + '>Comprar · tens ' + state.freezes + '</button></div>' +
     '<span class="eyebrow">Acessórios para o avatar</span><div class="shop-grid">';
   ACCS.forEach(a => {
@@ -6145,7 +6290,10 @@ function renderProfile() {
   let h = '<div class="page"><h1>Perfil <small class="ver">v1.2</small></h1><div class="card profile-top"><div class="who">' + avatarHtml(null, 150, 'happy') + '<div><h2>' + esc(state.profile.name || 'Estudante de Umbundu') + '</h2><p class="lead">' + (state.profile.email ? esc(state.profile.email) : 'Ainda sem e-mail') + '</p></div></div>' +
     '<div class="btnrow"><button class="btn small" data-act="avatar">' + ic('edit') + 'Editar avatar</button><button class="btn small ghost gbtn" data-act="google">' + (state.profile.google ? 'Conta Google ligada' : 'Entrar com o Google') + '</button></div></div>' +
     '<div class="stat-grid"><div class="stat-tile"><b>' + state.xp + '</b><span>XP total</span></div><div class="stat-tile"><b>' + dispStreak() + '</b><span>Ofensiva</span></div><div class="stat-tile"><b>' + state.best + '</b><span>Melhor</span></div>' +
-    '<div class="stat-tile"><b>' + learnedItems().length + '</b><span>Palavras</span></div><div class="stat-tile"><b>' + state.stats.lessons + '</b><span>Lições</span></div><div class="stat-tile"><b>' + acc + '%</b><span>Precisão</span></div></div>' +
+    '<div class="stat-tile"><b>' + learnedItems().length + '</b><span>Palavras</span></div><div class="stat-tile"><b>' + allItems().filter(i => masteryOf(i.id) >= 4).length + '</b><span>Dominadas</span></div><div class="stat-tile"><b>' + acc + '%</b><span>Precisão</span></div></div>' +
+    '<div class="card"><h2>Cópia de segurança</h2><p class="lead">O progresso fica só neste telemóvel. Guarda uma cópia para não perderes nada.' + (state.lastBackup ? ' Última cópia: ' + ymd(new Date(state.lastBackup)) + '.' : '') + '</p><div class="btnrow"><button class="btn small" data-act="bk-copy">Copiar código</button><button class="btn small ghost" data-act="bk-file">Guardar ficheiro</button><button class="btn small ghost" data-act="bk-restore">Restaurar</button></div></div>' +
+    '<div class="card"><h2>Ajuda a melhorar o Umbu</h2><p class="lead">' + (state.reports.length ? state.reports.length + (state.reports.length === 1 ? ' problema guardado.' : ' problemas guardados.') : 'Viste uma palavra errada? Toca em «Reportar problema» durante as lições.') + ' O relatório inclui também as palavras onde mais erraste.</p><div class="btnrow"><button class="btn small" data-act="report-send">Enviar relatório</button>' + (state.reports.length ? '<button class="btn small ghost" data-act="report-clear">Limpar</button>' : '') + '</div></div>' +
+    '<div class="card"><h2>Como funciona</h2><p class="lead">Conhecer, reconhecer, recordar e lembrar.</p><button class="btn small ghost" data-act="method">Ver o método</button></div>' +
     '<div class="card acct"><h2>Conta</h2><label for="pfName">Nome<input class="field" id="pfName" data-pf="name" type="text" autocomplete="name" value="' + esc(state.profile.name) + '" maxlength="40"></label>' +
     '<label for="pfMail">E-mail<input class="field" id="pfMail" data-pf="email" type="email" autocomplete="email" inputmode="email" value="' + esc(state.profile.email) + '" maxlength="80"></label>' +
     '<p class="note">' + acctStatus() + ' O nome e o e-mail ficam guardados só neste aparelho.</p></div>' +
@@ -6195,7 +6343,7 @@ const KEYSTORE = 'umbundulingo.key';
 function gateShow(maint) {
   document.body.classList.add('locked');
   const g = $('#gate'); g.hidden = false;
-  g.innerHTML = '<div class="gate-av">' + helperAvatar(HELPERS[0], 110, maint ? 'sad' : 'smug') + '</div><h1 class="logo">UmbunduLingo</h1>' +
+  g.innerHTML = '<div class="gate-av">' + helperAvatar(HELPERS[0], 110, maint ? 'sad' : 'smug') + '</div><h1 class="logo">Umbu</h1>' +
     (maint ? '<p class="lead">A app está em manutenção.</p><p class="lead"><b>' + esc(maint) + '</b></p>'
       : '<p class="lead">Esta versão de teste é só para convidados. Escreve a tua chave de acesso. Se ainda não tens uma, pede-a a quem criou a app.</p>' +
         '<input id="gateKey" class="field" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="UMB-XXXX-XXXX" aria-label="Chave de acesso" maxlength="16">' +
@@ -6301,7 +6449,7 @@ function setRev(id, f, v) {
   r[f] = v; save();
 }
 function reportText() {
-  const L = ['UmbunduLingo · relatório de revisão', ''];
+  const L = ['Umbu · relatório de revisão', ''];
   SECTIONS.forEach((sec, si) => {
     L.push('## Secção ' + (si + 1) + ' · ' + sec.title);
     sec.units.forEach(unit => {
@@ -6328,7 +6476,7 @@ document.addEventListener('click', e => {
     const d = today(); d.heard++; state.stats.heard++; save();
   }
 });
-$('#view').addEventListener('click', e => {
+const viewClick = e => {
   const nb = e.target.closest('[data-node]');
   if (nb) {
     const nodes = nodesList(), idx = nodes.findIndex(x => x.id === nb.dataset.node), n = nodes[idx];
@@ -6358,7 +6506,7 @@ $('#view').addEventListener('click', e => {
   const ti = e.target.closest('[data-theme-id]'); if (ti) { state.theme.id = ti.dataset.themeId; save(); applyTheme(); sfx('pop'); renderProfile(); return; }
   const tb = e.target.closest('[data-bg-id]'); if (tb) { state.theme.bg = tb.dataset.bgId; save(); applyTheme(); sfx('pop'); renderProfile(); return; }
   const tm = e.target.closest('[data-mode]'); if (tm) { state.theme.mode = tm.dataset.mode; save(); applyTheme(); sfx('pop'); renderProfile(); return; }
-  const da = e.target.closest('[data-dall]'); if (da) { dq.only = da.dataset.dall === '0'; dq.n = 60; renderDict(); return; }
+  const da = e.target.closest('[data-dall]'); if (da) { dq.only = da.dataset.dall === '0'; dq.conf = da.dataset.dall === '2'; dq.n = 60; renderDict(); return; }
   const gl = e.target.closest('[data-goal]'); if (gl) { state.goal = +gl.dataset.goal; save(); renderProfile(); return; }
   const a = e.target.closest('[data-act]'); if (!a) return;
   const act = a.dataset.act;
@@ -6376,6 +6524,13 @@ $('#view').addEventListener('click', e => {
   else if (act === 'ask-ai') askAI(a);
   else if (act === 'hint') { if (S && S.cur && !S.cur.answered) { const hb = document.querySelector('#stage .hintbox'); hb.innerHTML = hintFor(S.cur); hb.hidden = false; a.hidden = true; S.hints = (S.hints || 0) + 1; sfx('pop'); } }
   else if (act === 'practice-due') startPractice('due');
+  else if (act === 'method') openMethod();
+  else if (act === 'bk-copy') backupCopy();
+  else if (act === 'bk-file') backupFile();
+  else if (act === 'bk-restore') openRestore();
+  else if (act === 'rp-open') openReport(S ? (S.mode === 'intro' ? S.node.intro[introI] : S.cur && S.cur.item) : null);
+  else if (act === 'report-send') sendReport();
+  else if (act === 'report-clear') { state.reports = []; save(); renderProfile(); toast('Reportes apagados.'); }
   else if (act === 'google') googleLogin();
   else if (act === 'dict-more') { dq.n += 60; $('#dictOut').innerHTML = dictList(); }
   else if (act === 'daily-chest') { const d = ymd(new Date()); if (state.dailyChest !== d) { state.dailyChest = d; const g = 15 + Math.floor(Math.random() * 16); state.gems += g; if (state.hearts < MAXH) state.hearts++; save(); updateHeader(); sfx('gem'); renderQuests(); toast('Baú diário: +' + g + ' gemas'); } }
@@ -6390,7 +6545,8 @@ $('#view').addEventListener('click', e => {
     try { navigator.clipboard.writeText(box.value).then(() => toast('Relatório copiado.'), () => toast('Seleciona o texto abaixo e copia.')); }
     catch (err) { toast('Seleciona o texto abaixo e copia.'); }
   }
-});
+};
+$('#view').addEventListener('click', viewClick); $('#lesson').addEventListener('click', viewClick);
 $('#view').addEventListener('input', e => {
   const el = e.target;
   if (el.id === 'dictQ') { dq.q = el.value; dq.n = 60; $('#dictOut').innerHTML = dictList(); return; }
@@ -6411,9 +6567,7 @@ $('#hStreakBtn').addEventListener('click', () => { sfx('tap'); tab = 'quests'; c
 function gemShopHtml() {
   regen(); const miss = MAXH - state.hearts;
   const row = (t, price, act, ok, sub) => '<div class="gs-row"><div><b>' + t + '</b><small>' + sub + '</small></div><button class="btn small" data-buy="' + act + '"' + (ok && state.gems >= price ? '' : ' disabled') + '>' + ic('gem') + price + '</button></div>';
-  return '<p class="lead">Tens ' + ic('gem') + '<b>' + state.gems + '</b> gemas, ' + ic('heart', 'fill') + '<b>' + state.hearts + '</b> de ' + MAXH + ' vidas e ' + state.freezes + (state.freezes === 1 ? ' congelamento.' : ' congelamentos.') + '</p>' +
-    row('1 vida', 20, 'h1', miss > 0, miss > 0 ? 'Recupera um coração' : 'Já tens todas') +
-    row('Todas as vidas', 60, 'hall', miss > 1, 'Enche os ' + MAXH + ' corações') +
+  return '<p class="lead">Tens ' + ic('gem') + '<b>' + state.gems + '</b> gemas e ' + state.freezes + (state.freezes === 1 ? ' congelamento.' : ' congelamentos.') + '</p>' +
     row('Congelar ofensiva', 50, 'fz', true, 'Protege a tua ofensiva 1 dia sem estudares') +
     '<p class="note">As gemas ganham-se a estudar, nos tesouros e nas missões. Nunca se compram com dinheiro.</p>';
 }
@@ -6477,7 +6631,13 @@ applyTheme(); injectIcons();
     else if (fb.hidden || (!ok && !bad)) shown = false;
   }).observe(fb, { attributes: true, childList: true, subtree: true });
 })();
-checkAccess().then(ok => { if (ok) { document.body.classList.remove('locked'); render(); cloudInit(); } });
+try {
+  fetch('confirmadas.txt', { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
+    try { localStorage.setItem('umbundulingo.conf', t); } catch (e) {}
+    const set = parseConf(t); if (set.size !== CONF.size || [...set].some(w => !CONF.has(w))) { CONF = set; _all = null; _nodes = null; try { render(); } catch (e) {} }
+  }).catch(() => {});
+} catch (e) {}
+checkAccess().then(ok => { if (ok) { document.body.classList.remove('locked'); render(); cloudInit(); if (!state.seenMethod) setTimeout(openMethod, 700); } });
 })();
 </script>
 <script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); }); }</script>
