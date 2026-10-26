@@ -4,7 +4,7 @@
 <meta name="description" content="Aprende Umbundu do zero, com voz. Grátis.">
 <title>UmbunduLingo</title>
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@400;500;600&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Fredoka:wght@400;500;600&family=Nunito:wght@600;700;800;900&display=swap">
 <style>html,body{margin:0;padding:0}</style></head><body>
 
 
@@ -39,7 +39,7 @@
   --flame: #ff9600;
   --gem: #1cb0f6;
   --heart: #ff4b4b;
-  --font-title: 'Cinzel', 'Times New Roman', serif;
+  --font-title: 'Outfit', 'Fredoka', system-ui, sans-serif;
   --font-display: 'Fredoka', ui-rounded, 'Nunito', system-ui, sans-serif;
   --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   color-scheme: dark;
@@ -454,7 +454,7 @@ body.locked .app, body.locked .tabbar, body.locked #lesson { display: none; }
 /* capa */
 .hero { overflow: hidden; }
 .hero-cover { position: relative; margin: -16px -16px 12px; height: 168px; border-radius: 20px 20px 0 0; overflow: hidden; }
-.hero-cover svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero-cover > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .hero-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,6,27,.78), rgba(18,6,27,0) 60%); }
 .hero-cover .hc-t { position: absolute; left: 16px; right: 16px; bottom: 12px; z-index: 1; color: #fff; }
 .hero-cover .hc-t small { display: block; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; font-size: 11.5px; color: #ffd978; }
@@ -576,15 +576,257 @@ body.locked .app, body.locked .tabbar, body.locked #lesson { display: none; }
 .tsw i { width: 100%; max-width: 44px; height: auto; aspect-ratio: 1; margin: 0 auto; }
 .tsw span { display: none; }
 .card > .eyebrow { display: block; margin-top: 12px; }
+/* ensino: palavra nova e dica */
+.teach { background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 18px; padding: 12px 14px; display: grid; gap: 6px; }
+.teach-top { display: flex; align-items: center; justify-content: space-between; }
+.teach-w { font-size: 20px; font-weight: 800; line-height: 1.35; overflow-wrap: anywhere; }
+.teach-w b { font-family: var(--font-display); font-weight: 600; color: var(--accent-t); }
+.teach-w span { color: var(--muted); font-size: 15px; }
+.teach p { font-size: 14.5px; color: var(--fg); line-height: 1.45; }
+.hintbtn { align-self: flex-start; }
+.hintbox { background: var(--surface-2); border: 2px dashed var(--accent); border-radius: 14px; padding: 10px 12px; font-weight: 700; font-size: 15px; line-height: 1.45; }
+.stage .teach ~ .mrow { display: none; }
+/* imagens e loja de gemas */
+.opts.pics { grid-template-columns: 1fr 1fr; }
+.opts.pics .opt { font-size: 56px; text-align: center; padding: 14px 8px; line-height: 1.1; }
+.teach-pic { font-size: 64px; text-align: center; line-height: 1.1; }
+.bemo { font-size: 40px; line-height: 1; margin-left: auto; }
+button.chip.flame, button.chip.gem { cursor: pointer; }
+button.chip.flame:hover, button.chip.gem:hover { background: var(--surface); }
+.gs-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-top: 2px solid var(--line); }
+.gs-row small { display: block; color: var(--muted); font-weight: 700; }
+.gs-row .btn { width: auto; min-width: 84px; }
+.cal { scroll-margin-top: 80px; }
+/* equipa humana e mancha pastel */
+.av.mc { position: relative; isolation: isolate; }
+.av.mc::before { content: ""; position: absolute; inset: 6% -12% 0; background: var(--hc, var(--accent-soft)); opacity: .5; border-radius: 46% 54% 50% 50% / 54% 46% 54% 46%; z-index: -1; }
+.mc .arm.l { transform-origin: 37px 106px; } .mc .arm.r { transform-origin: 83px 106px; }
+.mc .leg.l { transform-origin: 51px 140px; } .mc .leg.r { transform-origin: 69px 140px; }
+@keyframes armUpL { to { transform: rotate(150deg); } } @keyframes armUpR { to { transform: rotate(-150deg); } }
+.fb.bad .mc .arm.l, .fb.bad .mc .arm.r { transform: rotate(0); }
+.hcard { align-items: flex-start; }
+.hcard .hname { display: inline-block; padding: 2px 12px; border-radius: 12px; color: #1b1a1f; font-family: var(--font-display); font-size: 17px; }
+.hcard .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.hcard .tags i { font-style: normal; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 10px; background: var(--hc); color: #1b1a1f; }
+.mrow .av.mc { width: 84px; }
+.fb .mc { width: 66px; }
+.buddy .av.mc { width: 62px; }
+.so-m .av.mc { width: 110px; }
+.hero-cover { overflow: visible; }
+.hero-cover > svg { border-radius: 20px 20px 0 0; }
+.hero-cover .hc-m { position: absolute; right: 10px; bottom: -22px; z-index: 2; }
+.hero-cover .hc-m .av.mc::before { opacity: .7; }
+.hero-cover::after { border-radius: 20px 20px 0 0; }
+.hero-cover .hc-t { right: 120px; }
+.hero-cover .hc-m { bottom: 4px; right: 6px; }
+.hero-cover .hc-m .av.mc { width: 78px; }
+.hero-cover { overflow: hidden; }
+.hero-cover .hc-t { right: 96px; }
+.hero-cover .hc-t h1 { font-size: 26px; }
+/* ===== v1.2 moderno ===== */
+.chip.course, .logo, .jump, .sb-text b, .page h1, .unit-h, .result h2, .sheet h2, .so-in h2, .hero-cover .hc-t h1 { letter-spacing: -0.01em !important; font-weight: 800 !important; }
+.logo { color: var(--fg) !important; }
+.result h2 { color: var(--accent-t) !important; }
+.flag { width: 28px !important; height: 28px !important; border: 0 !important; border-radius: 9px !important; background: linear-gradient(135deg, #6d5efc, #ff62b0) !important; }
+.flag::after { content: "U" !important; inset: 0 !important; width: 100% !important; height: 100% !important; margin: 0 !important; border-radius: 0 !important; background: none !important; color: #fff; font: 800 16px/28px var(--font-title); text-align: center; left: 0 !important; top: 0 !important; }
+.hero-cover { height: 214px !important; border-radius: 24px 24px 0 0 !important; overflow: hidden !important; }
+.hero-cover > svg { border-radius: 24px 24px 0 0 !important; }
+.hero-cover::after { background: linear-gradient(to top, rgba(20,8,60,.35), rgba(20,8,60,0) 55%) !important; border-radius: 24px 24px 0 0 !important; }
+.hero-cover .hc-t { top: 16px !important; bottom: auto !important; left: 18px !important; right: auto !important; }
+.hero-cover .hc-t small { color: #fff !important; opacity: .85; font-size: 11px !important; letter-spacing: .08em !important; text-transform: none !important; font-weight: 800 !important; background: rgba(255,255,255,.18); display: inline-block !important; padding: 3px 10px; border-radius: 99px; margin-bottom: 6px; }
+.hero-cover .hc-t h1 { font-size: 30px !important; text-shadow: 0 2px 14px rgba(40,10,120,.45) !important; }
+.hero-cover .hc-team { position: absolute; left: 6px; bottom: -2px; z-index: 2; display: flex; align-items: flex-end; gap: 0; }
+.hero-cover .hc-team .av.mc { margin-right: -10px; }
+.hero-cover .hc-team .av.mc::before, .hero-cover .hc-m .av.mc::before { display: none !important; }
+.hero-cover .hc-m { right: 8px !important; bottom: -2px !important; z-index: 3; }
+.hero-cover .hc-m .av.mc { width: 112px !important; }
+.abody .tail { transform-origin: 80px 150px; animation: tailw 2.6s ease-in-out infinite; }
+@keyframes tailw { 0%,100% { transform: rotate(0); } 50% { transform: rotate(7deg); } }
+.hero { border-radius: 24px !important; }
+.btn { border-radius: 16px !important; }
+.sheet, .card { border-radius: 22px; }
+.crest-wrap { border-radius: 20px !important; }
+.hero-cover .hc-t h1 { font-size: 26px !important; }
+.hero-cover .hc-m { right: -2px !important; bottom: -8px !important; }
+.hero-cover .hc-m .av.mc { width: 104px !important; }
+/* ===== v1.2 minimalista ===== */
+:root { --rad: 22px; }
+body { background-image: radial-gradient(70% 26% at 50% 0%, var(--hero-glow), transparent 72%); }
+.ver { font: 700 12px var(--font-body); color: var(--muted); background: var(--surface-2); border-radius: 99px; padding: 3px 9px; vertical-align: middle; letter-spacing: 0; }
+/* topo */
+.topbar { border-bottom: 0 !important; background: color-mix(in srgb, var(--bg) 86%, transparent) !important; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); padding-block: 8px !important; }
+.chip { background: none !important; }
+.lvl-tag { border: 0 !important; background: var(--surface-2); border-radius: 99px !important; padding: 2px 8px !important; }
+/* menu flutuante */
+.tabbar { left: 50% !important; right: auto !important; width: min(456px, calc(100% - 24px)); transform: translateX(-50%); bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important; border: 0 !important; border-radius: 26px; background: var(--surface) !important; box-shadow: 0 10px 34px rgba(30, 14, 90, .2), 0 0 0 1px var(--line); padding: 6px !important; }
+.tabbar-in { grid-template-columns: repeat(6, 1fr) !important; gap: 2px !important; }
+.tab { font-size: 0 !important; border: 0 !important; border-radius: 18px !important; min-height: 48px; justify-content: center; gap: 1px !important; padding: 5px 0 !important; }
+.tab .ic { width: 25px !important; height: 25px !important; }
+.tab[aria-current="page"] { font-size: 10px !important; text-transform: none !important; letter-spacing: 0 !important; background: var(--accent-soft) !important; color: var(--accent-t) !important; }
+.tab[aria-current="page"] .ic { width: 22px !important; height: 22px !important; }
+/* cartões */
+.card, .word-row, .stat-tile, .goal, .opt:not(.ok):not(.bad) { border: 0 !important; background: var(--surface-2) !important; border-radius: var(--rad) !important; }
+.card, .goal { padding: 16px !important; }
+.card h2 { font-family: var(--font-title); font-weight: 700; }
+.page h1 { font-size: 30px !important; }
+.page > .lead, .page > p.lead { font-size: 14px; }
+/* botões planos */
+.btn { box-shadow: none !important; border-radius: 18px !important; text-transform: none !important; letter-spacing: 0 !important; font-family: var(--font-title) !important; font-weight: 700 !important; font-size: 17px !important; padding: 15px 18px !important; transition: transform .1s, filter .1s; }
+.btn:active { transform: scale(.97) !important; filter: brightness(.95); }
+.btn.ghost { background: var(--surface-2) !important; border: 0 !important; color: var(--accent-t) !important; }
+.btn[disabled] { background: var(--surface-2) !important; color: var(--muted) !important; }
+.btn.small { padding: 10px 16px !important; font-size: 15px !important; }
+.pill { border: 0 !important; background: var(--surface-2); }
+.pill.ok { background: var(--good-bg); }
+/* opções de resposta */
+.opt { border: 2px solid transparent !important; border-radius: 18px !important; padding: 15px 16px !important; background: var(--surface-2) !important; font-weight: 700 !important; }
+.opt[aria-pressed="true"] { border-color: var(--accent) !important; background: var(--accent-soft) !important; }
+.opt.ok { border-color: var(--good) !important; }
+.opt.bad { border-color: var(--bad) !important; }
+.hintbtn { background: none !important; }
+/* início */
+.hero { border: 0 !important; background: none !important; padding: 0 !important; margin-top: 6px !important; gap: 12px !important; overflow: visible !important; }
+.hero-cover { margin: 0 !important; height: 208px !important; border-radius: 30px !important; }
+.hero-cover > svg, .hero-cover::after { border-radius: 30px !important; }
+.hero-cover::after { background: none !important; }
+.hero-cover .hc-t { top: 22px !important; left: 22px !important; }
+.hero-cover .hc-t h1 { font-size: 32px !important; line-height: 1.02 !important; font-weight: 800 !important; text-shadow: none !important; }
+.hero-cover .hc-team { left: 8px !important; }
+.hero-cover .hc-m { right: 4px !important; }
+.goal-row { font-size: 14px; }
+.meter { height: 8px !important; background: var(--surface) !important; }
+.meter i { background: linear-gradient(90deg, var(--accent), var(--accent-t)) !important; }
+.hero-row { justify-content: space-between; }
+.chips { padding-block: 10px 0 !important; }
+.jump { border: 0 !important; background: var(--surface-2) !important; width: 38px !important; height: 38px !important; font-size: 15px !important; }
+.jump.cur { background: var(--accent-soft) !important; color: var(--accent-t) !important; box-shadow: inset 0 0 0 2px var(--accent); }
+.jump.done { background: var(--accent) !important; }
+/* secções e caminho */
+.sec-banner { box-shadow: none !important; border-radius: 26px !important; padding: 16px !important; background: linear-gradient(120deg, var(--s-deep), var(--s-light) 190%) !important; }
+.sec-banner::before { display: none !important; }
+.crest-wrap { width: 52px !important; height: 52px !important; border-radius: 17px !important; }
+.crest { width: 38px !important; height: 38px !important; }
+.sb-text small { text-transform: none !important; letter-spacing: 0 !important; font-size: 12px !important; }
+.sb-text b { font-size: 20px !important; }
+.unit-label { border-bottom: 0 !important; margin-top: 26px !important; }
+.unit-label .ul-n { text-transform: none !important; letter-spacing: 0 !important; font-size: 12px !important; }
+.unit-label b { font-family: var(--font-title) !important; font-weight: 700 !important; font-size: 20px !important; }
+.node { box-shadow: none !important; width: 68px !important; height: 68px !important; background: var(--surface-2) !important; }
+.node.test { width: 78px !important; height: 78px !important; }
+.node.done { background: var(--good) !important; }
+.node.current { background: var(--s-light) !important; box-shadow: 0 10px 24px -6px var(--s-deep) !important; }
+.node.current::after { border-width: 3px !important; inset: -9px !important; }
+.node:active { transform: scale(.93) !important; box-shadow: none !important; }
+.node-label { font-weight: 700; }
+.tip { border: 0 !important; box-shadow: 0 6px 18px rgba(30, 14, 90, .16); border-radius: 14px !important; text-transform: none !important; letter-spacing: 0 !important; }
+/* lição */
+.card-word { border: 0 !important; border-radius: 26px !important; background: var(--accent-soft) !important; }
+.fb { background: none !important; }
+.sheet { border-radius: 28px 28px 0 0 !important; }
+.stat-tile { padding: 14px 6px !important; }
+.stat-tile b { font-family: var(--font-title) !important; }
+.stat-tile span, .eyebrow, .pill { text-transform: none !important; letter-spacing: 0 !important; }
+.eyebrow { font-size: 13px !important; }
+.field, .searchbox { border: 0 !important; background: var(--surface-2) !important; border-radius: 18px !important; }
+.searchbox { box-shadow: none !important; }
+.searchbox .field { background: none !important; }
+.seg { gap: 6px !important; }
+.seg button { border: 0 !important; background: var(--surface-2) !important; border-radius: 99px !important; padding: 8px 16px !important; font-weight: 700 !important; box-shadow: none !important; }
+.seg button[aria-pressed="true"] { background: var(--accent) !important; color: var(--accent-ink) !important; }
+.pill { font-size: 12.5px !important; padding: 5px 12px !important; font-weight: 700 !important; }
+/* ===== v1.2 polimento ===== */
+/* poses */
+.mc .hd { transform-origin: 60px 98px; transition: transform .3s; }
+.pose-wave .arm.r { animation: waveR 1s ease-in-out infinite !important; }
+@keyframes waveR { 0%,100% { transform: rotate(-135deg); } 50% { transform: rotate(-168deg); } }
+.pose-cheer .arm.l { animation: cheerL .8s ease-in-out infinite !important; }
+.pose-cheer .arm.r { animation: cheerR .8s ease-in-out infinite !important; }
+@keyframes cheerL { 0%,100% { transform: rotate(140deg); } 50% { transform: rotate(165deg); } }
+@keyframes cheerR { 0%,100% { transform: rotate(-140deg); } 50% { transform: rotate(-165deg); } }
+.pose-cheer { animation: hop .8s ease-in-out infinite; }
+@keyframes hop { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.pose-hip .arm.l { animation: none !important; transform: rotate(24deg); }
+.pose-hip .arm.r { animation: none !important; transform: rotate(-24deg); }
+.pose-cross .arm.l { animation: none !important; transform: rotate(-46deg); }
+.pose-cross .arm.r { animation: none !important; transform: rotate(46deg); }
+.pose-cross .hd { transform: rotate(5deg); }
+.pose-think .arm.l { animation: none !important; transform: rotate(-30deg); }
+.pose-think .arm.r { animation: none !important; transform: rotate(14deg); }
+.pose-think .hd { transform: rotate(-8deg) translateX(-1px); }
+/* capa */
+.hero-cover .hc-t { top: 20px !important; left: 20px !important; }
+.hero-cover .hc-t h1 { font-size: 30px !important; }
+.hero-cover .hc-chip { position: absolute; right: 14px; top: 16px; z-index: 3; background: #fff; color: #5a3df5; font: 800 14px var(--font-title); padding: 6px 12px; border-radius: 14px 14px 14px 4px; transform: rotate(4deg); box-shadow: 0 6px 16px rgba(30,10,120,.25); }
+.hero-cover .hc-team { left: 12px !important; bottom: 0 !important; gap: 6px; align-items: flex-end; }
+.hero-cover .hc-m { right: 8px !important; bottom: 0 !important; }
+.hero-cover .hc-team .av.mc { margin-right: 0 !important; }
+.pod { display: flex; flex-direction: column; align-items: center; }
+.pod i { display: block; width: calc(100% + 10px); margin-top: -3px; border-radius: 14px 14px 0 0; background: rgba(255,255,255,.24); }
+/* continuar */
+.cta { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; text-align: left; padding: 16px 18px; border-radius: 24px; background: var(--accent); color: var(--accent-ink); }
+.cta small { display: block; font-weight: 700; font-size: 13px; opacity: .8; }
+.cta b { font: 800 19px/1.2 var(--font-title); }
+.cta .ic { width: 26px; height: 26px; transform: rotate(-90deg); flex: none; }
+.cta:active { transform: scale(.98); }
+.goal { padding: 12px 16px !important; }
+.hero-row .btn { padding: 8px 14px !important; }
+/* secoes na cor do tema */
+.sec { --s-deep: var(--accent-deep) !important; --s-light: var(--accent) !important; --s-ink: var(--accent-ink) !important; }
+.sec-banner { color: var(--accent-ink) !important; background: linear-gradient(125deg, var(--accent), var(--accent-t) 220%) !important; }
+.sb-bar { background: rgba(0,0,0,.18) !important; } .sb-bar i { background: var(--accent-ink) !important; }
+.crest-wrap { background: rgba(255,255,255,.28) !important; color: var(--accent-ink) !important; }
+.crest-wrap.gold { background: var(--accent-ink) !important; color: var(--accent) !important; }
+.crest-wrap.gold .crest path { fill: var(--accent-ink); }
+/* legibilidade */
+.node-label { font-size: 13px !important; color: var(--muted); }
+.unit-label .ul-n, .sb-sub, .word-row .r, .stat-tile span, .sb-text small { font-size: 13px !important; }
+.word-row .r, .unit-label .ul-n { color: var(--muted); }
+.card > p, .lead { color: var(--muted); }
+/* barra da lição */
+.bar { height: 16px !important; background: var(--surface-2) !important; }
+.bar i { background: linear-gradient(90deg, var(--accent), var(--accent-t)) !important; position: relative; transition: width .45s cubic-bezier(.3,1.3,.5,1) !important; }
+.bar i::after { content: ""; position: absolute; left: 8px; right: 8px; top: 3px; height: 4px; border-radius: 4px; background: rgba(255,255,255,.4); }
+/* respostas animadas */
+.opt { transition: transform .12s, background .15s, border-color .15s; }
+.opt:active:not([disabled]) { transform: scale(.98); }
+.opt.ok { animation: popok .38s cubic-bezier(.3,1.5,.5,1); background: var(--good-bg) !important; }
+.opt.bad { animation: shake .4s; background: var(--bad-bg) !important; }
+@keyframes popok { 0% { transform: scale(1); } 45% { transform: scale(1.04); } 100% { transform: scale(1); } }
+@keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } }
+#fb:not([hidden]) { animation: slideup .28s cubic-bezier(.2,.9,.3,1.1); }
+@keyframes slideup { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.cf { position: fixed; bottom: 150px; width: 9px; height: 13px; border-radius: 3px; z-index: 99; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .pose-cheer, .pose-wave .arm.r, .pose-cheer .arm { animation: none !important; } }
+.sec-banner { color: #fff !important; background: linear-gradient(125deg, var(--accent-deep), var(--accent) 230%) !important; }
+.sb-bar i { background: #fff !important; }
+.crest-wrap { color: #fff !important; background: rgba(255,255,255,.2) !important; }
+.crest-wrap.gold { background: #fff !important; color: var(--accent-deep) !important; }
+.crest-wrap.gold .crest path { fill: var(--accent); }
+.unit-label { background: var(--surface-2) !important; color: var(--fg) !important; border-radius: 20px !important; padding: 12px 14px !important; box-shadow: none !important; }
+.unit-label b, .unit-label * { color: inherit; }
+.unit-label .ul-n { color: var(--muted) !important; }
+.unit-label .dots i { background: var(--line) !important; } .unit-label .dots i.on { background: var(--accent) !important; }
+.guide { background: var(--surface) !important; color: var(--accent-t) !important; border: 0 !important; }
+.cta b { font-size: 17px; }
+.pod .av.mc, .pod .av.mc .animal { display: block; line-height: 0; }
+.pod i { margin-top: -5px !important; }
+@keyframes waveR { 0%,100% { transform: rotate(-152deg); } 50% { transform: rotate(-176deg); } }
+.node.current { color: #fff !important; background: linear-gradient(135deg, var(--accent), var(--accent-deep)) !important; }
+.node.current .ic { color: #fff; }
+
+.flag { width: 30px !important; height: 20px !important; border: 0 !important; border-radius: 5px !important; background: none !important; overflow: hidden; box-shadow: 0 0 0 1px rgba(0,0,0,.12); flex: none; display: block; }
+.flag::after { display: none !important; content: none !important; }
+.flagsvg { display: block; width: 100%; height: 100%; }
+.hero-cover .hc-flag { position: absolute; left: 190px; top: 26px; width: 42px; height: 28px; border-radius: 6px; overflow: hidden; z-index: 3; box-shadow: 0 4px 14px rgba(20,8,70,.35); transform: rotate(-4deg); }
 </style>
 
 <section id="gate" class="gate" hidden></section>
 <div class="app">
   <header class="topbar">
-    <div class="chip course"><span class="flag" aria-hidden="true"></span><span>Umbundu</span><span class="lvl-tag" id="hLevel">A0</span></div>
+    <div class="chip course"><span class="flag" aria-hidden="true"><svg class="flagsvg" viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="20" fill="#cc092f"/><rect y="20" width="60" height="20" fill="#111"/><g fill="none" stroke="#f2b230" stroke-linecap="round"><path d="M21.5 22.5a8.6 8.6 0 0 1 17 0" stroke-width="3.2" stroke-dasharray="2.2 1.6"/><path d="M25 29q11-1 12.5-12.5" stroke-width="2.2"/></g><path d="M30 12.2l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4z" fill="#f2b230"/></svg></span><span>Umbundu</span><span class="lvl-tag" id="hLevel">A0</span></div>
     <div class="stats">
-      <div class="chip flame" aria-label="Dias seguidos"><span data-ic="flame" class="fill"></span><b id="hStreak">0</b></div>
-      <div class="chip gem" aria-label="Gemas"><span data-ic="gem"></span><b id="hGems">0</b></div>
+      <button class="chip flame" id="hStreakBtn" aria-label="Ofensiva e calendário"><span data-ic="flame" class="fill"></span><b id="hStreak">0</b></button>
+      <button class="chip gem" id="hGemsBtn" aria-label="Loja de gemas"><span data-ic="gem"></span><b id="hGems">0</b></button>
       <button class="chip heart" id="hHeartsBtn" aria-label="Corações"><span data-ic="heart" class="fill"></span><b id="hHearts">10</b></button>
     </div>
   </header>
@@ -661,6 +903,14 @@ const ICONS = {
   gift: '<rect x="3" y="9" width="18" height="12" rx="2"/><path d="M12 9v12M3 13h18" stroke="#fff" stroke-opacity=".6" stroke-width="2"/><path d="M12 9C9 9 7 7.5 7.5 6S10.5 5 12 9zm0 0c3 0 5-1.5 4.5-3S13.5 5 12 9z"/>',
   back: '<path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
 };
+Object.assign(ICONS, {
+  home: '<path d="M5.5 10.4 12 4.8l6.5 5.6V19a2 2 0 0 1-2 2H14v-5a2 2 0 0 0-4 0v5H7.5a2 2 0 0 1-2-2z"/><path d="M3.5 11.2 12 3.8l8.5 7.4" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>',
+  refresh: '<path d="M19.5 12a7.5 7.5 0 0 1-13 5.1M4.5 12a7.5 7.5 0 0 1 13-5.1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M18.2 3.5v4.2H14M5.8 20.5v-4.2H10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+  search: '<circle cx="10.5" cy="10.5" r="6.5" opacity=".22"/><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5l5 5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>',
+  target: '<circle cx="12" cy="12" r="9.2" opacity=".2"/><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="1.7"/>',
+  shop: '<path d="M5.2 8.5h13.6l-1 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z" opacity=".22"/><path d="M5.2 8.5h13.6l-1 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M9 11V7.5a3 3 0 0 1 6 0V11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+  user: '<circle cx="12" cy="8" r="4.2" opacity=".22"/><circle cx="12" cy="8" r="4.2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4.5 20.5c.6-4 3.6-6 7.5-6s6.9 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>'
+});
 function ic(n, c) {
   return '<svg class="ic ' + (c || '') + '" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' + (ICONS[n] || '') + '</svg>';
 }
@@ -679,12 +929,7 @@ const isPhrase = i => /\s/.test(i.u);
 
 /* Brasão: um sol (utanya); cada secção ganha mais um raio */
 function crest(n) {
-  let r = '';
-  for (let i = 0; i < n; i++) {
-    const a = i * 2 * Math.PI / n - Math.PI / 2, c = Math.cos(a), s = Math.sin(a);
-    r += '<line x1="' + (32 + c * 15).toFixed(1) + '" y1="' + (32 + s * 15).toFixed(1) + '" x2="' + (32 + c * 28).toFixed(1) + '" y2="' + (32 + s * 28).toFixed(1) + '"/>';
-  }
-  return '<svg class="crest" viewBox="0 0 64 64" aria-hidden="true"><g stroke="currentColor" stroke-width="3.5" stroke-linecap="round">' + r + '</g><circle cx="32" cy="32" r="9" fill="currentColor"/></svg>';
+  return '<svg class="crest" viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="10" width="44" height="44" rx="14" transform="rotate(45 32 32)" fill="currentColor" opacity=".3"/><rect x="16" y="16" width="32" height="32" rx="11" transform="rotate(45 32 32)" fill="currentColor"/><path d="M32 21.5l3.4 7 7.6 1.1-5.5 5.3 1.3 7.6L32 39l-6.8 3.5 1.3-7.6-5.5-5.3 7.6-1.1z" fill="var(--accent)"/></svg>';
 }
 /* ===================== ANIMAIS, AVATAR E AJUDANTES (desenhos originais) ===================== */
 function mixHex(h, to, a) {
@@ -836,7 +1081,7 @@ function personSvg(o) {
   if (hw === 'lenco') hat = '<path d="M28 44C30 22 44 14 60 14s30 8 32 30c-10-10-20-12-32-12S38 34 28 44z" fill="' + hwc + '"/><path d="M84 30l16-8-4 18z" fill="' + hwc + '"/><path d="M34 40q26-10 52 0" fill="none" stroke="' + lighten(hwc, .5) + '" stroke-width="2.4" stroke-dasharray="3 4"/>';
   if (hw === 'fones') hat = '<path d="M30 56C28 14 92 14 90 56" fill="none" stroke="#2b2f3a" stroke-width="6" stroke-linecap="round"/><rect x="22" y="52" width="12" height="24" rx="6" fill="' + hwc + '"/><rect x="86" y="52" width="12" height="24" rx="6" fill="' + hwc + '"/>';
   return '<svg class="animal person" viewBox="0 0 120 140" aria-hidden="true">' + back +
-    '<path d="M12 140C12 114 34 104 60 104s48 10 48 36z" fill="' + shirt + '"/><path d="M46 104q14 14 28 0" fill="none" stroke="' + darken(shirt, .18) + '" stroke-width="3"/>' +
+    (o.noShirt ? '' : '<path d="M12 140C12 114 34 104 60 104s48 10 48 36z" fill="' + shirt + '"/><path d="M46 104q14 14 28 0" fill="none" stroke="' + darken(shirt, .18) + '" stroke-width="3"/>') +
     '<rect x="51" y="86" width="18" height="22" rx="7" fill="' + sd + '"/><circle cx="30" cy="62" r="7" fill="' + skin + '"/><circle cx="90" cy="62" r="7" fill="' + skin + '"/>' + ear +
     '<rect x="30" y="20" width="60" height="72" rx="27" fill="' + skin + '"/>' + front + '<ellipse cx="38" cy="76" rx="6" ry="4" fill="#ff8aa0" opacity=".3"/><ellipse cx="82" cy="76" rx="6" ry="4" fill="#ff8aa0" opacity=".3"/>' +
     '<path d="M58 66q-4 8 0 10h5" fill="none" stroke="' + sd + '" stroke-width="3" stroke-linecap="round"/>' + beard + brows + '<g class="eyes">' + eyes + '</g>' + glass + '<g class="mouth">' + mouthL + '</g>' + hat + '</svg>';
@@ -849,56 +1094,132 @@ function avatarHtml(av, size, mood) {
 }
 /* Ajudantes: personagens originais, cada um com a sua maneira de falar */
 const HELPERS = [
-  { id: 'ndala', name: 'Ndala', role: 'Treinador confiante', sp: 'palanca', fur: null, acc: ['sunglasses'], bg: '#c9f2a6',
+  { id: 'ngola', pose: 'hip', name: 'Ngola', role: 'O teu guia', col: '#cfc8ff', tags: ['Focado', 'Confiante', 'Leal'],
+    look: { skin: '#7a4a2c', hair: '#14100f', hs: 'curto', shirt: '#6d5efc', gl: 'nenhum', hw: 'fones', hwc: '#19d3c5' }, pants: '#1f2937', shoe: '#ffffff',
+    bio: 'O teu guia no UmbunduLingo. Direto, calmo e sempre contigo em cada lição.',
+    ok: ['É isso! Tu consegues.', 'Boa! Mais uma no bolso.', 'Limpinho. Segue assim!', 'Perfeito. Próxima?'],
+    bad: ['Sem stress. Vê o que aconteceu e vai de novo.', 'Quase! A próxima é tua.', 'Errar faz parte. Bora outra vez.'],
+    done: ['Missão cumprida. Orgulho de ti!', 'Hoje evoluíste. Amanhã há mais.'], tip: ['Vamos a isto?', 'Uma palavra de cada vez.', 'Estou contigo.', 'Foco. Tu consegues.'] },
+  { id: 'ndala', pose: 'hip', name: 'Ndala', role: 'Treinador confiante', sp: 'palanca', fur: null, acc: ['sunglasses'], col: '#c9f2a6', shirt: '#1f9d6b', pants: '#1f2937', shoe: '#ffffff', tags: ['Confiante', 'Cool', 'Leal'],
     bio: 'Sabe que és capaz, e não tem medo de o dizer.',
     ok: ['Era previsível. Fácil para ti.', 'Assim mesmo. Nem suei.', 'Já sabia que ias acertar.', 'Boa. Continua nesse ritmo.'],
     bad: ['Acontece aos melhores. Respira e tenta outra vez.', 'Só um tropeção. Eu cá não me preocupo.', 'Anota esta e vira a página.'],
     done: ['Missão cumprida. Foi estilo.', 'Ninguém te pára hoje.'], tip: ['Vamos a isto?', 'Mais uma lição e és lenda.', 'Eu estou aqui contigo.'] },
-  { id: 'lemba', name: 'Mama Lemba', role: 'Avó paciente', sp: 'tartaruga', fur: null, acc: ['glasses', 'scarf'], bg: '#ffe3a3',
-    bio: 'Devagar se vai ao longe. Tem sempre um provérbio à mão.',
-    ok: ['Muito bem, meu filho. Devagar se vai ao longe.', 'Isso mesmo. Tens boa cabeça.', 'Orgulho-me de ti.'],
-    bad: ['Não faz mal. Quem não erra não aprende.', 'Calma, filho. Olha outra vez com cuidado.', 'Errar é como a chuva: faz crescer.'],
-    done: ['Vem comer qualquer coisa. Mereces.', 'Tanta coisa aprendida! Que bênção.'], tip: ['Sem pressa. Um passo de cada vez.', 'Senta-te aqui comigo.', 'Quem estuda hoje colhe amanhã.'] },
-  { id: 'kandjimbo', name: 'Kandjimbo', role: 'Rei do teatro', sp: 'leao', fur: null, acc: ['crown'], bg: '#ffd8b5',
-    bio: 'Tudo, para ele, é épico. Tudo.',
-    ok: ['MAGNÍFICO! As multidões aplaudem!', 'Que talento! Digno de um rei!', 'Bravo! Bravíssimo!'],
-    bad: ['Ó tragédia! Ó desgraça! ...Tenta outra vez.', 'O destino é cruel, mas tu és mais forte!', 'Cai o pano! Mas já se levanta!'],
-    done: ['E o público levanta-se, de pé!', 'Fim do espetáculo. Uma obra-prima.'], tip: ['Sobe ao palco, meu caro!', 'A história está à tua espera!', 'Hoje é dia de glória!'] },
-  { id: 'zuzu', name: 'Zuzu', role: 'Adolescente sarcástica', sp: 'camaleao', fur: null, acc: ['headphones'], bg: '#e3d4ff',
+  { id: 'tchitu', pose: 'cheer', name: 'Tchitu', role: 'Treinadora elétrica', sp: 'lebre', fur: null, acc: ['cap'], col: '#ffc9d6', shirt: '#ff5c7a', pants: '#1f2937', shoe: '#ffd23f', tags: ['Veloz', 'Enérgica', 'Divertida'],
+    bio: 'Corre, salta e nunca pára de te animar.',
+    ok: ['SIM! SIM! SIM! Mais uma!', 'Que velocidade! Vai, vai, vai!', 'Isso é que é energia!'],
+    bad: ['Upa! Levanta e vai outra vez!', 'Aquece e volta já!', 'Nem penses em parar agora!'],
+    done: ['RECORDE! Vamos outra vez?', 'Fizeste isso a correr! Que atleta!'], tip: ['Aquece! Vamos a isso!', 'Mais um treino? Bora!', 'Corre comigo!'] },
+  { id: 'zuzu', pose: 'cross', name: 'Zuzu', role: 'Adolescente sarcástica', sp: 'camaleao', fur: null, acc: ['headphones'], col: '#e3d4ff', shirt: '#7c5cff', pants: '#2b2f3a', shoe: '#ffffff', tags: ['Irónica', 'Esperta', 'Cool'],
     bio: 'Finge que nada a impressiona. Impressiona-se.',
     ok: ['Uau. Outra certa. Que surpresa.', 'Ok, nada mau. Eu não disse nada.', 'Pronto, está bem. Foi bom.'],
     bad: ['Ahah. Não. Mas tenta outra vez.', 'Eu mudo de cor, tu mudas de resposta.', 'Quase. Ou talvez nem tanto.'],
     done: ['Acabaste. Eu estava a ver, tá bem?', 'Tá. Foi impressionante. Não contes a ninguém.'], tip: ['Se tens mesmo de estudar...', 'Vá, não demores.', 'Eu fico aqui, só a olhar.'] },
-  { id: 'sakala', name: 'Sakala', role: 'Sábio tranquilo', sp: 'elefante', fur: null, acc: ['none'], bg: '#bfe9ff',
+  { id: 'sakala', pose: 'idle', name: 'Sakala', role: 'Sábio tranquilo', sp: 'elefante', fur: null, acc: ['none'], col: '#bfe9ff', shirt: '#3b82f6', pants: '#2b2f3a', shoe: '#ffffff', tags: ['Calmo', 'Sábio', 'Paciente'],
     bio: 'O elefante nunca esquece, e ajuda-te a não esquecer.',
     ok: ['Certo. Guarda isso na memória.', 'A água corre bem quando o rio é fundo.', 'Bem feito. Respira.'],
     bad: ['O erro também é professor.', 'Respira fundo. Vê outra vez.', 'Sem pressa. A resposta fica.'],
     done: ['Hoje a tua memória cresceu.', 'Descansa. O que aprendeste fica contigo.'], tip: ['Começa devagar.', 'A calma também aprende.', 'Quando quiseres.'] },
-  { id: 'tchitu', name: 'Tchitu', role: 'Treinadora elétrica', sp: 'lebre', fur: null, acc: ['cap'], bg: '#ffc9d6',
-    bio: 'Corre, salta e nunca pára de te animar.',
-    ok: ['SIM! SIM! SIM! Mais uma!', 'Que velocidade! Vai, vai, vai!', 'Isso é que é energia!'],
-    bad: ['Upa! Levanta e vai outra vez!', 'Aquece e volta já!', 'Nem penses em parar agora!'],
-    done: ['RECORDE! Vamos outra vez?', 'Fizeste isso a correr! Que atleta!'], tip: ['Aquece! Vamos a isso!', 'Mais um treino? Bora!', 'Corre comigo!'] }
+  { id: 'kandjimbo', pose: 'wave', name: 'Kandjimbo', role: 'Rei do teatro', sp: 'leao', fur: null, acc: ['crown'], col: '#ffd8b5', shirt: '#ff9f1c', pants: '#2b2f3a', shoe: '#ffffff', tags: ['Dramático', 'Divertido', 'Épico'],
+    bio: 'Tudo, para ele, é épico. Tudo.',
+    ok: ['MAGNÍFICO! As multidões aplaudem!', 'Que talento! Digno de um rei!', 'Bravo! Bravíssimo!'],
+    bad: ['Ó tragédia! Ó desgraça! ...Tenta outra vez.', 'O destino é cruel, mas tu és mais forte!', 'Cai o pano! Mas já se levanta!'],
+    done: ['E o público levanta-se, de pé!', 'Fim do espetáculo. Uma obra-prima.'], tip: ['Sobe ao palco, meu caro!', 'A história está à tua espera!', 'Hoje é dia de glória!'] },
+  { id: 'lemba', pose: 'think', name: 'Mama Lemba', role: 'Avó paciente', sp: 'tartaruga', fur: null, acc: ['glasses', 'scarf'], col: '#ffe3a3', shirt: '#c084fc', pants: '#2b2f3a', shoe: '#ffffff', tags: ['Paciente', 'Sábia', 'Carinhosa'],
+    bio: 'Devagar se vai ao longe. Tem sempre um provérbio à mão.',
+    ok: ['Muito bem, meu filho. Devagar se vai ao longe.', 'Isso mesmo. Tens boa cabeça.', 'Orgulho-me de ti.'],
+    bad: ['Não faz mal. Quem não erra não aprende.', 'Calma, filho. Olha outra vez com cuidado.', 'Errar é como a chuva: faz crescer.'],
+    done: ['Vem comer qualquer coisa. Mereces.', 'Tanta coisa aprendida! Que bênção.'], tip: ['Sem pressa. Um passo de cada vez.', 'Senta-te aqui comigo.', 'Quem estuda hoje colhe amanhã.'] },
+  { id: 'lili', pose: 'wave', name: 'Lili', role: 'A curiosa', col: '#ffe08a', tags: ['Curiosa', 'Corajosa', 'Alegre'],
+    look: { skin: '#8d5524', hair: '#1d1412', hs: 'coques', shirt: '#ffb020', gl: 'nenhum', ea: 1, hw: 'nenhum' }, pants: '#4f46e5', shoe: '#ffffff',
+    bio: 'Curiosa e determinada. Adora descobrir palavras novas contigo.',
+    ok: ['Boa! Eu sabia que conseguias!', 'Isso mesmo! Vamos à próxima?', 'Que orgulho de ti!', 'Perfeito! Aprendeste mais uma.'],
+    bad: ['Não faz mal, vamos ver juntas o que aconteceu.', 'Quase! Errar também é aprender.', 'Respira. Já vais ver que fica fácil.'],
+    done: ['Fizemos isto juntos! Que equipa!', 'Hoje aprendeste muito. Parabéns!'], tip: ['Vamos aprender uma palavra nova?', 'Estou aqui contigo.', 'Uma lição de cada vez.'] },
+  { id: 'kiala', pose: 'think', name: 'Kiala', role: 'O estratega', col: '#bdf0d8', tags: ['Paciente', 'Atento', 'Amigo'],
+    look: { skin: '#5d3a22', hair: '#1d1412', hs: 'curto', shirt: '#25b97a', gl: 'redondos', hw: 'nenhum' }, pants: '#2b2f3a', shoe: '#f2f4f6',
+    bio: 'Calmo e atento. Ajuda-te a pensar, a planear e a evoluir.',
+    ok: ['Correto. Bom raciocínio.', 'Muito bem. Fixa essa palavra.', 'Exato. Continua assim.'],
+    bad: ['Sem pressa. Olha outra vez com calma.', 'Observa a diferença e tenta de novo.', 'O erro mostra o que revisar.'],
+    done: ['Bom trabalho. Descansa um pouco.', 'Progresso constante. É assim que se aprende.'], tip: ['Vamos com calma.', 'Pensa antes de responder.', 'Respira e começa.'] }
 ];
 const helperOf = id => HELPERS.find(h => h.id === id) || HELPERS[0];
-function helperAvatar(h, size, mood) {
+function helperAvatar(h, size, mood) { return mascot(h, size, mood); }
+function helperAvatarOld(h, size, mood) {
   return '<span class="av" style="--av-bg:' + h.bg + ';' + (size ? 'width:' + size + 'px;height:' + size + 'px' : '') + '">' + animal({ sp: h.sp, fur: h.fur, acc: h.acc, mood: mood || 'smug' }) + '</span>';
 }
 
-function bodyAnimal(o) {
-  const sp = o.sp || 'palanca', fur = o.fur || SPECIES[sp].fur, dk = darken(fur, .22), lt = lighten(fur, .5);
-  const head = animal(o).replace('<svg class="animal" viewBox="0 0 120 120" aria-hidden="true">', '<svg class="ahead" x="0" y="0" width="120" height="120" viewBox="0 0 120 120" style="overflow:visible">');
-  const tail = sp === 'elefante' ? '<path d="M84 132q14 0 12 14" fill="none" stroke="' + dk + '" stroke-width="4" stroke-linecap="round"/>' : '<ellipse class="tail" cx="88" cy="140" rx="9" ry="6" fill="' + dk + '"/>';
-  const arm = (side, x) => '<g class="arm ' + side + '"><rect x="' + (x - 6) + '" y="108" width="12" height="30" rx="6" fill="' + fur + '" stroke="' + dk + '" stroke-width="2"/><circle cx="' + x + '" cy="138" r="7" fill="' + lt + '" stroke="' + dk + '" stroke-width="2"/></g>';
-  const leg = (side, x) => '<g class="leg ' + side + '"><rect x="' + (x - 8) + '" y="148" width="16" height="16" rx="7" fill="' + fur + '" stroke="' + dk + '" stroke-width="2"/><ellipse cx="' + x + '" cy="165" rx="12" ry="5.5" fill="' + dk + '"/></g>';
-  const accB = (Array.isArray(o.acc) ? o.acc : [o.acc]).includes('scarf') ? '<path d="M44 102q16 10 32 0l2 9q-18 10-36 0z" fill="#e0475b"/>' : '';
-  return '<svg class="animal abody" viewBox="0 0 120 172" aria-hidden="true"><ellipse cx="60" cy="168" rx="34" ry="4" fill="#000" opacity=".14"/>' + tail + leg('l', 46) + leg('r', 74) +
-    arm('l', 33) + arm('r', 87) + '<ellipse cx="60" cy="130" rx="27" ry="30" fill="' + fur + '" stroke="' + dk + '" stroke-width="2"/><ellipse cx="60" cy="136" rx="16" ry="20" fill="' + lt + '"/>' + head + accB + '</svg>';
+function creatureHead(h, mood) {
+  const sp = h.sp, fur = h.fur, INK = '#1b1a1f', dk = darken(fur, .32), cheer = mood === 'cheer' || mood === 'happy', sad = mood === 'sad';
+  const ey = sp === 'coelho' ? 60 : 56;
+  const eo = x => '<ellipse cx="' + x + '" cy="' + ey + '" rx="5" ry="6.4" fill="' + INK + '"/><circle cx="' + (x + 1.8) + '" cy="' + (ey - 2.4) + '" r="1.9" fill="#fff"/>';
+  const arc = x => '<path d="M' + (x - 6.5) + ' ' + (ey + 3) + 'q6.5-9 13 0" fill="none" stroke="' + INK + '" stroke-width="3.6" stroke-linecap="round"/>';
+  let eyes = cheer ? arc(44) + arc(76) : eo(44) + eo(76);
+  if (sad) eyes += '<path d="M35 ' + (ey - 9) + 'l15 4M85 ' + (ey - 9) + 'l-15 4" stroke="' + dk + '" stroke-width="3.4" stroke-linecap="round"/>';
+  let back = '', face = '', ny = 80, nose = '';
+  if (sp === 'raposa') {
+    back = '<path d="M26 50L28 10L55 33z" fill="' + fur + '"/><path d="M94 50L92 10L65 33z" fill="' + fur + '"/><path d="M32 40L33 21L46 33z" fill="#3b2230"/><path d="M88 40L87 21L74 33z" fill="#3b2230"/>';
+    face = '<path d="M20 56Q20 27 60 27Q100 27 100 56Q100 72 60 95Q20 72 20 56z" fill="' + fur + '"/><path d="M20 58Q42 60 60 80Q78 60 100 58Q100 72 60 95Q20 72 20 58z" fill="#fff6ea"/>';
+    nose = '<ellipse cx="60" cy="82" rx="5.4" ry="3.8" fill="#2a1620"/>'; ny = 82;
+  } else if (sp === 'gato') {
+    back = '<path d="M25 52L26 12L54 32z" fill="' + fur + '"/><path d="M95 52L94 12L66 32z" fill="' + fur + '"/><path d="M31 42L31 23L45 33z" fill="#ffb3c7"/><path d="M89 42L89 23L75 33z" fill="#ffb3c7"/>';
+    face = '<rect x="21" y="27" width="78" height="64" rx="31" fill="' + fur + '"/><path d="M52 29v8M60 28v9M68 29v8" stroke="' + dk + '" stroke-width="3" stroke-linecap="round" opacity=".7"/><ellipse cx="60" cy="79" rx="17" ry="11.5" fill="#f1ecf7"/><path d="M14 72l17 3M14 82l17-2M106 72l-17 3M106 82l-17-2" stroke="#e8e6f2" stroke-width="2" stroke-linecap="round"/>';
+    nose = '<path d="M55.5 74h9l-4.5 5.5z" fill="#ff7fa3"/>'; ny = 76;
+  } else {
+    back = '<g transform="rotate(-9 44 24)"><ellipse cx="44" cy="24" rx="9.5" ry="23" fill="' + fur + '" stroke="' + darken(fur, .1) + '" stroke-width="1.5"/><ellipse cx="44" cy="26" rx="4.6" ry="16" fill="#ffb3c7"/></g><g transform="rotate(9 76 24)"><ellipse cx="76" cy="24" rx="9.5" ry="23" fill="' + fur + '" stroke="' + darken(fur, .1) + '" stroke-width="1.5"/><ellipse cx="76" cy="26" rx="4.6" ry="16" fill="#ffb3c7"/></g>';
+    face = '<ellipse cx="60" cy="62" rx="37" ry="31" fill="' + fur + '" stroke="' + darken(fur, .1) + '" stroke-width="1.5"/><ellipse cx="60" cy="78" rx="15" ry="10.5" fill="#ffffff"/>';
+    nose = '<path d="M55.5 72q4.5-4.5 9 0q-4.5 5.5-9 0z" fill="#ff7fa3"/>'; ny = 73;
+  }
+  const my = ny + 8;
+  let mouth;
+  if (cheer) mouth = '<path d="M52 ' + my + 'q8 13 16 0z" fill="#7a1f2e"/>';
+  else if (sad) mouth = '<path d="M53 ' + (my + 5) + 'q7-7 14 0" fill="none" stroke="' + INK + '" stroke-width="3.2" stroke-linecap="round"/>';
+  else mouth = '<path d="M60 ' + (ny + 3) + 'v5M52 ' + my + 'q8 7 16 0" fill="none" stroke="' + INK + '" stroke-width="3" stroke-linecap="round"/>';
+  if (sp === 'coelho' && !sad) mouth += '<rect x="56.5" y="' + (my + (cheer ? 1 : 3)) + '" width="7" height="6" rx="1.6" fill="#fff" stroke="#d9d3ee" stroke-width="1"/>';
+  const blush = '<ellipse cx="34" cy="72" rx="6" ry="4" fill="#ff8aa0" opacity=".28"/><ellipse cx="86" cy="72" rx="6" ry="4" fill="#ff8aa0" opacity=".28"/>';
+  return back + face + blush + nose + '<g class="eyes">' + eyes + '</g><g class="mouth">' + mouth + '</g>';
 }
-function mascot(h, size, mood) {
-  return '<span class="av mc" style="width:' + size + 'px">' + bodyAnimal({ sp: h.sp, fur: h.fur, acc: h.acc, mood: mood || 'smug' }) + '</span>';
+function bodyCreature(h, mood) {
+  const fur = h.fur, shirt = h.shirt, pants = h.pants || '#2b2f3a', shoe = h.shoe || '#fff', sp = h.sp;
+  const sole = '<path d="M39 178h22M59 178h22" stroke="#00000022" stroke-width="2" stroke-linecap="round"/>';
+  const legs = '<g class="leg l"><rect x="45" y="136" width="13" height="36" rx="6.5" fill="' + pants + '"/><path d="M38 174q0-6 8-6h10q5 0 5 6v3H38z" fill="' + shoe + '" stroke="' + darken(shoe, .25) + '" stroke-width="1.5"/></g>' +
+    '<g class="leg r"><rect x="62" y="136" width="13" height="36" rx="6.5" fill="' + pants + '"/><path d="M55 174q0-6 8-6h10q5 0 5 6v3H55z" fill="' + shoe + '" stroke="' + darken(shoe, .25) + '" stroke-width="1.5"/></g>';
+  let tail = '';
+  if (sp === 'raposa') tail = '<g class="tail"><path d="M84 154Q116 150 112 112Q96 126 82 138z" fill="' + fur + '"/><path d="M112 112Q114 132 104 142Q114 138 118 124Q118 114 112 112z" fill="#fff6ea"/></g>';
+  else if (sp === 'gato') tail = '<g class="tail"><path d="M82 156Q114 160 112 126" fill="none" stroke="' + fur + '" stroke-width="9" stroke-linecap="round"/></g>';
+  else tail = '<g class="tail"><circle cx="34" cy="150" r="8" fill="#ffffff" stroke="#e1dcf3" stroke-width="1.5"/></g>';
+  const torso = '<path d="M37 102q0-6 8-6h30q8 0 8 6v40q0 6-6 6H43q-6 0-6-6z" fill="' + shirt + '"/><path d="M44 99q16 14 32 0v6q-16 12-32 0z" fill="' + darken(shirt, .18) + '"/><path d="M54 106v10M66 106v10" stroke="#fff" stroke-opacity=".8" stroke-width="2" stroke-linecap="round"/><path d="M47 128h26l4 13H43z" fill="' + darken(shirt, .12) + '"/>';
+  const arm = (side, x) => '<g class="arm ' + side + '"><rect x="' + (x - 6) + '" y="102" width="13" height="38" rx="6.5" fill="' + shirt + '" stroke="' + darken(shirt, .15) + '" stroke-width="1.5"/><rect x="' + (x - 6) + '" y="131" width="13" height="6" rx="3" fill="' + darken(shirt, .16) + '"/><circle cx="' + x + '" cy="144" r="7" fill="' + fur + '"/></g>';
+  return '<svg class="animal abody" viewBox="0 0 120 184" aria-hidden="true"><ellipse cx="60" cy="180" rx="34" ry="4" fill="#000" opacity=".14"/>' + tail + legs + torso + arm('l', 31) + arm('r', 89) + '<g class="hd">' + creatureHead(h, mood) + '</g></svg>';
 }
-function hare(mood) { return mascot(pick(HELPERS), 120, mood === 'sad' ? 'sad' : 'happy'); }
+function bodyOldAnimal(h, mood) {
+  const sp = SPECIES[h.sp], fur = h.fur || sp.fur, shirt = h.shirt || '#6d5efc', pants = h.pants || '#2b2f3a', shoe = h.shoe || '#fff';
+  let head = animal({ sp: h.sp, fur: h.fur, acc: h.acc, mood: mood === 'happy' ? 'smug' : (mood || 'smug') });
+  head = head.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '').replace('<ellipse cx="60" cy="112" rx="26" ry="4" fill="#000" opacity=".12"/>', '');
+  const legs = '<g class="leg l"><rect x="45" y="136" width="13" height="36" rx="6.5" fill="' + pants + '"/><path d="M38 174q0-6 8-6h10q5 0 5 6v3H38z" fill="' + shoe + '" stroke="' + darken(shoe, .25) + '" stroke-width="1.5"/></g>' +
+    '<g class="leg r"><rect x="62" y="136" width="13" height="36" rx="6.5" fill="' + pants + '"/><path d="M55 174q0-6 8-6h10q5 0 5 6v3H55z" fill="' + shoe + '" stroke="' + darken(shoe, .25) + '" stroke-width="1.5"/></g>';
+  const torso = '<path d="M37 102q0-6 8-6h30q8 0 8 6v40q0 6-6 6H43q-6 0-6-6z" fill="' + shirt + '"/><path d="M44 99q16 14 32 0v6q-16 12-32 0z" fill="' + darken(shirt, .18) + '"/><path d="M54 106v10M66 106v10" stroke="#fff" stroke-opacity=".8" stroke-width="2" stroke-linecap="round"/><path d="M47 128h26l4 13H43z" fill="' + darken(shirt, .12) + '"/>';
+  const arm = (side, x) => '<g class="arm ' + side + '"><rect x="' + (x - 6) + '" y="102" width="13" height="38" rx="6.5" fill="' + shirt + '" stroke="' + darken(shirt, .15) + '" stroke-width="1.5"/><rect x="' + (x - 6) + '" y="131" width="13" height="6" rx="3" fill="' + darken(shirt, .16) + '"/><circle cx="' + x + '" cy="144" r="7" fill="' + fur + '"/></g>';
+  return '<svg class="animal abody" viewBox="0 0 120 184" aria-hidden="true"><ellipse cx="60" cy="180" rx="34" ry="4" fill="#000" opacity=".14"/>' + legs + torso + arm('l', 31) + arm('r', 89) +
+    '<g class="hd"><svg x="8" y="-4" width="104" height="104" viewBox="0 0 120 120" overflow="visible">' + head + '</svg></g></svg>';
+}
+function bodyPerson(h, mood) {
+  if (h.sp && SPECIES[h.sp]) return bodyOldAnimal(h, mood);
+  if (h.sp) return bodyCreature(h, mood);
+  const L = h.look, skin = L.skin, sd = darken(skin, .14), shirt = L.shirt, pants = h.pants || '#2b2f3a', shoe = h.shoe || '#f2f4f6';
+  const head = personSvg(Object.assign({}, L, { mood: mood === 'happy' ? 'sorriso' : mood === 'smug' ? 'sorriso' : mood, noShirt: true })).replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
+  const legC = h.dress ? skin : pants;
+  const legs = '<g class="leg l"><rect x="45" y="136" width="13" height="36" rx="6.5" fill="' + legC + '"/><ellipse cx="50" cy="176" rx="11" ry="6" fill="' + shoe + '" stroke="' + darken(shoe, .25) + '" stroke-width="1.5"/></g>' +
+    '<g class="leg r"><rect x="62" y="136" width="13" height="36" rx="6.5" fill="' + legC + '"/><ellipse cx="70" cy="176" rx="11" ry="6" fill="' + shoe + '" stroke="' + darken(shoe, .25) + '" stroke-width="1.5"/></g>';
+  const skirt = h.dress ? '<path d="M38 134h44l9 28H29z" fill="' + pants + '"/><path d="M33 156h54" stroke="' + lighten(pants, .35) + '" stroke-width="3" stroke-dasharray="4 5"/>' : '';
+  const torso = '<path d="M37 102q0-6 8-6h30q8 0 8 6v40q0 6-6 6H43q-6 0-6-6z" fill="' + shirt + '"/><path d="M52 100q8 8 16 0" fill="none" stroke="' + darken(shirt, .2) + '" stroke-width="3" stroke-linecap="round"/>';
+  const arm = (side, x) => '<g class="arm ' + side + '"><rect x="' + (x - 6) + '" y="102" width="13" height="38" rx="6.5" fill="' + shirt + '" stroke="' + darken(shirt, .15) + '" stroke-width="1.5"/><rect x="' + (x - 6) + '" y="131" width="13" height="6" rx="3" fill="' + darken(shirt, .16) + '"/><circle cx="' + x + '" cy="144" r="7" fill="' + skin + '"/></g>';
+  return '<svg class="animal abody" viewBox="0 0 120 184" aria-hidden="true"><ellipse cx="60" cy="180" rx="34" ry="4" fill="#000" opacity=".14"/>' + legs + skirt + torso + arm('l', 31) + arm('r', 89) + '<g class="hd">' + head + '</g></svg>';
+}
+function mascot(h, size, mood, pose) {
+  return '<span class="av mc pose-' + (pose || h.pose || 'idle') + '" style="width:' + size + 'px;--hc:' + (h.col || '#ffd36b') + '">' + bodyPerson(h, mood || 'smug') + '</span>';
+}
+function hare(mood) { return mascot(HELPERS[0], 120, mood === 'sad' ? 'sad' : 'cheer'); }
 
 /* ===================== CONTEÚDO =====================
    Todo o vocabulário fica aqui, separado do código, no formato "Umbundu|Português".
@@ -4827,25 +5148,16 @@ function emblemSvg(uid, cls) {
     '<g transform="translate(256 322) scale(0.92)">' + palancaHead(uid) + '</g></svg>';
 }
 function coverSvg(uid, cls) {
-  const stars = [[40, 30, 2], [90, 62, 1.6], [150, 24, 2.2], [330, 40, 2], [372, 76, 1.5], [260, 20, 1.6], [28, 98, 1.4], [196, 52, 1.3]].map(s => '<circle cx="' + s[0] + '" cy="' + s[1] + '" r="' + s[2] + '" fill="#fff6d6" opacity=".85"/>').join('');
-  return '<svg class="' + (cls || '') + '" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>' +
-    '<linearGradient id="' + uid + 'sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#150a36"/><stop offset="0.45" stop-color="#4a1f78"/><stop offset="0.75" stop-color="#d4506a"/><stop offset="1" stop-color="#ffa43a"/></linearGradient>' +
-    '<radialGradient id="' + uid + 'sun" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff2b8"/><stop offset="0.65" stop-color="#ffc83a"/><stop offset="1" stop-color="#f58a1f"/></radialGradient></defs>' +
-    '<rect width="400" height="260" fill="url(#' + uid + 'sk)"/>' + stars +
-    '<g opacity=".5">' + sunRays(278, 190, 70, 190, 28, '#ffd35a') + '</g>' +
-    '<circle cx="278" cy="190" r="70" fill="url(#' + uid + 'sun)"/>' +
-    '<path d="M0 205C60 188 120 200 190 192C260 184 330 200 400 188V260H0Z" fill="#3a1745"/>' +
-    '<path d="M0 224C70 210 150 222 230 214C300 206 360 220 400 212V260H0Z" fill="#240d31"/>' +
-    '<g fill="#150820"><path d="M338 232V186M338 196C318 190 306 184 296 186C312 176 330 178 338 188C346 176 366 172 384 180C372 182 356 190 338 198Z"/></g>' +
-    '<g transform="translate(112 168) scale(0.5)">' + palancaHead(uid) + '</g>' +
-    '<path d="M0 238C40 232 90 242 150 236C220 230 300 244 400 236V260H0Z" fill="#12061b"/>' +
-    '<g fill="#12061b"><path d="M20 244l3-18 3 18zM34 246l2-14 3 14zM60 245l3-20 3 20zM250 246l3-16 3 16zM268 245l2-12 3 12z"/></g>' +
-    '<path d="M300 70q6-6 12 0q6-6 12 0" fill="none" stroke="#fff3d0" stroke-width="2" stroke-linecap="round" opacity=".7"/><path d="M340 96q5-5 10 0q5-5 10 0" fill="none" stroke="#fff3d0" stroke-width="1.8" stroke-linecap="round" opacity=".6"/></svg>';
+  return '<svg class="' + (cls || '') + '" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>' +
+    '<linearGradient id="' + uid + 'g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4b2ff0"/><stop offset=".6" stop-color="#8d4dff"/><stop offset="1" stop-color="#ff6ab5"/></linearGradient></defs>' +
+    '<rect width="400" height="240" fill="url(#' + uid + 'g)"/>' +
+    '<text x="214" y="262" font-family="Outfit,Fredoka,system-ui,sans-serif" font-weight="800" font-size="330" fill="#fff" fill-opacity=".1">U</text>' +
+    '<circle cx="372" cy="22" r="64" fill="#fff" opacity=".1"/><circle cx="22" cy="150" r="46" fill="#fff" opacity=".07"/></svg>';
 }
 
 /* ===================== CORES DO APP ===================== */
 const THEMES = {
-  angola: { name: 'Angola', h: 38, c: '#f2b230' }, ouro: { name: 'Ouro', h: 48, c: '#eab308' }, limao: { name: 'Limão', h: 78, c: '#a3e635' },
+  angola: { name: 'Âmbar', h: 38, c: '#f2b230' }, ouro: { name: 'Ouro', h: 48, c: '#eab308' }, limao: { name: 'Limão', h: 78, c: '#a3e635' },
   lima: { name: 'Lima', h: 90, c: '#84cc16' }, verde: { name: 'Verde', h: 142, c: '#22c55e' }, floresta: { name: 'Floresta', h: 145, c: '#15803d' },
   esmeralda: { name: 'Esmeralda', h: 160, c: '#10b981' }, menta: { name: 'Menta', h: 172, c: '#2dd4bf' }, turquesa: { name: 'Turquesa', h: 186, c: '#06b6d4' },
   ciano: { name: 'Ciano', h: 190, c: '#22d3ee' }, ceu: { name: 'Céu', h: 199, c: '#38bdf8' }, oceano: { name: 'Oceano', h: 214, c: '#3b82f6' },
@@ -4863,7 +5175,8 @@ const rgbOf = h => [1, 3, 5].map(i => parseInt(h.substr(i, 2), 16));
 function lumOf(h) { const c = rgbOf(h).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; }
 function contrastOf(a, b) { const x = lumOf(a), y = lumOf(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
 function applyTheme() {
-  const th = THEMES[state.theme.id] || THEMES.angola, mode = state.theme.mode;
+  try { if (state.theme && !state.theme.v) { if (state.theme.id === 'angola' && !state.theme.bg) state.theme.id = 'roxo'; state.theme.v = 12; save(); } } catch (e) {}
+  const th = THEMES[state.theme.id] || THEMES.roxo, mode = state.theme.mode;
   const dark = mode === 'dark' || (mode === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
   const R = document.documentElement, h = (THEMES[state.theme.bg] || th).h, ac = th.c, rgb = rgbOf(ac);
   R.setAttribute('data-theme', dark ? 'dark' : 'light'); R.style.colorScheme = dark ? 'dark' : 'light';
@@ -4872,7 +5185,7 @@ function applyTheme() {
   const ink = contrastOf('#0a0a0a', ac) >= contrastOf('#ffffff', ac) ? '#0a0a0a' : '#ffffff';
   const V = {
     '--bg': bg, '--surface': dark ? hsl2hex(h, .28, .125) : '#ffffff', '--surface-2': dark ? hsl2hex(h, .26, .175) : hsl2hex(h, .55, .96),
-    '--line': dark ? hsl2hex(h, .22, .26) : hsl2hex(h, .32, .87), '--fg': dark ? hsl2hex(h, .4, .96) : hsl2hex(h, .35, .15), '--muted': dark ? hsl2hex(h, .18, .72) : hsl2hex(h, .14, .38),
+    '--line': dark ? hsl2hex(h, .22, .26) : hsl2hex(h, .32, .87), '--fg': dark ? hsl2hex(h, .4, .96) : hsl2hex(h, .35, .15), '--muted': dark ? hsl2hex(h, .18, .79) : hsl2hex(h, .16, .30),
     '--accent': ac, '--accent-t': at, '--accent-deep': darken(ac, .3), '--accent-ink': ink, '--accent-soft': 'rgba(' + rgb.join(',') + ',' + (dark ? .18 : .12) + ')',
     '--hero-a': dark ? hsl2hex(h, .42, .20) : hsl2hex(h, .70, .91), '--hero-b': bg, '--hero-glow': 'rgba(' + rgb.join(',') + ',.26)',
     '--gold-1': dark ? '#ffe58a' : '#b07a00', '--gold-2': dark ? '#ffc800' : '#d99b00',
@@ -4886,7 +5199,7 @@ function applyTheme() {
 try { if (window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { if (state.theme.mode === 'auto') applyTheme(); }); } catch (e) {}
 
 /* ===================== VOZ DOS AJUDANTES ===================== */
-const HVOICE = { ndala: [0.85, 1.0], lemba: [0.75, 0.82], kandjimbo: [0.6, 0.88], zuzu: [1.25, 1.05], sakala: [0.5, 0.8], tchitu: [1.6, 1.2] };
+const HVOICE = { ndala: [0.7, 1.0], tchitu: [1.6, 1.2], zuzu: [1.45, 1.1], sakala: [0.5, 0.85], kandjimbo: [0.55, 0.9], lemba: [0.8, 0.82], ngola: [0.8, 1.05], rox: [1.25, 1.1], neo: [0.65, 0.9], bolt: [1.6, 1.2], lili: [1.35, 1.0], kiala: [0.85, 0.95], tchissola: [1.5, 1.05], ngola: [0.7, 1.1], lemba: [0.8, 0.82], kandjimbo: [0.55, 0.9] };
 function voiceFor(hp) {
   const vs = (TTS && speechSynthesis.getVoices() || []).filter(v => /^pt/i.test(v.lang));
   if (!vs.length) return null;
@@ -4914,6 +5227,21 @@ function glossOf(tok) {
   if (!_gloss) { _gloss = {}; UNITS.forEach(u => u.items.forEach(i => { if (!/\s/.test(i.u) && !_gloss[norm(i.u)]) _gloss[norm(i.u)] = i.p; })); }
   return _gloss[norm(tok)] || null;
 }
+function usageNote(it) {
+  const u = UNITS.find(x => x.items.some(i => i.id === it.id)), tema = u ? SECTIONS[u.sec].title.toLowerCase() : '';
+  const L = [], p = it.p, par = p.match(/\(([^)]*)\)/);
+  if (/^oku/i.test(it.u)) L.push('É um verbo (ação). Usa-se para falar do que se faz.');
+  else if (/\?\s*$/.test(it.u) || /\?\s*$/.test(p)) L.push('É uma pergunta. Usa-a quando queres perguntar isto a alguém.');
+  else if (/^resposta/i.test(p)) L.push('É uma resposta. Usa-a quando alguém te cumprimenta ou te pergunta isto.');
+  else if (isPhrase(it)) L.push('É uma frase feita. Usa-a inteira, na conversa.');
+  else L.push('É uma palavra solta. Podes usá-la dentro de frases.');
+  if (par) L.push('Atenção ao contexto: ' + par[1] + '.');
+  if (tema) L.push('Aparece no tema «' + tema + '».');
+  const toks = it.u.split(/\s+/).map(norm).filter(t => t.length > 2), ex = [];
+  allItems().forEach(x => { if (ex.length >= 2 || x.id === it.id || !isPhrase(x)) return; if (x.u.split(/\s+/).map(norm).some(t => toks.includes(t))) ex.push('«' + x.u + '» = ' + x.p); });
+  if (ex.length) L.push('Exemplos: ' + ex.join('; ') + '.');
+  return L;
+}
 function explain(ex, ok) {
   const q = x => '«' + x + '»';
   if (ex.type === 'match') return ex.pairs.map(p => esc(q(p.u) + ' = ' + q(p.p))).join('<br>');
@@ -4924,10 +5252,12 @@ function explain(ex, ok) {
   else if (ex.type === 'type') chosen = ($('#ansInput') || {}).value || '';
   else if (ex.type === 'tiles') chosen = S.t.chosen.map(id => ex.tiles[id]).join(' ');
   const find = (key, t) => allItems().find(x => norm(x[key]) === norm(t));
-  L.push(q(it.p) + ' diz-se ' + q(it.u) + ' em Umbundu. Lê-se aproximadamente ' + q(respell(it.u)) + '.');
+  L.push('Significado: ' + q(it.u) + ' quer dizer ' + q(it.p) + '.');
+  L.push('Quando usar: ' + usageNote(it).slice(0, 2).join(' '));
   if (!ok && chosen) {
     if (ex.type === 'type') L.push('Escreveste ' + q(chosen) + '. Os acentos não contam, mas cada letra conta.' + (ex.dir === 'u2pt' ? ' Aqui pede-se o significado em Português.' : ''));
     else if (ex.type === 'tiles') L.push('A tua ordem foi ' + q(chosen) + '. A ordem das palavras muda o sentido da frase.');
+    else if (ex.type === 'pic') L.push('Escolheste a imagem ' + chosen + '. A imagem certa é ' + (emojiOf(it) || '') + ', que é ' + q(it.p) + '.');
     else if (ex.type === 'cloze') L.push('Escolheste ' + q(chosen) + ', mas o espaço pede ' + q(ex.toks[ex.k]) + '.');
     else if (ex.dir === 'pt2u' && ex.type === 'mc') { const o = find('u', chosen); L.push('Escolheste ' + q(chosen) + (o ? ', que significa ' + q(o.p) : '') + '. Não é ' + q(it.p) + '.'); }
     else { const o = find('p', chosen); L.push('Escolheste ' + q(chosen) + (o ? ', que em Umbundu se diz ' + q(o.u) : '') + '. Não é ' + q(it.p) + '.'); }
@@ -4938,13 +5268,15 @@ function explain(ex, ok) {
   } else if (/^oku/i.test(it.u)) L.push('Dica: os verbos em Umbundu escrevem-se no infinitivo com «oku-» no princípio.');
   if (it.p.indexOf(' / ') > 0) L.push('Esta palavra tem mais de um sentido: ' + it.p.toLowerCase() + '.');
   if (it.alt && it.alt.length) L.push('Também se diz: ' + it.alt.join(', ') + '.');
-  return L.map(esc).join('<br>');
+  L.push('Pronúncia: lê-se mais ou menos ' + q(respell(it.u)) + '.');
+  return L.map(x => esc(x).replace(/^(Significado|Quando usar|Pronúncia):/, '<b>$1:</b>')).join('<br>');
 }
 function moreExamples(ex) {
   const it = ex.item; if (!it) return 'Sem mais exemplos por agora.';
   const out = [], toks = it.u.split(/\s+/).map(t => norm(t)).filter(t => t.length > 2);
   allItems().forEach(x => { if (out.length >= 4 || x.id === it.id) return; const xt = x.u.split(/\s+/).map(norm); if (toks.some(t => xt.includes(t))) out.push('«' + x.u + '» = ' + x.p); });
-  let txt = out.length ? 'Outros exemplos com estas palavras:<br>' + out.map(esc).join('<br>') : 'Ainda não há outros exemplos desta palavra no dicionário.';
+  const un = usageNote(it); let txt = '<b>O que significa:</b> ' + esc(it.p) + '<br><b>Quando usar:</b> ' + un.map(esc).join(' ') + '<br>';
+  txt += out.length ? '<b>Outros exemplos:</b><br>' + out.map(esc).join('<br>') : '';
   txt += '<br><span class="note">A explicação com inteligência artificial liga-se quando o serviço de IA estiver configurado.</span>';
   return txt;
 }
@@ -5023,7 +5355,7 @@ function dailyChestCard() {
 const KEY = 'umbundulingo.v5';
 const MAXH = 10;
 const DEF = {
-  completed: {}, seen: {}, hist: {}, xp: 0, gems: 0, hearts: 10, theme: { id: 'angola', bg: '', mode: 'auto' }, dailyChest: '', heartsAt: 0, streak: 0, best: 0, lastDay: '', freezes: 0, goal: 30, rev: {}, miss: {},
+  completed: {}, seen: {}, hist: {}, box: {}, xp: 0, gems: 0, hearts: 10, theme: { id: 'roxo', bg: '', mode: 'auto', v: 12 }, dailyChest: '', heartsAt: 0, streak: 0, best: 0, lastDay: '', freezes: 0, goal: 30, rev: {}, miss: {},
   voice: { on: true, fx: true, helpers: true, rate: 0.85, uri: '' },
   day: { d: '', xp: 0, lessons: 0, heard: 0, claimed: {} },
   stats: { lessons: 0, heard: 0, perfect: 0, right: 0, answered: 0 },
@@ -5031,7 +5363,7 @@ const DEF = {
 };
 function mergeState(r) {
   return Object.assign({}, DEF, r, {
-    completed: r.completed || {}, seen: r.seen || {}, hist: r.hist || {}, rev: r.rev || {}, miss: r.miss || {},
+    completed: r.completed || {}, seen: r.seen || {}, hist: r.hist || {}, box: r.box || {}, rev: r.rev || {}, miss: r.miss || {},
     voice: Object.assign({}, DEF.voice, r.voice || {}), theme: Object.assign({}, DEF.theme, r.theme || {}),
     day: Object.assign({}, DEF.day, r.day || {}, { claimed: (r.day && r.day.claimed) || {} }),
     stats: Object.assign({}, DEF.stats, r.stats || {}),
@@ -5241,7 +5573,7 @@ function buildExercises(node) {
     return ex;
   }
   if (node.kind === 'lesson' && node.intro.length) {
-    pool.forEach(i => ex.push(mcEx(i, 'u2pt')));
+    pool.forEach(i => ex.push(emojiOf(i) && Math.random() < 0.75 ? picEx(i) : mcEx(i, 'u2pt')));
     ex = ex.concat(shuffle(pool).slice(0, 3).map((i, k) => isPhrase(i) ? phraseEx(i) : (k === 0 && L ? listenEx(i) : (k === 1 ? typeEx(i) : mcEx(i, 'pt2u')))));
     ex.splice(Math.min(ex.length, pool.length + 1), 0, matchEx(pool));
   } else if (node.kind === 'lesson') {
@@ -5266,7 +5598,7 @@ function buildExercises(node) {
 /* ===================== SESSÃO DE LIÇÃO ===================== */
 let S = null, introI = 0;
 const PRAISE = ['Correto!', 'Muito bem!', 'Isso mesmo!', 'Certo!', 'Ndapandula!'];
-const isChoice = t => t === 'mc' || t === 'listen' || t === 'cloze';
+const isChoice = t => t === 'mc' || t === 'listen' || t === 'cloze' || t === 'pic';
 
 function setMain(label, mode, kind, disabled) {
   const b = $('#mainBtn');
@@ -5308,13 +5640,20 @@ function nextEx() {
   renderEx(S.cur); setBar();
 }
 function choiceHtml(ex) {
-  return '<div class="opts">' + ex.choices.map((c, i) => '<button class="opt" data-i="' + i + '" aria-pressed="false">' + esc(c.text) + '</button>').join('') + '</div>';
+  return '<div class="opts' + (ex.type === 'pic' ? ' pics' : '') + '">' + ex.choices.map((c, i) => '<button class="opt" data-i="' + i + '" aria-pressed="false">' + esc(c.text) + '</button>').join('') + '</div>';
 }
 const Q_PT2U = ['Como se diz isto em Umbundu?', 'Traduz para Umbundu:', 'Escolhe a tradução em Umbundu:', 'Qual é a palavra em Umbundu?'];
 const Q_U2PT = ['O que quer dizer isto?', 'Traduz para Português:', 'Qual é o significado?', 'Escolhe a tradução:'];
 const Q_LISTEN = ['Ouve e escolhe o significado', 'O que ouviste?', 'Ouve com atenção. O que quer dizer?'];
 const Q_TILES = ['Traduz esta frase para Umbundu:', 'Ordena as palavras em Umbundu:', 'Como se diz isto em Umbundu?'];
 const Q_TYPE = ['Escreve em Umbundu:', 'Como se escreve em Umbundu?', 'Traduz escrevendo:'];
+const EMO = {"agua": "💧", "abelha": "🐝", "abobora": "🎃", "aldeia": "🏘️", "algodao": "☁️", "almofada": "🛏️", "amarelo": "🟡", "amigo": "🤝", "anel": "💍", "animal": "🐾", "anjo": "👼", "aranha": "🕷️", "arcoiris": "🌈", "areia": "🏖️", "arma": "🔫", "armario": "🗄️", "arvore": "🌳", "asa": "🪽", "automovel": "🚗", "azeite": "🫒", "azul": "🔵", "bacia": "🥣", "balanca": "⚖️", "balde": "🪣", "baleia": "🐋", "banana": "🍌", "banco": "🪑", "bandeira": "🚩", "barba": "🧔", "barco": "⛵", "barriga": "🫃", "batata": "🥔", "bebe": "👶", "beijo": "💋", "biblia": "📖", "boca": "👄", "boi": "🐂", "bola": "⚽", "bolsa": "👜", "boneca": "🪆", "borboleta": "🦋", "braco": "💪", "branco": "⚪", "brinco": "💎", "cabana": "🛖", "cabeca": "🗣️", "cabelo": "💇", "cabra": "🐐", "cadeira": "🪑", "caderno": "📓", "calcas": "👖", "calendario": "📆", "cama": "🛏️", "camaleao": "🦎", "camelo": "🐫", "camisa": "👕", "caneta": "🖊️", "cao": "🐕", "caes": "🐕", "carne": "🥩", "carro": "🚗", "carta": "✉️", "casa": "🏠", "casaco": "🧥", "cavalo": "🐎", "cebola": "🧅", "cem": "💯", "cerveja": "🍺", "cesto": "🧺", "ceu": "☁️", "chapeu": "🎩", "chave": "🔑", "chorar": "😢", "chuva": "🌧️", "cidade": "🏙️", "cinco": "5️⃣", "cinto": "🪢", "cinza": "🩶", "cobra": "🐍", "coelho": "🐇", "colher": "🥄", "coluna": "🏛️", "comida": "🍽️", "cor": "🎨", "coracao": "❤️", "corda": "🪢", "coroa": "👑", "corpo": "🧍", "costas": "🧍", "cozinha": "🍳", "crianca": "🧒", "criancas": "🧒", "crocodilo": "🐊", "cruz": "✝️", "dedo": "☝️", "dente": "🦷", "deserto": "🏜️", "dez": "🔟", "dia": "☀️", "diamante": "💎", "dinheiro": "💵", "doente": "🤒", "dois": "2️⃣", "elefante": "🐘", "escola": "🏫", "escravo": "⛓️", "espada": "🗡️", "espelho": "🪞", "esponja": "🧽", "estrada": "🛣️", "estrela": "⭐", "estudante": "🧑‍🎓", "faca": "🔪", "familia": "👪", "farinha": "🌾", "febre": "🤒", "feijao": "🫘", "feio": "😖", "festa": "🎉", "filha": "👧", "filho": "👦", "flor": "🌸", "floresta": "🌲", "fogo": "🔥", "fogueira": "🔥", "folha": "🍃", "fome": "🍽️", "formiga": "🐜", "forno": "♨️", "franga": "🐔", "frasco": "🧴", "fruta": "🍎", "fumo": "💨", "funje": "🥣", "gafanhoto": "🦗", "galinha": "🐔", "galo": "🐓", "garrafa": "🍾", "gato": "🐈", "gelo": "🧊", "gordura": "🧈", "grande": "🐘", "hiena": "🐺", "hipopotamo": "🦛", "hospital": "🏥", "igreja": "⛪", "irma": "👭", "irmao": "👬", "janela": "🪟", "javali": "🐗", "joelho": "🦵", "jogo": "🎮", "jovem": "🧑", "laranja": "🍊", "lagarto": "🦎", "lago": "🏞️", "lagoa": "🏞️", "lebre": "🐇", "leao": "🦁", "leite": "🥛", "lenha": "🪵", "leopardo": "🐆", "livro": "📕", "lixo": "🗑️", "lobo": "🐺", "loja": "🏪", "lua": "🌙", "macaco": "🐒", "machado": "🪓", "mae": "👩", "mandioca": "🍠", "manteiga": "🧈", "mao": "✋", "maos": "🙌", "marido": "🤵", "martelo": "🔨", "mel": "🍯", "mesa": "🪑", "milho": "🌽", "moto": "🏍️", "mosca": "🪰", "mulher": "👩", "mundo": "🌍", "nariz": "👃", "navio": "🚢", "neto": "👶", "ninho": "🪺", "noite": "🌙", "noiva": "👰", "noivo": "🤵", "nove": "9️⃣", "nuvem": "☁️", "oito": "8️⃣", "olho": "👁️", "olhos": "👀", "onca": "🐆", "osso": "🦴", "ouro": "🥇", "ouvido": "👂", "ovelha": "🐑", "ovo": "🥚", "pai": "👨", "pais": "👪", "palancanegra": "🦌", "panela": "🍲", "pao": "🍞", "papagaio": "🦜", "parede": "🧱", "passaro": "🐦", "pastor": "🧑‍🌾", "pato": "🦆", "pe": "🦶", "pedra": "🪨", "peixe": "🐟", "pena": "🪶", "pente": "💇", "perna": "🦵", "pernas": "🦵", "pessoa": "🧑", "pessoas": "👥", "pilha": "🔋", "pimenta": "🌶️", "pirao": "🥣", "planta": "🌱", "pomba": "🕊️", "ponte": "🌉", "porco": "🐖", "porta": "🚪", "prata": "🥈", "prato": "🍽️", "preto": "⚫", "professor": "🧑‍🏫", "queijo": "🧀", "quarto": "🛏️", "quatro": "4️⃣", "quente": "🥵", "rainha": "👸", "rapariga": "👧", "rapaz": "👦", "rato": "🐀", "rei": "🤴", "relogio": "⌚", "rio": "🏞️", "roda": "🛞", "rosa": "🌹", "roupa": "👚", "rua": "🛣️", "sal": "🧂", "sandalia": "🩴", "sangue": "🩸", "sapato": "👞", "seis": "6️⃣", "semana": "🗓️", "sete": "7️⃣", "sol": "☀️", "sono": "😴", "sorriso": "😊", "tambor": "🥁", "terra": "🌍", "tesoura": "✂️", "tia": "👩", "tigela": "🥣", "tijolo": "🧱", "tio": "👨", "tomate": "🍅", "touro": "🐂", "trigo": "🌾", "tres": "3️⃣", "um": "1️⃣", "uvas": "🍇", "vaca": "🐄", "vento": "🌬️", "vermelho": "🔴", "verde": "🟢", "viagem": "🧳", "vinte": "2️⃣", "zero": "0️⃣", "agulha": "🪡", "alface": "🥬", "arroz": "🍚", "ave": "🐦", "bicicleta": "🚲", "bispo": "⛪", "bolo": "🎂", "cafe": "☕", "cha": "🍵", "chuveiro": "🚿", "cobertor": "🛌", "fonte": "⛲", "foguete": "🚀", "guitarra": "🎸", "lapis": "✏️", "medico": "🧑‍⚕️", "musica": "🎵", "padeiro": "🧑‍🍳", "telefone": "📱", "televisao": "📺", "trem": "🚆", "aviao": "✈️", "aeroporto": "🛫", "bandeja": "🍽️", "cabrito": "🐐", "canario": "🐤", "cavalinho": "🐴", "cobracega": "🐍", "escada": "🪜", "estomago": "🫃", "figado": "🫀", "fogao": "🍳", "gaiola": "🐦", "homem": "👨", "homens": "👨", "lampada": "💡", "luz": "💡", "mala": "🧳", "mar": "🌊", "montanha": "⛰️", "morro": "⛰️", "onda": "🌊", "orelha": "👂", "pulmao": "🫁", "praia": "🏖️", "rede": "🕸️", "saco": "🛍️", "teto": "🏠", "vassoura": "🧹", "vela": "🕯️"};
+function emojiOf(it) { const k = norm(String(it.p).replace(/\([^)]*\)/g, ' ')); return EMO[k] || EMO[k.replace(/s$/, '')] || ''; }
+function picEx(item) {
+  const e = emojiOf(item), seen = new Set([e]), ds = [];
+  shuffle(seenPool(item).concat(allItems())).forEach(x => { const ex = emojiOf(x); if (ds.length < 3 && ex && !seen.has(ex)) { seen.add(ex); ds.push(ex); } });
+  return { type: 'pic', item, choices: shuffle([{ text: e, ok: true }].concat(ds.map(t => ({ text: t, ok: false })))) };
+}
 const isNewWord = it => it && !state.seen[it.id];
 const spkBtn = (u, slow) => '<button class="spk' + (slow ? ' slow' : '') + '" data-say="' + esc(u) + '"' + (slow ? ' data-slow="1"' : '') + ' aria-label="Ouvir">' + ic('volume') + (slow ? 'Devagar' : '') + '</button>';
 let _rgloss = null;
@@ -5336,15 +5675,38 @@ function showTip(el) {
 function mascotRow(inner) {
   return '<div class="mrow">' + mascot(S.hp, 96, 'smug') + '<div class="bubble">' + inner + '</div></div>';
 }
+function hintFor(ex) {
+  const it = ex.item; if (!it) return '';
+  const L = usageNote(it).slice(0, 2);
+  const ans = ex.type === 'pic' ? '' : isChoice(ex.type) ? (ex.choices.find(c => c.ok) || {}).text : ex.type === 'tiles' ? ex.answer.join(' ') : ex.type === 'type' ? (ex.dir === 'u2pt' ? it.p : it.u) : '';
+  if (ans) L.push('A resposta começa por «' + ans.slice(0, 2) + '…» e tem ' + ans.length + ' letras.');
+  return L.map(esc).join('<br>');
+}
+function teachCard(it) {
+  const L = usageNote(it).slice(0, 2).map(esc).join('<br>');
+  return '<div class="teach"><div class="teach-top"><span class="pill new">Palavra nova</span>' + spkBtn(it.u) + '</div>' + (emojiOf(it) ? '<div class="teach-pic">' + emojiOf(it) + '</div>' : '') + '<div class="teach-w"><b>' + esc(it.u) + '</b> <span>quer dizer</span> <b>' + esc(it.p) + '</b></div><p>' + L + '</p></div>';
+}
 function renderEx(ex) {
+  const fresh = ex.item && isNewWord(ex.item) && (ex.type === 'mc' || ex.type === 'pic');
+  renderEx0(ex);
+  const st = $('#stage');
+  if (fresh) st.insertAdjacentHTML('afterbegin', teachCard(ex.item));
+  if (ex.type !== 'match' && ex.item) st.insertAdjacentHTML('beforeend', '<button class="btn small ghost hintbtn" data-act="hint">Dica</button><div class="hintbox" hidden></div>');
+}
+function renderEx0(ex) {
   const st = $('#stage'); $('#fb').hidden = true; footReset(); st.scrollTop = 0;
-  const prev = S.hp; do { S.hp = pick(HELPERS); } while (prev && S.hp === prev && HELPERS.length > 1);
+  const prev = S.hp; do { S.hp = Math.random() < 0.45 ? HELPERS[0] : pick(HELPERS.slice(1)); } while (prev && S.hp === prev && !(S.hp === HELPERS[0] && Math.random() < 0.3));
   const fresh = ex.item && isNewWord(ex.item) && ex.type !== 'match';
-  const head = t => (fresh ? '<span class="pill new">Palavra nova</span>' : '') + '<h2 class="q">' + esc(t) + '</h2>';
+  const head = t => '<h2 class="q">' + esc(t) + '</h2>';
+  if (fresh && (ex.type === 'mc' || ex.type === 'pic') && !ex.two) { ex.two = true; const ok = ex.choices.filter(c => c.ok), bad = ex.choices.filter(c => !c.ok); ex.choices = shuffle(ok.concat(bad.slice(0, 1))); }
   if (ex.type === 'mc') {
-    st.innerHTML = head(pick(ex.dir === 'pt2u' ? Q_PT2U : Q_U2PT)) + mascotRow(ex.dir === 'pt2u' ? '<span class="bt">«' + (isPhrase(ex.item) ? tokHtml(ex.item.p, 'p') : esc(ex.item.p)) + '»</span>' : spkBtn(ex.item.u) + '<span class="bt big2">' + (isPhrase(ex.item) ? tokHtml(ex.item.u, 'u') : esc(ex.item.u)) + '</span>') + choiceHtml(ex);
+    st.innerHTML = head(pick(ex.dir === 'pt2u' ? Q_PT2U : Q_U2PT)) + mascotRow(ex.dir === 'pt2u' ? '<span class="bt">«' + (isPhrase(ex.item) ? tokHtml(ex.item.p, 'p') : esc(ex.item.p)) + '»</span>' : spkBtn(ex.item.u) + '<span class="bt big2">' + (isPhrase(ex.item) ? tokHtml(ex.item.u, 'u') : esc(ex.item.u)) + '</span>' + (emojiOf(ex.item) ? '<span class="bemo">' + emojiOf(ex.item) + '</span>' : '')) + choiceHtml(ex);
     setMain('Verificar', 'check', null, true);
     if (fresh && ex.dir === 'u2pt') setTimeout(() => speak(ex.item.u), 250);
+  } else if (ex.type === 'pic') {
+    st.innerHTML = head(pick(['Qual é a imagem?', 'Escolhe a imagem certa:', 'Qual destas é a imagem?'])) + mascotRow(spkBtn(ex.item.u) + '<span class="bt big2">' + esc(ex.item.u) + '</span>') + choiceHtml(ex);
+    setMain('Verificar', 'check', null, true);
+    if (fresh) setTimeout(() => speak(ex.item.u), 250);
   } else if (ex.type === 'listen') {
     st.innerHTML = head(pick(Q_LISTEN)) + mascotRow(spkBtn(ex.item.u) + spkBtn(ex.item.u, true)) + choiceHtml(ex);
     setMain('Verificar', 'check', null, true);
@@ -5414,7 +5776,7 @@ function resolve(ok, correctText) {
     S.queue.push(Object.assign({}, ex, { retry: true, answered: false }));
   }
   S.lastBad = !ok;
-  S.lastOk = ok; if (id) { state.seen[id] = 1; save(); }
+  S.lastOk = ok; if (id) { state.seen[id] = 1; if (!ex.retry) srsUpdate(id, ok); save(); }
   const hp = S.hp || helperOf(state.helper), f = $('#fb'); f.hidden = false; f.className = 'fb ' + (ok ? 'ok' : 'bad');
   const line = ok ? pick(hp.ok) : pick(hp.bad), exh = explain(ex, ok);
   f.innerHTML = '<div class="fbrow">' + mascot(hp, 74, ok ? 'cheer' : 'sad') + '<div class="fbt"><b>' + esc(line) + '</b>' + (ok ? '' : '<small>Resposta certa: ' + esc(correctText) + '</small>') + '</div></div>' +
@@ -5511,8 +5873,17 @@ function toast(msg) {
   const t = $('#toast'); t.textContent = msg; t.hidden = false;
   clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2200);
 }
+const SRS_STEPS = [10 * 60e3, 864e5, 3 * 864e5, 7 * 864e5, 14 * 864e5, 30 * 864e5];
+function srsUpdate(id, ok) {
+  const b = state.box[id] || { b: 0, due: 0 };
+  b.b = ok ? Math.min(SRS_STEPS.length - 1, (b.b || 0) + 1) : 0;
+  b.due = Date.now() + SRS_STEPS[ok ? b.b : 0];
+  state.box[id] = b;
+}
+function dueItems() { const now = Date.now(); return allItems().filter(i => state.box[i.id] && state.box[i.id].due <= now).sort((a, b) => state.box[a.id].due - state.box[b.id].due); }
 function startPractice(mode) {
   let items;
+  if (mode === 'due') { items = dueItems().slice(0, 10); if (!items.length) { toast('Nada para rever agora. Volta mais tarde.'); return; } startSession({ id: 'practice', kind: 'practice', mode: 'due', label: 'Revisão inteligente', items: items, intro: [], length: Math.max(6, Math.min(12, items.length * 2)) }); return; }
   if (mode === 'errors') {
     const ids = Object.keys(state.miss); items = allItems().filter(i => ids.includes(i.id));
     if (!items.length) { toast('Ainda não tens erros para reforçar.'); return; }
@@ -5546,7 +5917,7 @@ function showStreak(from, to, hp, cb) {
   const o = document.createElement('div'); o.className = 'streak-ov'; o.setAttribute('role', 'dialog'); o.setAttribute('aria-label', 'Ofensiva aumentou');
   o.innerHTML = '<div class="so-in"><div class="so-flame">' + ic('flame', 'fill') + '<span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span></div>' +
     '<div class="so-num"><b id="soNum">' + from + '</b></div><h2>' + (to === 1 ? 'dia de ofensiva!' : 'dias de ofensiva!') + '</h2>' +
-    '<div class="so-week">' + days + '</div><div class="so-m">' + mascot(hp || helperOf('ndala'), 120, 'cheer') + '</div>' +
+    '<div class="so-week">' + days + '</div><div class="so-m">' + mascot(hp || helperOf('lili'), 120, 'cheer') + '</div>' +
     '<p class="lead">' + (to >= 7 ? 'Uma semana a estudar Umbundu! Incrível.' : 'Volta amanhã para a manter acesa.') + '</p><button class="btn" id="soBtn">Continuar</button></div>';
   document.body.appendChild(o); sfx('up');
   setTimeout(() => { const n = $('#soNum'); if (n) { n.textContent = to; n.classList.add('bump'); sfx('gem'); } }, 900);
@@ -5613,9 +5984,8 @@ function renderHome() {
   const curSec = cur < 0 ? SECTIONS.length - 1 : nodes[cur].sec;
   if (!openSecs) openSecs = new Set([curSec]);
   const learned = learnedItems().length, d = today(), gp = Math.min(100, Math.round(100 * d.xp / state.goal));
-  let h = '<div class="hero"><div class="hero-cover">' + coverSvg('cv', '') + '<div class="hc-t"><small>Língua dos Ovimbundu</small><h1>UmbunduLingo</h1></div></div>' +
-    '<p class="lead">Aprende Umbundu do zero, com voz e ao teu ritmo. Grátis para todos os estudantes.</p><p class="note">Mais de 3.300 palavras do <b>Mundumbundu.ao</b> e do Guia de Umbundu, em 15 secções. Cada palavra mostra a sua fonte.</p>' +
-    '<div class="goal"><div class="goal-row"><span>Meta de hoje</span><span>' + Math.min(d.xp, state.goal) + ' / ' + state.goal + ' XP</span></div><div class="meter" role="progressbar" aria-label="Meta diária"><i style="width:' + gp + '%"></i></div></div>' +
+  let h = '<div class="hero"><div class="hero-cover">' + coverSvg('cv', '') + '<div class="hc-t"><h1>Umbundu<br>Lingo</h1></div><div class="hc-flag"><svg class="flagsvg" viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="20" fill="#cc092f"/><rect y="20" width="60" height="20" fill="#111"/><g fill="none" stroke="#f2b230" stroke-linecap="round"><path d="M21.5 22.5a8.6 8.6 0 0 1 17 0" stroke-width="3.2" stroke-dasharray="2.2 1.6"/><path d="M25 29q11-1 12.5-12.5" stroke-width="2.2"/></g><path d="M30 12.2l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4z" fill="#f2b230"/></svg></div><div class="hc-team">' + [[1, 'hip', 14], [2, 'cheer', 26], [3, 'cross', 18]].map(x => '<div class="pod">' + mascot(HELPERS[x[0]], 58, 'smug', x[1]) + '<i style="height:' + x[2] + 'px"></i></div>').join('') + '</div><div class="hc-m"><div class="pod">' + mascot(HELPERS[0], 104, 'cheer', 'wave') + '<i style="height:24px"></i></div></div></div>' +
+    (cur >= 0 && nodes[cur] ? '<button class="cta" data-node="' + nodes[cur].id + '"><span><small>Continuar</small><b>' + esc(nodes[cur].unit.title) + ' · ' + nodes[cur].label + '</b></span>' + ic('chevron') + '</button>' : '') + '<div class="goal"><div class="goal-row"><span>Meta de hoje</span><span>' + Math.min(d.xp, state.goal) + ' / ' + state.goal + ' XP</span></div><div class="meter" role="progressbar" aria-label="Meta diária"><i style="width:' + gp + '%"></i></div></div>' +
     '<div class="hero-row"><span class="pill ok">' + learned + ' palavras aprendidas</span><button class="btn small ghost" data-act="voice">' + ic('volume') + 'Voz</button></div></div>';
   h += '<nav class="chips" aria-label="Secções">' + SECTIONS.map((s, si) => {
     const st = secStats(si, nodes), cls = st.done === st.total ? 'done' : (si === curSec ? 'cur' : '');
@@ -5690,7 +6060,9 @@ function renderPractice() {
   const learned = learnedItems(), misses = Object.keys(state.miss).length;
   let h = '<div class="page"><h1>Praticar</h1>';
   if (learned.length < 3) h += '<p class="lead">Ainda não aprendeste palavras. A prática vai usar as da Secção 1. Completa a primeira lição para praticares o que aprendeste.</p>';
-  h += '<div class="card"><h2>Prática rápida</h2><p class="lead">10 exercícios variados. Não gasta corações e recupera 1 coração.</p><button class="btn" data-act="practice-mix">Começar</button></div>' +
+  const due = dueItems().length;
+  h += '<div class="card"><h2>Revisão inteligente</h2><p class="lead">' + (due ? due + (due === 1 ? ' palavra está' : ' palavras estão') + ' prontas para rever agora.' : 'Nenhuma palavra para rever agora.') + ' Cada palavra volta no momento certo: 10 minutos, 1 dia, 3 dias, 1 semana… Assim ficas a saber mesmo.</p><button class="btn"' + (due ? '' : ' disabled') + ' data-act="practice-due">Rever agora</button></div>' +
+    '<div class="card"><h2>Prática rápida</h2><p class="lead">10 exercícios variados. Não gasta corações e recupera 1 coração.</p><button class="btn" data-act="practice-mix">Começar</button></div>' +
     '<div class="card"><h2>Só ouvir</h2><p class="lead">8 exercícios de audição para treinar o ouvido.</p><button class="btn ghost" data-act="practice-listen">Ouvir e escolher</button></div>' +
     '<div class="card"><h2>Reforçar erros</h2><p class="lead">' + (misses ? misses + (misses === 1 ? ' palavra precisa' : ' palavras precisam') + ' de reforço.' : 'Ainda não tens erros para reforçar.') + '</p><button class="btn ghost"' + (misses ? '' : ' disabled') + ' data-act="practice-errors">Reforçar</button></div>';
   if (learned.length) h += '<span class="eyebrow">As tuas palavras</span><div class="word-list">' + learned.map(wordRow).join('') + '</div>';
@@ -5770,7 +6142,7 @@ function acctStatus() {
 }
 function renderProfile() {
   const acc = state.stats.answered ? Math.round(100 * state.stats.right / state.stats.answered) : 0, hp = helperOf(state.helper);
-  let h = '<div class="page"><h1>Perfil</h1><div class="card profile-top"><div class="who">' + avatarHtml(null, 150, 'happy') + '<div><h2>' + esc(state.profile.name || 'Estudante de Umbundu') + '</h2><p class="lead">' + (state.profile.email ? esc(state.profile.email) : 'Ainda sem e-mail') + '</p></div></div>' +
+  let h = '<div class="page"><h1>Perfil <small class="ver">v1.2</small></h1><div class="card profile-top"><div class="who">' + avatarHtml(null, 150, 'happy') + '<div><h2>' + esc(state.profile.name || 'Estudante de Umbundu') + '</h2><p class="lead">' + (state.profile.email ? esc(state.profile.email) : 'Ainda sem e-mail') + '</p></div></div>' +
     '<div class="btnrow"><button class="btn small" data-act="avatar">' + ic('edit') + 'Editar avatar</button><button class="btn small ghost gbtn" data-act="google">' + (state.profile.google ? 'Conta Google ligada' : 'Entrar com o Google') + '</button></div></div>' +
     '<div class="stat-grid"><div class="stat-tile"><b>' + state.xp + '</b><span>XP total</span></div><div class="stat-tile"><b>' + dispStreak() + '</b><span>Ofensiva</span></div><div class="stat-tile"><b>' + state.best + '</b><span>Melhor</span></div>' +
     '<div class="stat-tile"><b>' + learnedItems().length + '</b><span>Palavras</span></div><div class="stat-tile"><b>' + state.stats.lessons + '</b><span>Lições</span></div><div class="stat-tile"><b>' + acc + '%</b><span>Precisão</span></div></div>' +
@@ -5779,7 +6151,7 @@ function renderProfile() {
     '<p class="note">' + acctStatus() + ' O nome e o e-mail ficam guardados só neste aparelho.</p></div>' +
     renderThemeCard() +
     '<div class="card"><h2>A tua equipa</h2><p class="lead">Eles aparecem ao acaso durante as lições e reagem à sua maneira.</p><div class="acct">' +
-    HELPERS.map(x => '<div class="hcard">' + mascot(x, 64, 'smug') + '<span><b>' + esc(x.name) + '</b><em>' + esc(x.role) + '</em><small>' + esc(x.bio) + '</small></span></div>').join('') + '</div></div>' +
+    HELPERS.map(x => '<div class="hcard" style="--hc:' + x.col + '">' + mascot(x, 70, 'smug') + '<span><b class="hname" style="background:' + x.col + '">' + esc(x.name) + '</b><em>' + esc(x.role) + '</em><small>' + esc(x.bio) + '</small><span class="tags">' + x.tags.map(t => '<i>' + esc(t) + '</i>').join('') + '</span></span></div>').join('') + '</div></div>' +
     '<div class="card"><h2>Meta diária</h2><div class="seg" role="group" aria-label="Meta diária">' + [20, 30, 50].map(g => '<button data-goal="' + g + '" aria-pressed="' + (state.goal === g) + '">' + g + ' XP</button>').join('') + '</div></div>' +
     '<div class="card"><h2>Voz e sons</h2><p class="lead">Escolhe a voz, a velocidade e os efeitos.</p><button class="btn small ghost" data-act="voice">' + ic('volume') + 'Abrir</button></div>' +
     '<span class="eyebrow">Conquistas</span><div class="badges">' + BADGES.map(b => { const on = b.ok(); return '<div class="badge' + (on ? ' on' : '') + '"><span class="bi">' + ic(b.i) + '</span><b>' + b.t + '</b><small>' + b.d + '</small></div>'; }).join('') + '</div>' +
@@ -6002,6 +6374,8 @@ $('#view').addEventListener('click', e => {
   else if (act === 'lock') { try { localStorage.removeItem(KEYSTORE); } catch (err) {} location.reload(); }
   else if (act === 'avatar') openAvatarEditor();
   else if (act === 'ask-ai') askAI(a);
+  else if (act === 'hint') { if (S && S.cur && !S.cur.answered) { const hb = document.querySelector('#stage .hintbox'); hb.innerHTML = hintFor(S.cur); hb.hidden = false; a.hidden = true; S.hints = (S.hints || 0) + 1; sfx('pop'); } }
+  else if (act === 'practice-due') startPractice('due');
   else if (act === 'google') googleLogin();
   else if (act === 'dict-more') { dq.n += 60; $('#dictOut').innerHTML = dictList(); }
   else if (act === 'daily-chest') { const d = ymd(new Date()); if (state.dailyChest !== d) { state.dailyChest = d; const g = 15 + Math.floor(Math.random() * 16); state.gems += g; if (state.hearts < MAXH) state.hearts++; save(); updateHeader(); sfx('gem'); renderQuests(); toast('Baú diário: +' + g + ' gemas'); } }
@@ -6033,6 +6407,28 @@ $('#view').addEventListener('change', e => {
 });
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => { sfx('tap'); tab = t.dataset.tab; render(); window.scrollTo(0, 0); }));
 $('#hHeartsBtn').addEventListener('click', openHeartsSheet);
+$('#hStreakBtn').addEventListener('click', () => { sfx('tap'); tab = 'quests'; calOff = 0; render(); window.scrollTo(0, 0); const c = document.querySelector('.cal'); if (c) setTimeout(() => c.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80); });
+function gemShopHtml() {
+  regen(); const miss = MAXH - state.hearts;
+  const row = (t, price, act, ok, sub) => '<div class="gs-row"><div><b>' + t + '</b><small>' + sub + '</small></div><button class="btn small" data-buy="' + act + '"' + (ok && state.gems >= price ? '' : ' disabled') + '>' + ic('gem') + price + '</button></div>';
+  return '<p class="lead">Tens ' + ic('gem') + '<b>' + state.gems + '</b> gemas, ' + ic('heart', 'fill') + '<b>' + state.hearts + '</b> de ' + MAXH + ' vidas e ' + state.freezes + (state.freezes === 1 ? ' congelamento.' : ' congelamentos.') + '</p>' +
+    row('1 vida', 20, 'h1', miss > 0, miss > 0 ? 'Recupera um coração' : 'Já tens todas') +
+    row('Todas as vidas', 60, 'hall', miss > 1, 'Enche os ' + MAXH + ' corações') +
+    row('Congelar ofensiva', 50, 'fz', true, 'Protege a tua ofensiva 1 dia sem estudares') +
+    '<p class="note">As gemas ganham-se a estudar, nos tesouros e nas missões. Nunca se compram com dinheiro.</p>';
+}
+function openGemShop() {
+  openSheet('Loja de gemas', gemShopHtml(), [{ label: 'Fechar', kind: 'ghost' }]);
+  $('#sheetBody').onclick = e => {
+    const b = e.target.closest('[data-buy]'); if (!b || b.disabled) return; const k = b.dataset.buy;
+    if (k === 'h1' && state.gems >= 20 && state.hearts < MAXH) { state.gems -= 20; state.hearts++; if (state.hearts >= MAXH) state.heartsAt = 0; }
+    else if (k === 'hall' && state.gems >= 60 && state.hearts < MAXH - 1) { state.gems -= 60; state.hearts = MAXH; state.heartsAt = 0; }
+    else if (k === 'fz' && state.gems >= 50) { state.gems -= 50; state.freezes++; }
+    else return;
+    save(); updateHeader(); sfx('buy'); $('#sheetBody').innerHTML = gemShopHtml(); if (tab === 'shop') renderShop();
+  };
+}
+$('#hGemsBtn').addEventListener('click', () => { sfx('tap'); openGemShop(); });
 $('#mainBtn').addEventListener('click', onMain);
 $('#xBtn').addEventListener('click', () => openSheet('Sair da lição?', '<p>Se saíres agora, perdes o progresso desta lição.</p>', [
   { label: 'Continuar a lição' },
@@ -6062,6 +6458,25 @@ if (TTS) { try { speechSynthesis.onvoiceschanged = () => {}; speechSynthesis.get
 setInterval(updateHeader, 30000);
 
 applyTheme(); injectIcons();
+(function () {
+  const fb = document.getElementById('fb'); if (!fb || !window.MutationObserver) return;
+  let shown = false; const cols = ['#ffd23f', '#ff6ab5', '#19d3c5', '#8d7bff', '#ff8a3d', '#4be08a'];
+  const still = () => { try { return !matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return true; } };
+  new MutationObserver(() => {
+    const ok = !fb.hidden && !!fb.querySelector('.fb.ok'), bad = !fb.hidden && !!fb.querySelector('.fb.bad');
+    if (ok && !shown) {
+      shown = true; try { navigator.vibrate && navigator.vibrate(15); } catch (e) {}
+      if (!still() || !document.body.animate) return;
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('i'); p.className = 'cf'; p.style.background = cols[i % cols.length];
+        p.style.left = (30 + Math.random() * 40) + '%'; document.body.appendChild(p);
+        const dx = (Math.random() - .5) * 260, dy = -(90 + Math.random() * 170);
+        p.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: 'translate(' + dx + 'px,' + dy + 'px) rotate(' + (Math.random() * 540 - 270) + 'deg)', opacity: 0 }], { duration: 750 + Math.random() * 350, easing: 'cubic-bezier(.2,.8,.3,1)' }).onfinish = () => p.remove();
+      }
+    } else if (bad && !shown) { shown = true; try { navigator.vibrate && navigator.vibrate([40, 30, 40]); } catch (e) {} }
+    else if (fb.hidden || (!ok && !bad)) shown = false;
+  }).observe(fb, { attributes: true, childList: true, subtree: true });
+})();
 checkAccess().then(ok => { if (ok) { document.body.classList.remove('locked'); render(); cloudInit(); } });
 })();
 </script>
