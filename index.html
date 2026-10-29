@@ -859,6 +859,37 @@ textarea.field { width: 100%; resize: vertical; padding: 12px 14px; font: inheri
 .btnrow { display: flex; flex-wrap: wrap; gap: 8px; }
 .sheet-wrap { z-index: 150 !important; }
 #fb { max-height: 48vh; overflow-y: auto; }
+
+.flash { display: grid; gap: 14px; background: var(--surface-2); border-radius: 26px; padding: 22px 18px; text-align: center; justify-items: center; }
+.fl-q, .fl-a { display: grid; gap: 8px; justify-items: center; }
+.fl-q b, .fl-a b { font: 800 34px/1.1 var(--font-title); overflow-wrap: anywhere; }
+.fl-a span { font: 700 20px var(--font-title); color: var(--muted); }
+.fl-q i, .fl-a i { font-style: normal; font-size: 54px; line-height: 1.1; }
+.flash .btn { width: 100%; }
+.fl-rate { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.fl-rate .btn { padding: 12px 6px !important; font-size: 15px !important; }
+
+.fl-rate .btn.ghost { background: var(--surface) !important; }
+.sent-list { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 6px; }
+.sent-list li { background: var(--surface-2); border-radius: 12px; padding: 8px 12px; font-size: 14.5px; }
+.sent-list li.ok { border-left: 4px solid var(--good); }
+.sent-list li.unk { border-left: 4px solid var(--line); color: var(--muted); }
+#sentOut .pill { margin-top: 10px; }
+
+.cw-lab { font: 700 12px var(--font-body); color: var(--muted); letter-spacing: .02em; margin-top: 2px; }
+.mean-big { font: 800 26px/1.15 var(--font-title) !important; color: var(--fg) !important; }
+.card-word .big { font-size: 40px; }
+.cw-ex { background: var(--surface-2); border-radius: 18px; padding: 12px 14px; font-size: 14.5px; }
+.cw-ex > b { color: var(--accent-t); font-size: 13px; }
+.cw-ex ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 8px; }
+.cw-ex li { display: grid; grid-template-columns: 1fr auto; gap: 0 8px; align-items: center; }
+.cw-ex li span { font-weight: 800; } .cw-ex li em { grid-column: 1; font-style: normal; color: var(--muted); font-size: 13.5px; }
+.cw-ex li .spk { grid-row: 1 / span 2; grid-column: 2; width: 36px; height: 36px; }
+.fl-a .cw-ex { text-align: left; width: 100%; }
+.wd { display: grid; gap: 10px; }
+.wd-m { display: flex; align-items: center; gap: 12px; } .wd-m i { font-style: normal; font-size: 40px; } .wd-m b { font: 800 24px/1.2 var(--font-title); }
+.word-row { cursor: pointer; }
+.bt.sub { display: block; font-size: 14px; color: var(--muted); margin-top: 4px; }
 </style>
 
 <section id="gate" class="gate" hidden></section>
@@ -5396,7 +5427,7 @@ function dailyChestCard() {
 const KEY = 'umbundulingo.v5';
 const MAXH = 10;
 const DEF = {
-  completed: {}, seen: {}, hist: {}, box: {}, xp: 0, gems: 0, hearts: 10, theme: { id: 'roxo', bg: '', mode: 'auto', v: 12 }, dailyChest: '', seenMethod: 0, reports: [], lastBackup: 0, heartsAt: 0, streak: 0, best: 0, lastDay: '', freezes: 0, goal: 30, rev: {}, miss: {},
+  completed: {}, seen: {}, hist: {}, box: {}, xp: 0, gems: 0, hearts: 10, theme: { id: 'roxo', bg: '', mode: 'auto', v: 12 }, dailyChest: '', sentences: [], seenMethod: 0, reports: [], lastBackup: 0, heartsAt: 0, streak: 0, best: 0, lastDay: '', freezes: 0, goal: 30, rev: {}, miss: {},
   voice: { on: true, fx: true, helpers: true, rate: 0.85, uri: '' },
   day: { d: '', xp: 0, lessons: 0, heard: 0, claimed: {} },
   stats: { lessons: 0, heard: 0, perfect: 0, right: 0, answered: 0 },
@@ -5460,6 +5491,13 @@ function touchStreak() {
 
 /* ===================== CONTEÚDO + REVISÃO ===================== */
 function origItem(id) { for (const u of UNITS) for (const i of u.items) if (i.id === id) return i; return null; }
+let EXTRA_PH = [];
+function parseFrases(t) {
+  const out = [];
+  String(t || '').split(/\r?\n/).forEach(l => { l = l.replace(/#.*/, '').trim(); const p = l.split('|'); if (p.length < 2 || !p[0].trim() || !p[1].trim()) return; out.push({ id: 'fx-' + norm(p[0]).replace(/ /g, '-'), u: p[0].trim(), p: p[1].trim(), ok: true, teacher: true, src: 'P' }); });
+  return out;
+}
+try { EXTRA_PH = parseFrases(localStorage.getItem('umbundulingo.frases')); } catch (e) {}
 let CONF = new Set();
 function parseConf(t) {
   const set = new Set();
@@ -5607,9 +5645,10 @@ function typeEx(item, dir) { return { type: 'type', item, dir: dir || (Math.rand
 function ptVariants(p) { const base = p.replace(/\([^)]*\)/g, ' ').trim(); return [p].concat(base.split(/\s*(?:\/|;)\s*/)).concat([base]).map(norm).filter(Boolean); }
 function matchEx(pool) { return { type: 'match', pairs: shuffle(pool).slice(0, 4) }; }
 
+function ctxEx(item, ph) { const e = mcEx(item, 'u2pt'); e.ctx = ph; return e; }
 function lettersEx(item) {
   if (/\s/.test(item.u.trim())) return null;
-  const parts = item.u.toLowerCase().match(/ch|nj|ng|mb|nd|ny|nh|ts|\S/g) || [];
+  const parts = item.u.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').match(/[a-z0-9]/g) || [];
   if (parts.length < 3 || parts.length > 12) return null;
   const abc = ['a', 'e', 'i', 'o', 'u', 'k', 'l', 'm', 'n', 't', 'v', 's', 'c', 'h', 'x', 'y', 'p'];
   const extra = shuffle(abc.filter(l => !parts.includes(l))).slice(0, 2);
@@ -5617,6 +5656,16 @@ function lettersEx(item) {
 }
 function buildExercises(node) {
   const pool = node.items; let ex = []; POOL_HINT = pool;
+  if (node.kind === 'practice' && node.mode === 'frases') {
+    shuffle(pool.slice()).slice(0, 8).forEach((i, k) => {
+      const e = k % 3 === 0 ? tilesEx(i) : k % 3 === 1 ? typeEx(i, 'pt2u') : (clozeEx(i) || tilesEx(i));
+      e.phase = 'Frase'; ex.push(e);
+    });
+    return ex;
+  }
+  if (node.kind === 'practice' && (node.mode === 'due' || node.mode === 'flash')) {
+    return shuffle(pool.slice()).slice(0, 12).map(i => ({ type: 'flash', item: i, side: Math.random() < 0.5 ? 'u' : 'p', phase: 'Cartão' }));
+  }
   const L = canListen();
   if (node.kind === 'practice' && node.mode === 'listen') {
     let picks = []; while (picks.length < 8) picks = picks.concat(shuffle(pool));
@@ -5630,13 +5679,14 @@ function buildExercises(node) {
       const e = (k % 3 === 2 && L) ? listenEx(i) : (emojiOf(i) && Math.random() < 0.8 ? picEx(i) : mcEx(i, 'u2pt'));
       ex.push(tag(two(e), e.type === 'listen' ? 'Ouvir' : 'Reconhecer'));
     });
-    shuffle(pool.slice()).slice(0, 4).forEach(i => ex.push(tag(isPhrase(i) ? phraseEx(i) : (lettersEx(i) || mcEx(i, 'pt2u')), 'Recordar')));
+    shuffle(pool.slice()).slice(0, 3).forEach(i => ex.push(tag(isPhrase(i) ? phraseEx(i) : (lettersEx(i) || mcEx(i, 'pt2u')), 'Recordar')));
+    shuffle(pool.filter(i => !isPhrase(i) && examplesOf(i, 1).length)).slice(0, 2).forEach(i => ex.push(tag(ctxEx(i, examplesOf(i, 1)[0]), 'Contexto')));
     ex.push(tag(matchEx(pool), 'Ligar'));
-    shuffle(pool.slice()).slice(0, 2).forEach(i => ex.push(tag(isPhrase(i) ? phraseEx(i) : (L && Math.random() < 0.5 ? typeEx(i, 'dict') : typeEx(i, 'pt2u')), 'Escrever')));
+    shuffle(pool.slice()).slice(0, 2).forEach(i => ex.push(tag(isPhrase(i) ? typeEx(i, 'pt2u') : (L && Math.random() < 0.5 ? typeEx(i, 'dict') : typeEx(i, 'pt2u')), 'Escrever')));
     const inPool = x => pool.some(p => p.id === x.id);
-    let old = dueItems().filter(x => !inPool(x)).slice(0, 2);
+    let old = dueItems().filter(x => !inPool(x)).slice(0, 4);
     if (old.length < 2) old = old.concat(shuffle(learnedItems().filter(x => !inPool(x) && !old.some(o => o.id === x.id))).slice(0, 2 - old.length));
-    old.forEach(i => ex.push(tag(mcEx(i, 'pt2u'), 'Revisão')));
+    old.forEach((i, k) => ex.push(tag(k >= 2 ? (lettersEx(i) || typeEx(i, 'pt2u')) : mcEx(i, 'pt2u'), 'Revisão')));
   } else if (node.kind === 'lesson') {
     shuffle(pool).slice(0, 5).forEach(i => ex.push(mcEx(i, Math.random() < 0.5 ? 'pt2u' : 'u2pt')));
     shuffle(pool).slice(0, 3).forEach(i => ex.push(isPhrase(i) ? phraseEx(i) : typeEx(i)));
@@ -5681,6 +5731,40 @@ function startSession(node) {
   introI = 0; S.n0 = ex.length; S.introDone = false;
   if (node.kind === 'lesson' && node.intro.length && !state.completed[node.id]) showIntro(); else { S.introDone = true; nextEx(); }
 }
+let _phIdx = null;
+function examplesOf(it, n) {
+  const all = allItems().concat(EXTRA_PH);
+  if (!_phIdx || _phIdx.n !== all.length) {
+    const m = {};
+    all.forEach(p => { if (!isPhrase(p)) return; new Set(norm(p.u).split(' ')).forEach(t => { if (t.length >= 2) (m[t] = m[t] || []).push(p); }); });
+    _phIdx = { n: all.length, m: m };
+  }
+  const k = norm(it.u); if (!k || /\s/.test(k)) return [];
+  return (_phIdx.m[k] || []).filter(p => p.id !== it.id).sort((a, b) => a.u.length - b.u.length).slice(0, n);
+}
+function kindOf(it) {
+  const u = it.u.trim(), first = it.p.trim().split(/[\s,;/(]/)[0].toLowerCase();
+  return !/\s/.test(u) && /^(oku|uku)/i.test(u) && /(ar|er|ir|or)$/.test(first) ? 'verbo: ação (começa por oku-)' : '';
+}
+function exHtml(list) {
+  return list.length ? '<div class="cw-ex"><b>Aparece em frases:</b><ul>' + list.map(p => '<li><span>' + esc(p.u) + '</span><em>' + esc(p.p) + '</em>' + spkBtn(p.u) + '</li>').join('') + '</ul></div>' : '';
+}
+function openWord(id) {
+  const it = allItems().find(i => i.id === id); if (!it) return;
+  const kd = kindOf(it), m = masteryOf(it.id);
+  openSheet(it.u, '<div class="wd"><div class="wd-m">' + (emojiOf(it) ? '<i>' + emojiOf(it) + '</i>' : '') + '<b>' + esc(it.p) + '</b></div>' +
+    (kd ? '<span class="pill">' + kd + '</span> ' : '') + (it.teacher ? '<span class="pill ok">✔ Confirmada pelo professor</span>' : '') +
+    '<p class="note">Lê-se aprox.: <b>' + esc(respell(it.u)) + '</b>' + (sylOf(it.u) ? ' · sílabas: <b>' + esc(sylOf(it.u)) + '</b>' : '') + '</p>' +
+    '<p>' + usageNote(it).slice(0, 2).map(esc).join('<br>') + '</p>' + exHtml(examplesOf(it, 3)) +
+    (m >= 0 ? '<p class="note">Domínio: ' + m + ' de 5</p>' : '') + '</div>', [{ label: 'Ouvir', fn: () => speak(it.u) }, { label: 'Fechar', kind: 'ghost' }]);
+}
+function sylOf(w) {
+  const out = String(w).trim().split(/\s+/).map(t => {
+    const lw = t.toLowerCase(), m = lw.match(/(?:ch|nj|ng|mb|nd|ny|nh|ts|[^aeiouãõáéíóúâêôà'’-])?[aeiouãõáéíóúâêôà]+/g);
+    return m && m.join('') === lw ? m.join('·') : null;
+  });
+  return out.length <= 3 && out.every(Boolean) ? out.join('  ') : '';
+}
 function showIntro() {
   const items = S.node.intro, n = items.length;
   $('#fb').hidden = true; footReset(); $('#stage').scrollTop = 0;
@@ -5695,16 +5779,30 @@ function showIntro() {
   $('#stage').innerHTML =
     '<div class="stepdots">' + items.map((_, k) => '<i class="' + (k < introI ? 'done' : k === introI ? 'cur' : '') + '"></i>').join('') + '</div>' +
     '<span class="eyebrow">Conhecer · palavra ' + (introI + 1) + ' de ' + n + '</span>' +
-    '<div class="card-word">' + (emojiOf(it) ? '<div class="cw-pic">' + emojiOf(it) + '</div>' : '') + '<div class="big">' + esc(it.u) + '</div><div class="mean">' + esc(it.p) + '</div>' +
+    '<div class="card-word">' + (emojiOf(it) ? '<div class="cw-pic">' + emojiOf(it) + '</div>' : '') + '<div class="cw-lab">Significa</div><div class="mean mean-big">' + esc(it.p) + '</div><div class="cw-lab">Em Umbundu</div><div class="big">' + esc(it.u) + '</div>' + (kindOf(it) ? '<span class="pill">' + kindOf(it) + '</span>' : '') +
     '<div class="say-row"><button class="spk big" data-say="' + esc(it.u) + '" aria-label="Ouvir ' + esc(it.u) + '">' + ic('volume') + '</button>' +
     '<button class="spk slow" data-say="' + esc(it.u) + '" data-slow="1">' + ic('volume') + 'Devagar</button></div>' +
-    '<div class="read">Lê-se aprox.: <span>' + esc(respell(it.u)) + '</span></div>' + (it.alt && it.alt.length ? '<div class="read">Também se diz: <span>' + esc(it.alt.join(', ')) + '</span></div>' : '') + pill + '</div>' +
-    (L ? '<div class="cw-use">' + L + '</div>' : '') +
+    '<div class="read">Lê-se aprox.: <span>' + esc(respell(it.u)) + '</span></div>' + (sylOf(it.u) ? '<div class="read">Por sílabas: <span>' + esc(sylOf(it.u)) + '</span></div>' : '') + (it.alt && it.alt.length ? '<div class="read">Também se diz: <span>' + esc(it.alt.join(', ')) + '</span></div>' : '') + pill + '</div>' +
+    (L ? '<div class="cw-use">' + L + '</div>' : '') + exHtml(examplesOf(it, 2)) +
     '<button class="rp-link" data-act="rp-open">⚑ Reportar problema nesta palavra</button><div class="cw-do"><b>Faz agora:</b> ouve, repete em voz alta 2 vezes e liga a palavra à imagem ou ao significado.</div>';
   setMain(introI < n - 1 ? 'Próxima palavra' : 'Rever as ' + n, 'intro');
   setTimeout(() => speak(it.u), 150);
 }
+function masteryRound() {
+  if (!(S.node.kind === 'lesson' && S.node.intro && S.node.intro.length)) return false;
+  S.mast = S.mast || {}; S.rounds = S.rounds || 0;
+  const weak = S.node.intro.filter(i => !S.mast[i.id]);
+  if (!weak.length || S.rounds >= 2) return false;
+  S.rounds++;
+  weak.forEach(i => {
+    const e = isPhrase(i) ? tilesEx(i) : typeEx(i, 'pt2u');
+    e.phase = S.rounds === 1 ? 'Teste final · sem ajuda' : 'Última tentativa';
+    e.mastery = true; S.queue.push(e); S.total++;
+  });
+  return true;
+}
 function nextEx() {
+  if (!S.queue.length && masteryRound()) { toast('Agora sem ajuda: escreve as palavras de memória.'); }
   if (!S.queue.length) { finish(); return; }
   S.cur = S.queue.shift(); S.cur.answered = false; S.sel = null; S.lastBad = false;
   renderEx(S.cur); setBar();
@@ -5762,7 +5860,7 @@ function renderEx(ex) {
   const st = $('#stage');
   if (fresh) st.insertAdjacentHTML('afterbegin', teachCard(ex.item));
   if (ex.phase) st.insertAdjacentHTML('afterbegin', '<span class="eyebrow phase">' + ex.phase + '</span>');
-  if (ex.type !== 'match' && ex.item) st.insertAdjacentHTML('beforeend', '<button class="btn small ghost hintbtn" data-act="hint">Dica</button><div class="hintbox" hidden></div>');
+  if (ex.type !== 'match' && ex.type !== 'flash' && ex.item) st.insertAdjacentHTML('beforeend', '<button class="btn small ghost hintbtn" data-act="hint">Dica</button><div class="hintbox" hidden></div>');
 }
 function renderEx0(ex) {
   const st = $('#stage'); $('#fb').hidden = true; footReset(); st.scrollTop = 0;
@@ -5770,7 +5868,10 @@ function renderEx0(ex) {
   const fresh = ex.item && isNewWord(ex.item) && ex.type !== 'match';
   const head = t => '<h2 class="q">' + esc(t) + '</h2>';
   if (fresh && (ex.type === 'mc' || ex.type === 'pic') && !ex.two) { ex.two = true; const ok = ex.choices.filter(c => c.ok), bad = ex.choices.filter(c => !c.ok); ex.choices = shuffle(ok.concat(bad.slice(0, 1))); }
-  if (ex.type === 'mc') {
+  if (ex.type === 'mc' && ex.ctx) {
+    st.innerHTML = head('O que significa «' + ex.item.u + '» nesta frase?') + mascotRow('<span class="bt">' + esc(ex.ctx.u) + '</span><span class="bt sub">«' + esc(ex.ctx.p) + '»</span>') + choiceHtml(ex);
+    setMain('Verificar', 'check', null, true);
+  } else if (ex.type === 'mc') {
     st.innerHTML = head(pick(ex.dir === 'pt2u' ? Q_PT2U : Q_U2PT)) + mascotRow(ex.dir === 'pt2u' ? '<span class="bt">«' + (isPhrase(ex.item) ? tokHtml(ex.item.p, 'p') : esc(ex.item.p)) + '»</span>' : spkBtn(ex.item.u) + '<span class="bt big2">' + (isPhrase(ex.item) ? tokHtml(ex.item.u, 'u') : esc(ex.item.u)) + '</span>' + (emojiOf(ex.item) ? '<span class="bemo">' + emojiOf(ex.item) + '</span>' : '')) + choiceHtml(ex);
     setMain('Verificar', 'check', null, true);
     if (fresh && ex.dir === 'u2pt') setTimeout(() => speak(ex.item.u), 250);
@@ -5797,6 +5898,11 @@ function renderEx0(ex) {
       '<p class="note">Os acentos não contam.</p>';
     setMain('Verificar', 'check', null, true);
     setTimeout(() => { const i = $('#ansInput'); if (i) i.focus(); }, 50); if (ex.dir === 'dict') setTimeout(() => speak(ex.item.u), 350);
+  } else if (ex.type === 'flash') {
+    const u = ex.side === 'u', it = ex.item;
+    st.innerHTML = '<h2 class="q">' + (u ? 'O que significa?' : 'Como se diz em Umbundu?') + '</h2><div class="flash" id="flash"><div class="fl-q"><b>' + esc(u ? it.u : it.p) + '</b>' + (u ? spkBtn(it.u) : (emojiOf(it) ? '<i>' + emojiOf(it) + '</i>' : '')) + '</div><p class="note">Tenta lembrar-te primeiro. Só depois toca em «Mostrar».</p><button class="btn" data-act="fl-show">Mostrar resposta</button></div>';
+    $('#mainBtn').hidden = true; S.mode = 'none';
+    if (u) setTimeout(() => speak(it.u), 250);
   } else if (ex.type === 'match') {
     const right = shuffle(ex.pairs);
     S.m = { left: null, done: 0, n: ex.pairs.length, bad: false };
@@ -5825,7 +5931,7 @@ function check() {
     resolve(sel.ok, ex.type === 'cloze' ? ex.item.u : right.text);
   } else if (ex.type === 'tiles') {
     const sep = ex.letters ? '' : ' ', got = S.t.chosen.map(id => ex.tiles[id]).join(sep);
-    resolve(got === ex.answer.join(sep), ex.item.u);
+    const nn = x => norm(x).replace(/ /g, ''); resolve(got === ex.answer.join(sep) || nn(got) === nn(ex.answer.join(' ')) || nn(got) === nn(ex.item.u), ex.item.u);
   } else if (ex.type === 'type') {
     const inp = $('#ansInput'); inp.disabled = true;
     const v = norm(inp.value);
@@ -5837,17 +5943,18 @@ function resolve(ok, correctText) {
   const id = ex.item && ex.item.id;
   if (ok) {
     S.right++; if (!ex.retry) S.firstTry++;
+    if (id && (ex.type === 'type' || ex.type === 'tiles' || (ex.type === 'mc' && ex.dir === 'pt2u' && !ex.two))) { S.mast = S.mast || {}; if (!(ex.retry && !ex.mastery)) S.mast[id] = 1; }
     if (id && !ex.retry && state.miss[id]) { state.miss[id]--; if (!state.miss[id]) delete state.miss[id]; save(); }
     tone(true);
   } else {
-    S.wrong++; tone(false);
+    S.wrong++; tone(false); if (id && S.mast) delete S.mast[id];
     if (id) state.miss[id] = (state.miss[id] || 0) + 1;
     if (S.node.kind !== 'practice') loseHeart();
     save(); updateLHearts(); updateHeader();
     S.total++; S.queue.splice(Math.min(3, S.queue.length), 0, Object.assign({}, ex, { retry: true, answered: false }));
   }
   S.lastBad = !ok;
-  S.lastOk = ok; if (id) { state.seen[id] = 1; if (!ex.retry) srsUpdate(id, ok); save(); }
+  S.lastOk = ok; if (id) { state.seen[id] = 1; srsSession(id, ok); save(); }
   const hp = S.hp || helperOf(state.helper), f = $('#fb'); f.hidden = false; f.className = 'fb ' + (ok ? 'ok' : 'bad');
   const line = ok ? pick(hp.ok) : pick(hp.bad), exh = explain(ex, ok);
   f.innerHTML = '<div class="fbrow">' + mascot(hp, 74, ok ? 'cheer' : 'sad') + '<div class="fbt"><b>' + esc(line) + '</b>' + (ok ? '' : '<small>Resposta certa: ' + esc(correctText) + '</small>') + '</div></div>' +
@@ -5857,6 +5964,23 @@ function resolve(ok, correctText) {
   setMain('Continuar', 'next', ok ? 'good' : 'bad');
   setBar();
   speakHelper(hp, line, f.querySelector('.av'), () => { if (ok && S && S.cur === ex && ex.item && ex.type !== 'listen') speak(ex.item.u); });
+}
+function flashShow() {
+  const ex = S && S.cur; if (!ex || ex.type !== 'flash') return; const it = ex.item;
+  $('#flash').innerHTML = '<div class="fl-a"><b>' + esc(it.u) + '</b><span>' + esc(it.p) + '</span>' + (emojiOf(it) ? '<i>' + emojiOf(it) + '</i>' : '') + spkBtn(it.u) + '</div><p class="note">Lembraste?</p>' + exHtml(examplesOf(it, 1)) +
+    '<div class="fl-rate"><button class="btn bad small" data-act="fl-rate" data-r="0">Esqueci</button><button class="btn ghost small" data-act="fl-rate" data-r="1">Difícil</button><button class="btn good small" data-act="fl-rate" data-r="2">Fácil</button></div>';
+  speak(it.u);
+}
+function flashRate(r) {
+  const ex = S && S.cur; if (!ex || ex.type !== 'flash' || ex.answered) return; ex.answered = true; const id = ex.item.id; state.seen[id] = 1;
+  if (r === 0) {
+    state.miss[id] = (state.miss[id] || 0) + 1; state.box[id] = { b: 0, due: Date.now() + SRS_STEPS[0] }; S.wrong++; S.total++; tone(false);
+    S.queue.splice(Math.min(3, S.queue.length), 0, Object.assign({}, ex, { retry: true, answered: false, side: ex.side === 'u' ? 'p' : 'u' }));
+  } else {
+    if (!ex.retry) { const b = state.box[id] || { b: 0, due: 0 }; if (r === 2) { b.b = Math.min(SRS_STEPS.length - 1, (b.b || 0) + 1); b.due = Date.now() + SRS_STEPS[b.b]; } else b.due = Date.now() + 864e5; state.box[id] = b; S.firstTry++; }
+    S.right++; tone(true);
+  }
+  save(); setBar(); nextEx();
 }
 function onMain() {
   if (!S) return;
@@ -5910,6 +6034,7 @@ function finish() {
   if (kind !== 'practice') today().lessons++;
   state.stats.lessons++; state.stats.right += S.firstTry; state.stats.answered += (S.n0 || S.total);
   if (S.wrong === 0) state.stats.perfect++;
+  if (S.node.intro && S.node.intro.length && S.mast) S.node.intro.forEach(i => { if (!S.mast[i.id]) state.box[i.id] = { b: 0, due: Date.now() + 3 * 60e3 }; });
   touchStreak(); save(); updateHeader(); sfx('done');
   if (state.stats.lessons >= 3 && Date.now() - (state.lastBackup || 0) > 7 * 864e5 && state.stats.lessons % 3 === 0) setTimeout(() => toast('Faz uma cópia do progresso no Perfil.'), 2500);
   if (dispStreak() > streakBefore) S.streakUp = [streakBefore, dispStreak()];
@@ -5920,7 +6045,7 @@ function finish() {
   const hpf = S.hp || helperOf(state.helper), msg = hpf.name + ': ' + pick(hpf.done);
   $('#stage').innerHTML = '<div class="result">' + mascot(hpf, 150, 'happy') + '<h2>' + title + '</h2><p class="lead">' + msg + '</p>' +
     '<div class="rstats"><div class="rstat"><b>+' + xp + '</b><span>XP</span></div><div class="rstat"><b>' + acc + '%</b><span>Precisão</span></div><div class="rstat"><b>+' + gems + '</b><span>Gemas</span></div></div>' +
-    (heartGain ? '<p class="lead">Recuperaste 1 coração.</p>' : '') + (perfect ? '<p class="eyebrow">Lição perfeita · +5 gemas de bónus</p>' : '') + (goalHit ? '<p class="eyebrow">Meta diária cumprida</p>' : '') + '</div>';
+    (S.node.intro && S.node.intro.length ? masteryHtml() : '') + (perfect ? '<p class="eyebrow">Lição perfeita · +5 gemas de bónus</p>' : '') + (goalHit ? '<p class="eyebrow">Meta diária cumprida</p>' : '') + '</div>';
   setMain('Continuar', 'done');
   if (window.confetti && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
     try { confetti({ particleCount: 100, spread: 75, origin: { y: 0.65 }, zIndex: 200, colors: ['#ffc247', '#5ee6a8', '#9b7bff', '#f6f3ff'] }); } catch (e) {}
@@ -5945,7 +6070,20 @@ function toast(msg) {
   const t = $('#toast'); t.textContent = msg; t.hidden = false;
   clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2200);
 }
-const SRS_STEPS = [10 * 60e3, 864e5, 3 * 864e5, 7 * 864e5, 14 * 864e5, 30 * 864e5];
+const SRS_STEPS = [10 * 60e3, 864e5, 2 * 864e5, 4 * 864e5, 9 * 864e5, 21 * 864e5];
+function masteryHtml() {
+  const ok = S.node.intro.filter(i => S.mast && S.mast[i.id]), weak = S.node.intro.filter(i => !(S.mast && S.mast[i.id]));
+  return '<div class="mastery">' +
+    (ok.length ? '<p class="lead">✅ Sabes escrever de memória: <b>' + ok.map(i => esc(i.u)).join(', ') + '</b></p>' : '') +
+    (weak.length ? '<p class="lead">🔁 Ainda frágeis: <b>' + weak.map(i => esc(i.u) + ' = ' + esc(i.p)).join(' · ') + '</b>. Voltam daqui a 3 minutos para fixares.</p>' : '<p class="lead">Todas ficam a voltar amanhã e nos dias seguintes.</p>') + '</div>';
+}
+function srsSession(id, ok) {
+  /* uma palavra só avança de nível uma vez por sessão; palavras novas voltam em 10 minutos */
+  S.srs = S.srs || {};
+  if (S.srs[id] !== undefined) { if (!ok) state.box[id] = { b: 0, due: Date.now() + SRS_STEPS[0] }; return; }
+  S.srs[id] = ok;
+  if (!state.box[id]) state.box[id] = { b: 0, due: Date.now() + SRS_STEPS[0] }; else srsUpdate(id, ok);
+}
 function srsUpdate(id, ok) {
   const b = state.box[id] || { b: 0, due: 0 };
   b.b = ok ? Math.min(SRS_STEPS.length - 1, (b.b || 0) + 1) : 0;
@@ -5956,6 +6094,14 @@ function dueItems() { const now = Date.now(); return allItems().filter(i => stat
 function startPractice(mode) {
   let items;
   if (mode === 'due') { items = dueItems().slice(0, 10); if (!items.length) { toast('Nada para rever agora. Volta mais tarde.'); return; } startSession({ id: 'practice', kind: 'practice', mode: 'due', label: 'Revisão inteligente', items: items, intro: [], length: Math.max(6, Math.min(12, items.length * 2)) }); return; }
+  if (mode === 'frases') {
+    const isP = i => isPhrase(i) && i.u.trim().split(/\s+/).length <= 8;
+    let pl = learnedItems().filter(isP).concat(EXTRA_PH);
+    if (pl.length < 6) pl = pl.concat(allItems().filter(isP).slice(0, 14));
+    const seenIds = new Set(); pl = pl.filter(i => !seenIds.has(i.id) && seenIds.add(i.id));
+    if (pl.length < 3) { toast('Ainda não há frases suficientes.'); return; }
+    startSession({ id: 'practice', kind: 'practice', mode: 'frases', label: 'Frases', items: pl, intro: [], length: 8 }); return;
+  }
   if (mode === 'errors') {
     const ids = Object.keys(state.miss); items = allItems().filter(i => ids.includes(i.id));
     if (!items.length) { toast('Ainda não tens erros para reforçar.'); return; }
@@ -6021,6 +6167,7 @@ function openReport(it) {
 function reportBody() {
   const L = ['Umbu v1.2 · relatório de ' + (state.profile.name || 'estudante'), 'Data: ' + ymd(new Date()), 'Lições feitas: ' + state.stats.lessons + ' · Palavras aprendidas: ' + learnedItems().length, ''];
   if (state.reports.length) { L.push('PROBLEMAS REPORTADOS (' + state.reports.length + '):'); state.reports.forEach(r => L.push('- ' + r.u + ' = ' + r.p + ' → ' + r.k + (r.n ? ': ' + r.n : ''))); L.push(''); }
+  if (state.sentences.length) { L.push('FRASES QUE ESCREVI (para corrigir):'); state.sentences.slice(-20).forEach(x => L.push('- ' + x.s)); L.push(''); }
   const ms = Object.keys(state.miss).map(id => [id, state.miss[id]]).sort((a, b) => b[1] - a[1]).slice(0, 15);
   if (ms.length) { L.push('PALAVRAS ONDE MAIS ERREI:'); ms.forEach(m => { const it = allItems().find(i => i.id === m[0]); if (it) L.push('- ' + it.u + ' = ' + it.p + ' (' + m[1] + ' erros)'); }); }
   return L.join('\n');
@@ -6030,12 +6177,38 @@ async function sendReport() {
   try { if (navigator.share) { await navigator.share({ title: 'Relatório Umbu', text: text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
   try { await navigator.clipboard.writeText(text); toast('Relatório copiado. Cola-o numa mensagem.'); } catch (e) { window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank'); }
 }
+let _wmap = null;
+function wmap() {
+  if (_wmap && _wmap.n === allItems().length) return _wmap.m;
+  const m = {}; allItems().forEach(i => { if (!/\s/.test(i.u.trim())) { const k = norm(i.u); if (k && !m[k]) m[k] = i; } });
+  _wmap = { n: allItems().length, m: m }; return m;
+}
+function openSentences() {
+  let pool = shuffle(learnedItems().filter(i => !isPhrase(i))).slice(0, 2);
+  if (pool.length < 2) pool = shuffle(allItems().filter(i => !isPhrase(i)).slice(0, 40)).slice(0, 2);
+  openSheet('Escreve a tua frase', '<p class="lead">Escreve uma frase em Umbundu' + (pool.length ? ' com <b>' + pool.map(i => esc(i.u)).join('</b> e <b>') + '</b>' : '') + '. Não faz mal errar: o app mostra o que reconhece e guarda a frase para o professor corrigir.</p>' +
+    '<textarea class="field" id="sentTxt" rows="3" placeholder="Escreve aqui…"></textarea><button class="btn" data-sent="go" style="margin-top:10px">Ver o que reconheço</button><div id="sentOut"></div>', [{ label: 'Fechar', kind: 'ghost' }]);
+}
+$('#sheetBody').addEventListener('click', e => {
+  const b = e.target.closest('[data-sent]'); if (!b) return;
+  const txt = ($('#sentTxt').value || '').trim().slice(0, 240); if (txt.length < 3) { toast('Escreve uma frase primeiro.'); return; }
+  const toks = txt.split(/\s+/).filter(Boolean), map = wmap(); let known = 0;
+  const rows = toks.map(t => { const it = map[norm(t)]; if (it) { known++; return '<li class="ok"><b>' + esc(t) + '</b> · ' + esc(it.p) + '</li>'; } return '<li class="unk"><b>' + esc(t) + '</b> · não está no dicionário do app</li>'; }).join('');
+  const whole = allItems().concat(EXTRA_PH).find(i => isPhrase(i) && norm(i.u) === norm(txt));
+  state.sentences.push({ t: Date.now(), s: txt, k: known, n: toks.length }); if (state.sentences.length > 200) state.sentences.shift();
+  const todayN = state.sentences.filter(x => ymd(new Date(x.t)) === ymd(new Date())).length;
+  let bonus = ''; if (todayN <= 3) { addXp(5); bonus = '<p class="eyebrow">+5 XP por escreveres uma frase</p>'; }
+  save(); updateHeader();
+  $('#sentOut').innerHTML = (whole ? '<p class="pill ok">✔ Frase do app: «' + esc(whole.p) + '»</p>' : '') + '<ul class="sent-list">' + rows + '</ul>' +
+    '<p class="note">' + (known === toks.length ? 'Reconheço todas as palavras. A ordem e a gramática só um falante confirma.' : 'Reconheço ' + known + ' de ' + toks.length + ' palavras. As outras podem estar noutra forma ou mal escritas.') + ' O app não corrige gramática. Mostra ao professor.</p>' + bonus;
+  $('#sentTxt').value = ''; sfx('pop');
+});
 function openMethod() {
   openSheet('Como vais aprender', '<div class="method">' +
     '<div><b>1 · Conhecer</b><span>Cada parte começa com 5 palavras: ouves, vês a imagem, repetes em voz alta.</span></div>' +
     '<div><b>2 · Reconhecer</b><span>Escolhes entre 2 opções. Fácil, para a palavra ficar ligada ao significado.</span></div>' +
     '<div><b>3 · Recordar e escrever</b><span>Formas a palavra letra a letra, ouves e escreves, sem ajuda.</span></div>' +
-    '<div><b>4 · Lembrar</b><span>Quando erras, a palavra volta daí a pouco. Depois volta ao fim de 10 minutos, 1 dia, 3 dias, 1 semana…</span></div>' +
+    '<div><b>4 · Lembrar</b><span>Quando erras, a palavra volta daí a pouco. Depois volta ao fim de 10 minutos, 1 dia, 2 dias, 4 dias, 9 dias…</span></div>' +
     '<p class="note">Não há vidas: errar faz parte. Palavras com ✔ foram confirmadas pelo professor.</p></div>', [{ label: 'Entendi', fn: () => { state.seenMethod = 1; save(); } }]);
 }
 function openNoHearts() {
@@ -6109,7 +6282,7 @@ function srcLabel(i) { return i.src === 'M' ? 'Mundumbundu' : i.src === 'C' ? '2
 const masteryOf = id => { const b = state.box[id]; return b ? b.b : -1; };
 function wordRow(i) {
   const m = masteryOf(i.id), dots = m >= 0 ? '<span class="mast" aria-label="Domínio ' + m + ' de 5">' + [1, 2, 3, 4, 5].map(k => '<i' + (k <= m ? ' class="on"' : '') + '></i>').join('') + '</span>' : '';
-  return '<div class="word-row"><div class="wt"><span class="u">' + esc(i.u) + (i.teacher ? ' <span class="tick" title="Confirmada pelo professor">✔</span>' : '') + '</span><span class="r">' + esc(respell(i.u)) + ' · ' + (i.teacher ? 'Professor' : srcLabel(i)) + '</span>' + dots + '</div><span class="p">' + esc(i.p) + '</span>' +
+  return '<div class="word-row" data-wid="' + esc(i.id) + '"><div class="wt"><span class="u">' + esc(i.u) + (i.teacher ? ' <span class="tick" title="Confirmada pelo professor">✔</span>' : '') + '</span><span class="r">' + esc(respell(i.u)) + ' · ' + (i.teacher ? 'Professor' : srcLabel(i)) + '</span>' + dots + '</div><span class="p">' + esc(i.p) + '</span>' +
     '<button class="spk" data-say="' + esc(i.u) + '" aria-label="Ouvir ' + esc(i.u) + '">' + ic('volume') + '</button></div>';
 }
 
@@ -6132,7 +6305,7 @@ function renderHome() {
   if (!openSecs) openSecs = new Set([curSec]);
   const learned = learnedItems().length, d = today(), gp = Math.min(100, Math.round(100 * d.xp / state.goal));
   let h = '<div class="hero"><div class="hero-cover">' + coverSvg('cv', '') + '<div class="hc-t"><h1>Umbu</h1><p class="tagline">Aprende Umbundu</p></div><div class="hc-flag"><svg class="flagsvg" viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="20" fill="#cc092f"/><rect y="20" width="60" height="20" fill="#111"/><g fill="none" stroke="#f2b230" stroke-linecap="round"><path d="M21.5 22.5a8.6 8.6 0 0 1 17 0" stroke-width="3.2" stroke-dasharray="2.2 1.6"/><path d="M25 29q11-1 12.5-12.5" stroke-width="2.2"/></g><path d="M30 12.2l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4z" fill="#f2b230"/></svg></div><div class="hc-team">' + [[1, 'hip', 14], [2, 'cheer', 26], [3, 'cross', 18]].map(x => '<div class="pod">' + mascot(HELPERS[x[0]], 58, 'smug', x[1]) + '<i style="height:' + x[2] + 'px"></i></div>').join('') + '</div><div class="hc-m"><div class="pod">' + mascot(HELPERS[0], 104, 'cheer', 'wave') + '<i style="height:24px"></i></div></div></div>' +
-    (cur >= 0 && nodes[cur] ? '<button class="cta" data-node="' + nodes[cur].id + '"><span><small>Continuar</small><b>' + esc(nodes[cur].unit.title) + ' · ' + nodes[cur].label + '</b></span>' + ic('chevron') + '</button>' : '') + (dueItems().length ? '<button class="cta alt" data-act="practice-due"><span><small>Revisão do dia</small><b>Rever ' + Math.min(10, dueItems().length) + ' palavras</b></span>' + ic('chevron') + '</button>' : '') + '<div class="goal"><div class="goal-row"><span>Meta de hoje</span><span>' + Math.min(d.xp, state.goal) + ' / ' + state.goal + ' XP</span></div><div class="meter" role="progressbar" aria-label="Meta diária"><i style="width:' + gp + '%"></i></div></div>' +
+    (cur >= 0 && nodes[cur] ? '<button class="cta" data-node="' + nodes[cur].id + '"><span><small>Continuar</small><b>' + esc(nodes[cur].unit.title) + ' · ' + nodes[cur].label + '</b></span>' + ic('chevron') + '</button>' : '') + (learnedItems().length >= 3 && !state.sentences.some(x => ymd(new Date(x.t)) === ymd(new Date())) ? '<button class="cta alt" data-act="sent-open"><span><small>Hoje</small><b>Escreve uma frase · +5 XP</b></span>' + ic('chevron') + '</button>' : '') + (dueItems().length ? '<button class="cta alt" data-act="practice-due"><span><small>Revisão do dia</small><b>Rever ' + Math.min(10, dueItems().length) + ' palavras</b></span>' + ic('chevron') + '</button>' : '') + '<div class="goal"><div class="goal-row"><span>Meta de hoje</span><span>' + Math.min(d.xp, state.goal) + ' / ' + state.goal + ' XP</span></div><div class="meter" role="progressbar" aria-label="Meta diária"><i style="width:' + gp + '%"></i></div></div>' +
     '<div class="hero-row"><span class="pill ok">' + learned + ' palavras aprendidas</span><button class="btn small ghost" data-act="voice">' + ic('volume') + 'Voz</button></div></div>';
   h += '<nav class="chips" aria-label="Secções">' + SECTIONS.map((s, si) => {
     const st = secStats(si, nodes), cls = st.done === st.total ? 'done' : (si === curSec ? 'cur' : '');
@@ -6208,7 +6381,9 @@ function renderPractice() {
   let h = '<div class="page"><h1>Praticar</h1>';
   if (learned.length < 3) h += '<p class="lead">Ainda não aprendeste palavras. A prática vai usar as da Secção 1. Completa a primeira lição para praticares o que aprendeste.</p>';
   const due = dueItems().length;
-  h += '<div class="card"><h2>Revisão inteligente</h2><p class="lead">' + (due ? due + (due === 1 ? ' palavra está' : ' palavras estão') + ' prontas para rever agora.' : 'Nenhuma palavra para rever agora.') + ' Cada palavra volta no momento certo: 10 minutos, 1 dia, 3 dias, 1 semana… Assim ficas a saber mesmo.</p><button class="btn"' + (due ? '' : ' disabled') + ' data-act="practice-due">Rever agora</button></div>' +
+  h += '<div class="card"><h2>Revisão inteligente</h2><p class="lead">' + (due ? due + (due === 1 ? ' palavra está' : ' palavras estão') + ' prontas para rever agora.' : 'Nenhuma palavra para rever agora.') + ' Cada palavra volta no momento certo: 10 minutos, 1 dia, 2 dias, 4 dias, 9 dias… Assim ficas a saber mesmo.</p><button class="btn"' + (due ? '' : ' disabled') + ' data-act="practice-due">Rever agora</button></div>' +
+    '<div class="card"><h2>Frases</h2><p class="lead">Monta e escreve frases inteiras em Umbundu' + (state.sentences.length ? ' · já escreveste ' + state.sentences.length + ' frase' + (state.sentences.length === 1 ? '' : 's') + ' tuas' : '') + '.</p><button class="btn" data-act="practice-frases">Praticar frases</button><button class="btn ghost" data-act="sent-open">Escrever a minha frase</button></div>' +
+    '<div class="card"><h2>Cartões rápidos</h2><p class="lead">Vês a palavra, tentas lembrar-te e dizes se acertaste. É o jeito mais rápido de não esquecer.</p><button class="btn" data-act="practice-flash">Começar</button></div>' +
     '<div class="card"><h2>Prática rápida</h2><p class="lead">10 exercícios variados para reforçar o que já aprendeste.</p><button class="btn" data-act="practice-mix">Começar</button></div>' +
     '<div class="card"><h2>Só ouvir</h2><p class="lead">8 exercícios de audição para treinar o ouvido.</p><button class="btn ghost" data-act="practice-listen">Ouvir e escolher</button></div>' +
     '<div class="card"><h2>Reforçar erros</h2><p class="lead">' + (misses ? misses + (misses === 1 ? ' palavra precisa' : ' palavras precisam') + ' de reforço.' : 'Ainda não tens erros para reforçar.') + '</p><button class="btn ghost"' + (misses ? '' : ' disabled') + ' data-act="practice-errors">Reforçar</button></div>';
@@ -6349,29 +6524,7 @@ function gateShow(maint) {
         '<input id="gateKey" class="field" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="UMB-XXXX-XXXX" aria-label="Chave de acesso" maxlength="16">' +
         '<button class="btn" id="gateBtn">Entrar</button><p class="note" id="gateMsg" role="status"></p>');
 }
-async function checkAccess() {
-  if (GATE.maint) { gateShow(GATE.maint); return false; }
-  let k = null; try { k = localStorage.getItem(KEYSTORE); } catch (e) {}
-  if (k && await keyOk(k)) return true;
-  if (k) { try { localStorage.removeItem(KEYSTORE); } catch (e) {} }
-  gateShow('');
-  return new Promise(res => {
-    let tries = 0, until = 0;
-    const go = async () => {
-      const msg = $('#gateMsg'), v = $('#gateKey').value;
-      if (Date.now() < until) { msg.textContent = 'Espera uns segundos e tenta outra vez.'; return; }
-      if (await keyOk(v)) {
-        try { localStorage.setItem(KEYSTORE, normKey(v)); } catch (e) {}
-        $('#gate').hidden = true; document.body.classList.remove('locked'); res(true);
-      } else {
-        tries++; msg.textContent = 'Chave incorreta. Confere as letras e os números.'; sfx('bad');
-        if (tries >= 5) { until = Date.now() + 30000; tries = 0; msg.textContent = 'Muitas tentativas. Espera 30 segundos.'; }
-      }
-    };
-    $('#gateBtn').onclick = go;
-    $('#gateKey').addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
-  });
-}
+async function checkAccess() { return true; }
 /* ===================== CONTA NA NUVEM (só se a página estiver aberta com conta Claude) ===================== */
 /* Para ligar o Google: cria um "ID de cliente OAuth" (tipo Aplicação Web) em console.cloud.google.com, autoriza a origem https://jacksonjosemil766-pixel.github.io e cola o ID aqui. */
 const GOOGLE_CLIENT_ID = '';
@@ -6477,6 +6630,7 @@ document.addEventListener('click', e => {
   }
 });
 const viewClick = e => {
+  const wr = e.target.closest('.word-row[data-wid]'); if (wr && !e.target.closest('.spk')) { openWord(wr.dataset.wid); return; }
   const nb = e.target.closest('[data-node]');
   if (nb) {
     const nodes = nodesList(), idx = nodes.findIndex(x => x.id === nb.dataset.node), n = nodes[idx];
@@ -6525,6 +6679,11 @@ const viewClick = e => {
   else if (act === 'hint') { if (S && S.cur && !S.cur.answered) { const hb = document.querySelector('#stage .hintbox'); hb.innerHTML = hintFor(S.cur); hb.hidden = false; a.hidden = true; S.hints = (S.hints || 0) + 1; sfx('pop'); } }
   else if (act === 'practice-due') startPractice('due');
   else if (act === 'method') openMethod();
+  else if (act === 'sent-open') openSentences();
+  else if (act === 'practice-frases') startPractice('frases');
+  else if (act === 'fl-show') flashShow();
+  else if (act === 'fl-rate') flashRate(+a.dataset.r);
+  else if (act === 'practice-flash') startPractice('flash');
   else if (act === 'bk-copy') backupCopy();
   else if (act === 'bk-file') backupFile();
   else if (act === 'bk-restore') openRestore();
@@ -6635,6 +6794,12 @@ try {
   fetch('confirmadas.txt', { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
     try { localStorage.setItem('umbundulingo.conf', t); } catch (e) {}
     const set = parseConf(t); if (set.size !== CONF.size || [...set].some(w => !CONF.has(w))) { CONF = set; _all = null; _nodes = null; try { render(); } catch (e) {} }
+  }).catch(() => {});
+} catch (e) {}
+try {
+  fetch('frases.txt', { cache: 'no-store' }).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
+    try { localStorage.setItem('umbundulingo.frases', t); } catch (e) {}
+    EXTRA_PH = parseFrases(t);
   }).catch(() => {});
 } catch (e) {}
 checkAccess().then(ok => { if (ok) { document.body.classList.remove('locked'); render(); cloudInit(); if (!state.seenMethod) setTimeout(openMethod, 700); } });
